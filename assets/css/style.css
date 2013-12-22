@@ -1,0 +1,30 @@
+/* CONTENT */
+.vbox{z-index: 100;}
+/* PAGINATION */
+li.current a{background-color: #e0e4e8;}
+.pagination-sm > li.next:last-child > a,
+.pagination-sm > li.previous:first-child > a{
+    height: 29px;padding-top: 6px;
+}
+
+.datepicker td.active, 
+.datepicker td.active:hover, 
+.datepicker td.active:hover.active, 
+.datepicker td.active.active{
+    background: #92cf5c;color: white;cursor: pointer;
+}
+.table-condensed thead > tr > td:hover, 
+.table-condensed tbody > tr > td:hover, 
+.table-condensed tfoot > tr > td:hover{
+    cursor: pointer;
+    background-color: #f5f5f5;
+}
+.datepicker span.month,
+.datepicker span.year
+{padding: 0 1px;}
+.datepicker span.month:hover,
+.datepicker span.year:hover
+{color: white;background-color: #92cf5c;}
+.navbar-right ul.dropdown-menu li hr{
+    margin: 5px 0;
+}
