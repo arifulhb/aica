@@ -7,7 +7,11 @@
 					<p class="block text-muted">List View of Quotations	</p>
 				</div>
 				<div class="col-sm-1 m-b-xs" style="padding-left:0px; padding-top:17px">
+                                    <?php
+                                    if(in_array('quotation_add', $this->session->userdata('user_access'))){
+                                    ?>
                                     <a href="<?php echo base_url().'quotation/add';?>" class="btn btn-success"><i class="icon-plus"></i> Create</a>
+                                    <?php }//end ?>
 				</div>
             </div>
           </header>

@@ -2,7 +2,7 @@ requirejs.config({
     //By default load any module IDs from js/lib
     //baseUrl: 'assets/js',
     paths: {
-        'apppath'   :'app/apppath',
+        'apppath'   :'page/apppath',
         'appaica'   :'lib/app',
         'appplugin' :'lib/appplugin',
         'appdata'   :'lib/appdata',

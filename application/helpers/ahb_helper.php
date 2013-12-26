@@ -120,7 +120,7 @@ function site_data()
             case 1:
                 return array('user','user_add','user_edit','user_delete','user_view',//user section
                              'quotation','quotation_all','quotation_add','quotation_edit','quotation_view','quotation_delete',//quotation
-                             'assign_commission', //Assigned Commission (in quotation)
+                             'qt_state_won','assign_commission', //Assigned Commission (in quotation)
                              'won_renew', 'won_export',  // Renewal & export of won deals
                              'css','css_add','css_edit','css_view','css_delete',  //css=Commission Schemes Structure (set commission)
                              'rec','rec_add','rec_edit','rec_view','rec_delete',  //Reconciliation                             
@@ -156,7 +156,7 @@ function site_data()
             case 4:
                 return array(//'user','user_add','user_edit','user_delete','user_view',//user section
                              'quotation','quotation_all','quotation_add','quotation_edit','quotation_view','quotation_delete',//quotation
-                             'assign_commission', //Assigned Commission (in quotation)
+                             'qt_state_won','assign_commission', //Assigned Commission (in quotation)
                             // 'won_renew', 
                              'won_export',  // Renewal & export of won deals
                              //'css','css_add','css_edit','css_view','css_delete',  //css=Commission Schemes Structure (set commission)

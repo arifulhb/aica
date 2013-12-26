@@ -8,14 +8,31 @@ class Template
     {
         $this->_ci =&get_instance();
     }//end construct
+    
+    function access_denied($data){
+        
+        $data['_content']=$this->_ci->load->view('inc/access',$data,true);
+
+        $data['_page_title']='Access Denied';
+        //Page Class Name
+        $data['_page_class']='access_denied';
+        
+        //noindex nofollow
+        $data['_noindex_meta']=true;
+
+        //Load the page
+        $this->_ci->load->view('page_template.php',$data);
+        
+        
+    }//end function
 
     //Load the Home Page
     function home($data=null)
     {
-        //Loadign the template
-        //$data['_header']=$this->_ci->load->view('front/header',$data,true);
+        //Loadign the template        
+        
         $data['_navbar_home']=$this->_ci->load->view('inc/navbar_home',$data,true);        
-        $data['_content']=$this->_ci->load->view('home/index',$data,true);
+        $data['_content']=$this->_ci->load->view('',$data,true);
         
         //Page Class Name        
         $data['_page_class']='home';

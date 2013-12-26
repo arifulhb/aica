@@ -12,7 +12,16 @@ class Customer_model extends CI_Model
 
     }//end constract
     
-    //Insert Customer Data in aica_customer table
+    public function getAllCustomerList(){
+        $this->db->select('cust_sn, cust_name, cust_nric');
+        $this->db->from('aica_customer');
+        $res=$this->db->get();
+        
+        return $res->result_array();
+        
+    }//end function
+
+        //Insert Customer Data in aica_customer table
     public function insert($data){                
         
         $this->db->set($data);

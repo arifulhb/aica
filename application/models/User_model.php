@@ -52,8 +52,18 @@ class User_model extends CI_Model
         
     }//end function
     
-    
-    public function insert($data){
+    public function getSmallList($user_role_sn){
+        
+        $this->db->select('user_sn, user_name');
+        $this->db->from('aica_user');
+        $this->db->where('user_role',$user_role_sn);
+        $res=$this->db->get();
+        
+        return $res->result_array();
+        
+    }//end function
+
+        public function insert($data){
         
         $item=array('user_name'=>$data['user_name'],
                     'user_email'=>$data['user_email'],

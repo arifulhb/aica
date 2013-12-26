@@ -65,7 +65,19 @@ class Customer extends CI_Controller {
         
     }//end index
     
-    /**
+    
+    public function getCustomerRecordJSON(){
+        $cust_sn=$this->input->post('cust_sn');
+        
+        //$this->model->load('Customer_model');
+        $this->load->model('Customer_model');
+        $res = $this->Customer_model->getRecord($cust_sn);
+        
+        echo json_encode($res);
+        
+    }//END FUNCTION
+
+        /**
      * Add New Customer Page
      */
     public function add(){
