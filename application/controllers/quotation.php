@@ -26,7 +26,7 @@ class Quotation extends CI_Controller {
 
             $config['total_rows'] = $this->Quotation_model->getTotalNum();        
             $config['use_page_numbers']=true;
-            $config['per_page'] = 10;
+            $config['per_page'] = 15;
             $config['num_links'] = 5;        
             $config['uri_segment'] = 3;                        
             $this->pagination->initialize($config);
@@ -70,6 +70,11 @@ class Quotation extends CI_Controller {
         
         if(in_array('quotation_view', $this->session->userdata('user_access'))){
             
+            $ref_no=$this->uri->segment(3);            
+                        
+            $this->load->model('Quotation_model');
+            $data['_record'] = $this->Quotation_model->getRecord($ref_no);
+            $data['_history']=$this->Quotation_model->getHistory($ref_no);
             $data['_page_title']="Quotation View";
             $data['_page_caption']="Quotation View";
             $data['_page_description']="Quotation View";

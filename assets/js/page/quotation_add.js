@@ -347,7 +347,7 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
                             if(record[i].update_to != record[i].update_from){
                             history+='<p class="edit_history">'+record[i].update_by_name.split(" ")[0]+' Edited state "'+record[i].update_from+'" to "'+record[i].update_to+'" on '+moment(record[i].update_date).format("DD MMM 'YY - hh:MM A")+'</p>';
                             }else{
-                                history+='<p class="edit_history">'+record[i].update_by_name.split(" ")[0]+' Edited on '+moment(record[i].update_date).format("DD MMM 'YY - hh:MM A")+'</p>';
+                                history+='<p class="edit_history">Edited by '+record[i].update_by_name.split(" ")[0]+' on '+moment(record[i].update_date).format("DD MMM 'YY - hh:MM A")+'</p>';
                             }
                         }
                         
