@@ -4,10 +4,13 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
    
    //initialize
     $('#qt_date').text(moment().format('DD MMMM, YYYY'));
-    
+    $('.qt_type_pvt').show();
+    $('.qt_type_com').hide();
+        
     if($('#_action').val()==='add'){
         $('#qt_history_wrapper').css('display','none');
     }
+    
     //temp hide
     $('#qt_claim_history_1').hide();
     $('#qt_driver_1').hide();
@@ -20,8 +23,42 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
     
     //ADD/UPDATE Status update
      $('.btn-save').click(function(){
-        //alert('btn click');
-        //$('#_action').val('update');        
+        
+        var _actin=$('#_action').val();
+        //console.log('action: '+_actin);
+        if(_actin=='add'){
+            //console.log('add and update');
+            NProgress.start();
+            $.fn.save1_quotation();      
+            $.fn.save2_quotation();   
+            NProgress.done();
+            
+        }else{
+           // console.log('update only');
+            NProgress.start();
+            $.fn.save2_quotation();   
+            NProgress.done();
+        }    
+    });
+        
+    //Full Save
+    $('#full_save').click(function(){
+        var _actin=$('#_action').val();
+        //console.log('action: '+_actin);
+        if(_actin=='add'){
+            //console.log('add and update');
+            NProgress.start();
+            $.fn.save1_quotation();      
+            $.fn.save2_quotation();   
+            NProgress.done();
+            
+        }else{
+           // console.log('update only');
+            NProgress.start();
+            $.fn.save2_quotation();   
+            NProgress.done();
+        }
+         
     });
     
     //Save 1: Quotationi & customer 
@@ -34,12 +71,6 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
         NProgress.done();
          
     });
-    
-    //Full Save
-    $('#full_save').click(function(){
-         //$.fn.save1_quotation();
-    });
-    
     
     //jQuery AJAX Save of Quotation & Customer Part
     $.fn.save1_quotation = function() {         
@@ -94,10 +125,16 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
                 url: apppath+'/quotation/save_quotation',
                 success:function(res){
                     //ADD SUCCESS
-                    //console.log(res);
-                    if(res!==false){       
-                        //console.log('res: '+res);
-                        if(_action==='add'){$('#qt_ref_no').val(res);}
+                    console.log('add succss. new id: '+res);
+                    if(res!==false){ 
+                        
+                        console.log('res: '+res);
+                        if(_action==='add'){
+                            $('#qt_ref_no').val(res);                            
+                        }
+                        $('input[name="qt_details_insurance_type"]').each(function(i) {
+                        jQuery(this).attr('disabled', 'disabled');
+                            });
                         $('#_action').val('update'); 
                         _action='update';
                         $('#current_status').val(_qt_details_state);
@@ -107,14 +144,14 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
                     }
                     
                     if(_action==='update'){
-                        //console.log('showing...');
-                        //if(res===1){
+                       
                          $.fn.getQuotationHistory();
                         $("#save_message").show().delay(5000).queue(function(n) {
                             $(this).hide('fast'); n();
+                            
                         });   
-                        //}                        
-                    }
+                                          
+                    }//end update
                     
                 },
                 error:function(error){
@@ -131,24 +168,164 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
     $.fn.save2_quotation=function(){
         
         var _qt_insurance_type=$('input[name=qt_details_insurance_type]:checked').val();
-        var data='';
+        var _qt_ref_no=$('#qt_ref_no').val();       
         
-        if(_qt_insurance_type=='Private'){
+        //Update
+        var _qt_current_state=$('#current_status').val();
+        var _qt_details_state=$('#qt_details_state').val();
+        
+        //Vehicle Info        
+        var _qt_vi_number=$('#qt_vi_number').val();
+        var _qt_vi_make=$('#qt_vi_make').val();
+        var _qt_vi_model=$('#qt_vi_model').val();
+        var _qt_vi_cc=$('#qt_vi_cc').val();
+        var _qt_vi_year_of_manufacture=$('#qt_vi_year_of_manufacture').val();
+        var _qt_vi_regn_date=$('#qt_vi_regn_date').val();
+        var _qt_vi_road_tax_expire_date=$('#qt_vi_road_tax_expire_date').val();
+        var _qt_vi_additional_accessories=$('#qt_vi_additional_accessories').val();
+        
+        if(_qt_insurance_type==='Private'){            
+            var _qt_vipvt_scheme_type=$('#qt_vipvt_scheme_type').val();            
+            var _qt_vipvt_feature_sunroof=$('input[name=qt_vipvt_feature_sunroof]:checked').length;
+            var _qt_vipvt_feature_soft_top=$('input[name=qt_vipvt_feature_soft_top]:checked').length;
+            var _qt_vipvt_feature_turbo_engine=$('input[name=qt_vipvt_feature_turbo_engine]:checked').length;
+            var _qt_vipvt_feature_moonroof=$('input[name=qt_vipvt_feature_moonroof]:checked').length;
+            var _qt_vipvt_feature_skyroof=$('input[name=qt_vipvt_feature_skyroof]:checked').length;
+            var _qt_vipvt_feature_roof_panoramic=$('input[name=qt_vipvt_feature_roof_panoramic]:checked').length;
             
-        }else{
+            var _qt_vipvt_type_sport_model=$('input[name=qt_vipvt_type_sport_model]:checked').length;
+            var _qt_vipvt_type_mpv=$('input[name=qt_vipvt_type_mpv]:checked').length;
+            var _qt_vipvt_type_suv=$('input[name=qt_vipvt_type_suv]:checked').length;
+            var _qt_vipvt_type_sedan=$('input[name=qt_vipvt_type_sedan]:checked').length;            
+            var _qt_vipvt_type_coupe=$('input[name=qt_vipvt_type_coupe]:checked').length;
+            var _qt_vipvt_type_cabriolet=$('input[name=qt_vipvt_type_cabriolet]:checked').length;
+            var _qt_vipvt_type_parallel_import=$('input[name=qt_vipvt_type_parallel_import]:checked').length;
             
-        }
+        }else{            
+            var _qt_vicom_type=$('#qt_vicom_type').val();            
+            var _qt_vicom_unladen_weight=$('#qt_vicom_unladen_weight').val();
+            var _qt_vicom_laden_weight=$('#qt_vicom_laden_weight').val();                       
+            
+        }//end else
+        //
+        //Current insurance        
+        var _qt_id_company=$('#qt_id_company').val();
+        var _qt_id_type_of_coverage=$('#qt_id_type_of_coverage').val();
+        var _qt_id_current_premium=$('#qt_id_current_premium').val();
+        var _qt_id_current_excess=$('#qt_id_current_excess').val();
+        var _qt_id_finance_company=$('#qt_id_finance_company').val();
+        var _qt_id_current_ncd=$('#qt_id_current_ncd').val();
+        var _qt_id_ncd_on_renewal=$('#qt_id_ncd_on_renewal option:selected').text();
+        var _qt_id_ncd_on_change=$('input[name=qt_id_ncd_on_change]:checked').val();
+        var _qt_id_ssd=$('input[name=qt_id_ssd]:checked').val();
+        var _qt_ssd_date_check=$('#qt_ssd_date_check').val();
+        //Current Insurance Period
+        var _qt_ci_start_date=$('#qt_ci_start_date').val();
+        var _qt_ci_poi_end_date=$('#qt_ci_poi_end_date').val();
+        var _qt_ci_road_tax_date=$('#qt_ci_road_tax_date').val();
+        var _qt_ci_ncd_protection=$('#qt_ci_ncd_protection option:selected').val();
+        var _qt_ci_claim_in_3_years=$('input[name=qt_ci_claim_in_3_years]:checked').val();
         
+        //Selected Insurance
+        var _qt_sid_company=$('#qt_sid_company').val();
+        var _qt_sid_coverage_type=$('#qt_sid_coverage_type').val();
+        var _qt_sid_premium=$('#qt_sid_premium').val();
+        var _qt_sid_excess=$('#qt_sid_excess').val();
+        var _qt_sid_finance_company=$('#qt_sid_finance_company').val();
+        var _qt_sid_ncd=$('#qt_sid_ncd').val();
+        var _qt_sid_ncd_on_renewal=$('#qt_sid_ncd_on_renewal').val();
+        var _qt_sid_ssd=$('input[name=qt_sid_ssd]:checked').val();
+        var _qt_sid_sdd_date_check=$('#qt_sid_sdd_date_check').val();
+        var _qt_sid_start_date=$('#qt_sid_start_date').val();
+        var _qt_sid_end_date=$('#qt_sid_end_date').val();
+        var _qt_sid_road_tax_due=$('#qt_sid_road_tax_due').val();
+        var _qt_sid_ncd_protection=$('#qt_sid_ncd_protection').val();
         
-        
-        
+        var data='qt_ref_no='+_qt_ref_no;
+            data+='&_qt_current_state='+_qt_current_state;
+            data+='&_qt_details_state='+_qt_details_state;
+            data+='&_qt_insurance_type='+_qt_insurance_type;
+            data+='&_qt_vi_number='+_qt_vi_number;
+            data+='&_qt_vi_make'+_qt_vi_make;
+            data+='&_qt_vi_model='+_qt_vi_model;
+            data+='&_qt_vi_cc='+_qt_vi_cc;
+            data+='&_qt_vi_year_of_manufacture='+_qt_vi_year_of_manufacture;
+            data+='&_qt_vi_regn_date='+_qt_vi_regn_date;
+            data+='&_qt_vi_road_tax_expire_date='+_qt_vi_road_tax_expire_date;
+            data+='&_qt_vi_additional_accessories='+_qt_vi_additional_accessories;
+            if(_qt_insurance_type==='Private'){
+                data+='&_qt_vipvt_scheme_type='+_qt_vipvt_scheme_type;
+                data+='&_qt_vipvt_feature_sunroof='+_qt_vipvt_feature_sunroof;
+                data+='&_qt_vipvt_feature_soft_top='+_qt_vipvt_feature_soft_top;
+                data+='&_qt_vipvt_feature_turbo_engine='+_qt_vipvt_feature_turbo_engine;
+                data+='&_qt_vipvt_feature_moonroof='+_qt_vipvt_feature_moonroof;
+                data+='&_qt_vipvt_feature_skyroof='+_qt_vipvt_feature_skyroof;
+                data+='&_qt_vipvt_feature_roof_panoramic='+_qt_vipvt_feature_roof_panoramic;
+                data+='&_qt_vipvt_type_sport_model='+_qt_vipvt_type_sport_model;
+                data+='&_qt_vipvt_type_mpv='+_qt_vipvt_type_mpv;
+                data+='&_qt_vipvt_type_suv='+_qt_vipvt_type_suv;
+                data+='&_qt_vipvt_type_sedan='+_qt_vipvt_type_sedan;
+                data+='&_qt_vipvt_type_coupe='+_qt_vipvt_type_coupe;
+                data+='&_qt_vipvt_type_cabriolet='+_qt_vipvt_type_cabriolet;
+                data+='&_qt_vipvt_type_parallel_import='+_qt_vipvt_type_parallel_import;                
+            }else{
+                data+='&_qt_vicom_type='+_qt_vicom_type;
+                data+='&_qt_vicom_unladen_weight='+_qt_vicom_unladen_weight;
+                data+='&_qt_vicom_laden_weight='+_qt_vicom_laden_weight;
+            }
+            data+='&_qt_id_company='+_qt_id_company;
+            data+='&_qt_id_type_of_coverage='+_qt_id_type_of_coverage;
+            data+='&_qt_id_current_premium='+_qt_id_current_premium;
+            data+='&_qt_id_current_excess='+_qt_id_current_excess;
+            data+='&_qt_id_finance_company='+_qt_id_finance_company;
+            data+='&_qt_id_current_ncd='+_qt_id_current_ncd;
+            data+='&_qt_id_ncd_on_renewal='+_qt_id_ncd_on_renewal;
+            data+='&_qt_id_ncd_on_change='+_qt_id_ncd_on_change;
+            data+='&_qt_id_ssd='+_qt_id_ssd;
+            data+='&_qt_ssd_date_check='+_qt_ssd_date_check;
+            data+='&_qt_ci_start_date='+_qt_ci_start_date;
+            data+='&_qt_ci_poi_end_date='+_qt_ci_poi_end_date;
+            data+='&_qt_ci_road_tax_date='+_qt_ci_road_tax_date;
+            data+='&_qt_ci_ncd_protection='+_qt_ci_ncd_protection;
+            data+='&_qt_ci_claim_in_3_years='+_qt_ci_claim_in_3_years;
+            data+='&_qt_sid_company='+_qt_sid_company;
+            data+='&_qt_sid_coverage_type='+_qt_sid_coverage_type;
+            data+='&_qt_sid_premium='+_qt_sid_premium;
+            data+='&_qt_sid_excess='+_qt_sid_excess;
+            data+='&_qt_sid_finance_company='+_qt_sid_finance_company;
+            data+='&_qt_sid_ncd='+_qt_sid_ncd;
+            data+='&_qt_sid_ncd_on_renewal='+_qt_sid_ncd_on_renewal;
+            data+='&_qt_sid_ssd='+_qt_sid_ssd;
+            data+='&_qt_sid_sdd_date_check='+_qt_sid_sdd_date_check;
+            data+='&_qt_sid_start_date='+_qt_sid_start_date;
+            data+='&_qt_sid_end_date='+_qt_sid_end_date;
+            data+='&_qt_sid_road_tax_due='+_qt_sid_road_tax_due;
+            data+='&_qt_sid_ncd_protection='+_qt_sid_ncd_protection;
+            
+            $.ajax({
+                type:"POST",
+                data:data,
+                url: apppath+'/quotation/update',
+                success:function(res){
+                        //console.log('updated ');
+                        console.log(res);
+                         $.fn.getQuotationHistory();
+                        $("#save_message").show().delay(5000).queue(function(n) {
+                            $(this).hide('fast'); n();
+                        });   
+                    },
+                error:function(error){
+                    console.log('Controller error: '+error);
+                }
+            });
+               
     }//end save 2
     
     
     
     //GetQuotationHistory
     $.fn.getQuotationHistory = function(){
-        //console.log('Show history');
+       // console.log('Show history');
         var _qt_ref_no=$('#qt_ref_no').val();
         //var _qt_ref_no=76;
         $.ajax({
@@ -191,7 +368,7 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
            
             },
             error:function(error){
-                
+                console.log('Show history error: '+error);
             }
         });
         
@@ -206,26 +383,31 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
             $('#qt_details_status_lost_wrapper').css('display','none');   
         }
     });
+    
     //CONDITION
     $('#qt_insurance_type_pvt').click(function(){
-        $('#panel_vehicle_info_pvt').css('display','block');
-        $('#panel_quot_pvt').css('display','block');
-        $('#panel_vehicle_info_com').css('display','none');
-        $('#panel_quot_com').css('display','none');
+                
+        $('#qt_ins_type_name').empty();
+        $('#qt_ins_type_name').text('Vehicle Information (Private)');
+        $('.qt_type_pvt').show();
+        $('.qt_type_com').hide();
+        
     });//end click
     //
     //CONDITION
     $('#qt_insurance_type_com').click(function(){
-        $('#panel_vehicle_info_pvt').css('display','none');
-        $('#panel_quot_pvt').css('display','none');
-        $('#panel_vehicle_info_com').css('display','block');
-        $('#panel_quot_com').css('display','block');
+        
+        $('#qt_ins_type_name').empty();
+        $('#qt_ins_type_name').text('Vehicle Information (Commercial)');
+        $('.qt_type_pvt').hide();
+        $('.qt_type_com').show();
         
     });//end click
-    
+        
     //show customer details
     $('#qt_customer_sn').bind('change ready',function(){
         var cust_sn=$('#qt_customer_sn option:selected').val();
+        //$('.').hide();
         //alert(cust_sn);
         $.ajax({            
             type:"POST",

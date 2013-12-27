@@ -61,30 +61,10 @@ function site_data()
         $config['cur_tag_close']='</a><li>';
         $config['num_tag_open']='<li>';
         $config['num_tag_close']='</li>';
-        
-        /*
-        $config['full_tag_open'] = '<div id="pagination">';
-        $config['full_tag_close'] = '</div>';
-
-        $config['first_link'] = '<i class="icon-fast-backward" title="First"></i>';
-        $config['first_tag_open'] = '<span class="pagination_first">&nbsp;';
-        $config['first_tag_close'] = '</span>';
-
-        $config['next_link'] = 'Next <i class="icon-double-angle-right"></i>';
-        $config['next_tag_open'] = '<span class="pagination_next">';
-        $config['next_tag_close'] = '</span>';
-
-        $config['prev_link'] = '<i class="icon-double-angle-left"></i> Previous';
-        $config['prev_tag_open'] = '<span class="pagination_previous">';
-        $config['prev_tag_close'] = '</span>';
-
-        $config['last_link'] = '<i class="icon-fast-forward" title="Last"></i>';
-        $config['last_tag_open'] = '<span class="pagination_last">';
-        $config['last_tag_close'] = '</span>';
-        */
-
+     
         return $config;
-    }
+        
+    }//end function
     
     /**
      * function: 

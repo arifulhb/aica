@@ -12,12 +12,13 @@ class Admin extends CI_Controller {
     public function index()
     {
              
-        $data=site_data();
+        //$data=site_data();
 
         if($this->session->userdata('is_logged_in')==TRUE){            
             //echo ' loggedin session ';
-            $data['_page_title']='All Ins Commission Application';
-            $this->template->admin_home($data);    
+            //$data['_page_title']='All Ins Commission Application';
+            //$this->template->admin_home($data);    
+            redirect('quotation');
             
         }else{
             //user not logged in

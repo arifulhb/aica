@@ -1,4 +1,5 @@
 <!--quotation/index-->
+
 <section class="scrollable" id="pjax-container">
           <header>
 			<div class="row b-b m-l-none m-r-none">
@@ -60,212 +61,55 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>05 Jan 14</td>
+                            <?php
+                            foreach($_list as $row):?>
+                              
+                            <tr>
+                            <td><?php echo date('d M y',$row['qt_date']);?></td>
                             <td>
                             <b>
-                              <a href="QT1v.html" style="color:#13608b;">QT1</a>
+                                <a href="<?php echo base_url().'quotation/view/'.$row['qt_ref_no'];?>" style="color:#13608b;">QT<?php echo $row['qt_ref_no'];?></a>
                             </b> 
-                            <a href="QT1e.html"><i class="icon-edit"></i></a></td>
-                            <td>Customer A</td>
-                            <td align="middle">-</td>
-                            <td align="middle">-</td>
-                            <td align="middle">-</td>
-                            <td align="middle">-</td>
-                            <td align="middle">-</td>
-                            <td align="middle">-</td>
-                            <td align="middle">-</td>
-                            <td>Consultant A</td>
-                            <td>Agent A</td>
-                            <td>Draft</td>
+                            <a href="/#"><i class="icon-edit"></i></a></td>
+                            <td><?php echo $row['cust_name'];?></td>
+                            <td align="middle"><?php echo $row['reg_no'];?></td>
+                            <td align="middle"><?php echo date('d M y',$row['regn_date']);?></td>
+                            <td align="middle">-?</td>
+                            <td align="middle">- ?</td>
+                            <td align="middle"><?php echo date('d M y',$row['start_date']);?></td>
+                            <td align="middle"><?php echo date('d M y',$row['end_date']);?></td>
+                            <td align="middle">- ?</td>
+                            <td><?php echo $row['consultant_name'];?></td>
+                            <td><?php echo $row['agent_name'];?></td>
+                            <td><?php echo $row['qt_state'];?></td>
                           </tr>
-                          <tr>
-                            <td>02 Feb 14</td>
-                            <td>
-                            <b>
-                              <a href="QT1v.html" style="color:#13608b;">QT2</a>
-                            </b> 
-                            <a href="QT1e.html"><i class="icon-edit"></i></a></td>
-                            <td>Customer A</td>
-                            <td>ABC1234D</td>
-                            <td>05 Feb 14</td>
-                            <td>Insurer B</td>
-                            <td>1234567890-01</td>
-                            <td>08 Feb 14</td>
-                            <td>07 Feb 16</td>
-                            <td>$100,000</td>
-                            <td>Consultant A</td>
-                            <td>Agent A</td>
-                            <td>New</td>
-                          </tr>
-                          <tr>
-                            <td>15 Feb 14</td>
-                            <td>
-                            <b>
-                              <a href="QT1v.html" style="color:#13608b;">QT3</a>
-                            </b> 
-                            <a href="QT1e.html"><i class="icon-edit"></i></a></td>
-                            <td>Customer A</td>
-                            <td>ABC1234D</td>
-                            <td>18 Feb 14</td>
-                            <td>Insurer C</td>
-                            <td>1234567890</td>
-                            <td>31 Feb 14</td>
-                            <td>30 Feb 16</td>
-                            <td>$100,000</td>
-                            <td>Consultant A</td>
-                            <td>Agent A</td>
-                            <td>Renewal</td>
-                          </tr>
-                          <tr>
-                            <td>18 Feb 14</td>
-                            <td>
-                            <b>
-                              <a href="QT1v.html" style="color:#13608b;">QT4</a>
-                            </b> 
-                            <a href="QT1e.html"><i class="icon-edit"></i></a></td>
-                            <td>Customer A</td>
-                            <td>ABC1234D</td>
-                            <td>20 Feb 14</td>
-                            <td>Insurer D</td>
-                            <td>SI12A34567</td>
-                            <td>01 Mar 14</td>
-                            <td>28 Feb 16</td>
-                            <td>$100,000</td>
-                            <td>Consultant A</td>
-                            <td>Agent A</td>
-                            <td>Quoted</td>
-                          </tr>
-                          <tr>
-                            <td>01 Mar 14</td>
-                            <td>
-                            <b>
-                              <a href="QT1v.html" style="color:#13608b;">QT5</a>
-                            </b> 
-                            <a href="QT1e.html"><i class="icon-edit"></i></a></td>
-                            <td>Customer A</td>
-                            <td>ABC1234D</td>
-                            <td>05 Mar 14</td>
-                            <td>Insurer A</td>
-                            <td>ABCD/1234-5678</td>
-                            <td>08 Mar 14</td>
-                            <td>07 Mar 16</td>
-                            <td>$100,000</td>
-                            <td>Consultant A</td>
-                            <td>Agent A</td>
-                            <td>Accepted</td>
-                          </tr>
-                          <tr>
-                            <td>05 Mar 14</td>
-                            <td>
-                            <b>
-                              <a href="QT1v.html" style="color:#13608b;">QT6</a>
-                            </b> 
-                            <a href="QT1e.html"><i class="icon-edit"></i></a></td>
-                            <td>Customer A</td>
-                            <td>ABC1234D</td>
-                            <td>08 Mar 14</td>
-                            <td>Insurer A</td>
-                            <td>ABCD/1234-5678</td>
-                            <td>15 Mar 14</td>
-                            <td>14 Mar 19</td>
-                            <td>$100,000</td>
-                            <td>Consultant A</td>
-                            <td>Agent A</td>
-                            <td>Paid</td>
-                          </tr>
-                          <tr>
-                            <td>13 Mar 14</td>
-                            <td>
-                            <b>
-                              <a href="QT1v.html" style="color:#13608b;">QT7</a>
-                            </b> 
-                            <a href="QT1e.html"><i class="icon-edit"></i></a></td>
-                            <td>Customer A</td>
-                            <td>ABC1234D</td>
-                            <td>13 Mar 14</td>
-                            <td>Insurer A</td>
-                            <td>ABCD/1234-5678</td>
-                            <td>15 Mar 14</td>
-                            <td>14 Mar 16</td>
-                            <td>$100,000</td>
-                            <td>Consultant A</td>
-                            <td>Agent A</td>
-                            <td>Closed</td>
-                          </tr>
-                          <tr>
-                            <td>28 Mar 14</td>
-                            <td>
-                            <b>
-                              <a href="QT1v.html" style="color:#13608b;">QT8</a>
-                            </b> 
-                            <a href="QT1e.html"><i class="icon-edit"></i></a></td>
-                            <td>Customer A</td>
-                            <td>ABC1234D</td>
-                            <td>01 Apr 14</td>
-                            <td>Insurer A</td>
-                            <td>ABCD/1234-5678</td>
-                            <td>05 Apr 14</td>
-                            <td>04 Apr 15</td>
-                            <td>$100,000</td>
-                            <td>Consultant A</td>
-                            <td>Agent A</td>
-                            <td>Renewal</td>
-                          </tr>
-                          <tr>
-                            <td>10 Apr 14</td>
-                            <td>
-                            <b>
-                              <a href="QT1v.html" style="color:#13608b;">QT9</a>
-                            </b> 
-                            <a href="QT1e.html"><i class="icon-edit"></i></a></td>
-                            <td>Customer A</td>
-                            <td>ABC1234D</td>
-                            <td>11 Apr 14</td>
-                            <td>Insurer A</td>
-                            <td>ABCD/1234-5678</td>
-                            <td>15 Apr 14</td>
-                            <td>14 Apr 17</td>
-                            <td>$100,000</td>
-                            <td>Consultant A</td>
-                            <td>Agent A</td>
-                            <td>Renewal</td>
-                          </tr>
-                          <tr>
-                            <td>05 May 14</td>
-                            <td>
-                            <b>
-                              <a href="QT1v.html" style="color:#13608b;">QT10</a>
-                            </b> 
-                            <a href="QT1e.html"><i class="icon-edit"></i></a></td>
-                            <td>Customer A</td>
-                            <td>ABC1234D</td>
-                            <td>05 May 14</td>
-                            <td>Insurer A</td>
-                            <td>ABCD/1234-5678</td>
-                            <td>06 May 14</td>
-                            <td>05 May 15</td>
-                            <td>$100,000</td>
-                            <td>Consultant A</td>
-                            <td>Agent A</td>
-                            <td>Renewal</td>
-                          </tr>
+                                
+                                <?php
+                            endforeach;
+                            ?>                          
                         </tbody>
                       </table>
                     </div>
                     <footer class="panel-footer">
                       <div class="row">
-                        <div class="col-sm-4 hidden-xs" style="text-valign:center; margin-bottom:10px; margin-top:10px">Show 
+                        <div class="col-sm-4 hidden-xs" style="text-valign:center; margin-bottom:10px; margin-top:10px">
+                            <?php /*
+                            Show 
                         <select size="1" name="DataTables_Table_0_length" aria-controls="DataTables_Table_0">
                           <option value="10" selected="selected">10</option>
                           <option value="25">25</option>
                           <option value="50">50</option>
                           <option value="100">100</option>
-                        </select> entries per page</div>
-                        <div class="col-sm-4 text-center">
-                          <small class="text-muted inline m-t-sm m-b-sm">showing 20-30 of 50 items</small>
+                        </select> entries per page*/?>
                         </div>
-                        <div class="col-sm-4 text-right text-center-xs">
+                        <div class="col-sm-4 text-center">                          
+                          <small class="text-muted inline m-t-sm m-b-sm">showing <?php echo $_pagi_msg;?> of <?php echo $_total_rows;?> items</small>
+                        </div>
+                        <div class="col-sm-4 text-right text-center-xs">                            
+                            <?php 
+                            echo $this->pagination->create_links();
+                            /* Paginatin
+                             * 
                           <ul class="pagination pagination-sm m-t-none m-b-none">
                             <li>
                             	<a href="prospect.html"><i class="icon-chevron-left"></i>.</a>
@@ -289,6 +133,7 @@
                               <a href="prospect.html">.<i class="icon-chevron-right"></i></a>
                             </li>
                           </ul>
+                            */?>
                         </div>
                       </div>
                     </footer>

@@ -157,6 +157,23 @@ class Template
         
     }//end function
 
+    
+    function quotation_view($data)
+    {
+        //Loadign the template       
+        $data['_content']=$this->_ci->load->view('quotation/view',$data,true);
+
+        //Page Class Name
+        $data['_page_class']='quotation_view';
+        
+        //noindex nofollow
+        $data['_noindex_meta']=true;
+        
+        //Load the page
+        $this->_ci->load->view('page_template.php',$data);
+                  
+        
+    }//end function
 
     /**
      * Customer

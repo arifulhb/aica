@@ -60,7 +60,9 @@ class Customer extends CI_Controller {
             $this->template->customer_index($data);
 
         }else{
-            echo 'Access Denied! No sufficient permittion to access this page. Please contact Administrator.';
+            //echo 'Access Denied! No sufficient permittion to access this page. Please contact Administrator.';
+            $data=site_data();
+            $this->template->access_denied($data);
         }
         
     }//end index

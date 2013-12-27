@@ -537,7 +537,7 @@
 
                         </a>
                     </li>
-                </ul>Vehicle Information (Private)
+                </ul><span id="qt_ins_type_name">Vehicle Information (Private)</span>
             </header>
             <section class="panel-body">
                 <form class="form-horizontal" method="get">
@@ -546,11 +546,11 @@
 
                         <div class="col-sm-6">
 
-                            <label class="col-sm-3 control-label req" for="qt_vipvt_number">Number</label>
+                            <label class="col-sm-3 control-label req" for="qt_vi_number">Number</label>
 
                             <div class="col-md-6">
-                                <input type="text" id="qt_vipvt_number" name="qt_vipvt_number" value=""
-                                       placeholder="Private Vehicle Number" class="form-control">
+                                <input type="text" id="qt_vi_number" name="qt_vi_number" value=""
+                                       placeholder="Vehicle Number" class="form-control">
                             </div>
 
                         </div>
@@ -562,25 +562,20 @@
 
                         <div class="col-sm-6">
 
-                            <label class="col-sm-3 control-label req" for="qt_vipvt_make">Make</label>
+                            <label class="col-sm-3 control-label req" for="qt_vi_make">Make</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" id="qt_vipvt_number" required
-                                       name="qt_vipvt_number" placeholder="Make" value="" maxlength="50"/>
+                                <input type="text" class="form-control" id="qt_vi_make" required
+                                       name="qt_vi_make" placeholder="Make" value="" maxlength="50"/>
                             </div>
                         </div>
 
                         <div class="col-sm-6">
-
-                            <label class="col-sm-3 control-label  req" for="qt_vipvt_model">Model</label>
-
+                            <label class="col-sm-3 control-label  req" for="qt_vi_model">Model</label>
                             <div class="col-md-6">
-
-                                <input type="text" class="form-control" id="qt_vipvt_model" name="qt_vipvt_model" 
+                                <input type="text" class="form-control" id="qt_vi_model" name="qt_vi_model" 
                                        placeholder="Model" value="" required maxlength="50"/>
-
                             </div>
-
                         </div>
 
                     </div>
@@ -588,9 +583,9 @@
                     <div class="line line-dashed line-lg pull-in"></div>
 
                     <div class="form-group">
-
-                        <div class="col-sm-6">
-
+                                                
+                        <div class="col-sm-6 qt_type_pvt">
+                            <!--private type-->
                             <label class="col-sm-3 control-label req" for="qt_vipvt_scheme_type">Scheme Type</label>
                             <div class="col-md-6">
                                 <select name="qt_vipvt_scheme_type" id="qt_vipvt_scheme_type" class="form-control m-b" required>
@@ -601,36 +596,93 @@
                             </div>
 
                         </div>
+                        <!--commercial type-->
+                         <div class="col-sm-6 qt_type_com">
+                            <label class="col-sm-3 control-label req" for="qt_vicom_type">Type</label>
+                            <div class="col-md-6">
+                                <select name="qt_vicom_type" id="qt_vicom_type" class="form-control m-b" required>
+                                    <option>Hood/Canopy</option>
+                                    <option>Std Lorry</option>
+                                    <option>Std Van</option>
+                                    <option>Refrigerated Van</option>
+                                    <option>Crane/Tailgate</option>
+                                    <option>Garbage Truck</option>
+                                    <option>Mixer</option>
+                                    <option>Prime Mover</option>
+                                    <option>Tipper</option>
+                                    <option>Tanker</option>
+                                    <option>Ambulance</option>
+                                    <option>Tow Truck</option>
+                                </select>
+                            </div>
+                        </div>
 
                         <div class="col-sm-6">
-                            <label class="col-sm-3 control-label req" for="qt_vipvt_cc">CC</label>
+                            <label class="col-sm-3 control-label req" for="qt_vi_cc">CC</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" id="qt_vipvt_cc" required maxlength="50"
-                                       name="qt_vipvt_cc" placeholder="Number" value=""/>
+                                <input type="text" class="form-control" id="qt_vi_cc" required maxlength="50"
+                                       name="qt_vi_cc" placeholder="CC" value=""/>
                             </div>
                         </div>
 
                     </div>
+                    <!--commercial Type-->
+                    <div class="qt_type_com">
+                        <div class="form-group">
 
+                            <div class="col-sm-6">
+                                <label class="col-sm-3 control-label req" for="qt_vicom_unladen_weight">Unladen Weight</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="qt_vicom_unladen_weight" required
+                                           name="qt_vicom_unladen_weight" placeholder="Unladen Weight"/>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label class="col-sm-3 control-label req" for="qt_vicom_laden_weight">Laden Weight</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="qt_vicom_laden_weight" required
+                                           name="qt_vicom_laden_weight" placeholder="Laden Weigh"/>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="line line-dashed line-lg pull-in"></div>
+
+                        <div class="form-group">
+
+                            <div class="col-sm-6">
+
+                                <label class="col-sm-3 control-label">Tonnage</label>
+
+                                <label class="col-sm-3 control-label" id="qt_vicom_tonnage">[Equation]</label>
+
+                            </div>
+
+                        </div>
+                        
+                    </div><!--end qt_type_com -->
+                    
                     <div class="line line-dashed line-lg pull-in"></div>
 
                     <div class="form-group">
 
-                        <label class="col-sm-3 control-label req" for="qt_vipvt_year_of_manufacture">Year of Manufacture</label>
+                        <label class="col-sm-3 control-label req" for="qt_vi_year_of_manufacture">Year of Manufacture</label>
                         <div class="col-md-7">
-                            <input type="number" class="form-control" id="qt_vipvt_year_of_manufacture" maxlength="4"
-                                   name="qt_vipvt_year_of_manufacture" placeholder="Year of Manufacture"/>
+                            <input type="number" class="form-control" id="qt_vi_year_of_manufacture" maxlength="4" max="2030" min="1900"
+                                   name="qt_vi_year_of_manufacture" placeholder="Year of Manufacture"/>
                         </div>
                     </div>
 
                     <div class="line line-dashed line-lg pull-in"></div>
 
                     <div class="form-group">
-                        <label class="col-sm-3 control-label req" for="qt_vipvt_regn_date">Regn. Date</label>
+                        <label class="col-sm-3 control-label req" for="qt_vi_regn_date">Regn. Date</label>
 
                         <div class="col-md-7">
-                            <input class="input-sm datepicker-input form-control" id="qt_vipvt_regn_date" 
-                                   size="16" type="text" name="qt_vipvt_regn_date" maxlength="12"  required
+                            <input class="input-sm datepicker-input form-control" id="qt_vi_regn_date" 
+                                   size="16" type="text" name="qt_vi_regn_date" maxlength="12"  required
                                    parsley-maxlength="12" parsley-trigger="focusout" 
                                    data-date-format="dd-mm-yyyy" placeholder="Regn. Date">                            
                         </div>
@@ -640,108 +692,109 @@
 
                     <div class="form-group">
 
-                        <label class="col-sm-3 control-label req" for="qt_vipvt_road_tax_expire_date">Road Tax Expiry Date</label>
+                        <label class="col-sm-3 control-label req" for="qt_vi_road_tax_expire_date">Road Tax Expiry Date</label>
                         <div class="col-md-7">
-                            <input class="input-sm datepicker-input form-control" id="qt_vipvt_road_tax_expire_date" 
-                                   size="16" type="text" name="qt_vipvt_road_tax_expire_date" maxlength="12" 
+                            <input class="input-sm datepicker-input form-control" id="qt_vi_road_tax_expire_date" 
+                                   size="16" type="text" name="qt_vi_road_tax_expire_date" maxlength="12" 
                                    parsley-maxlength="12" parsley-trigger="focusout"  required
                                    data-date-format="dd-mm-yyyy" placeholder="Road Tax Expiry Date">   
                         </div>
                     </div>
 
                     <div class="line line-dashed line-lg pull-in"></div>
+                    <div class="qt_type_pvt">
+                        <div class="form-group">
 
-                    <div class="form-group">
+                            <label class="col-sm-3 control-label"></label>
+                            <!--additional features-->
+                            <div class="col-sm-4">
 
-                        <label class="col-sm-3 control-label"></label>
-                        <div class="col-sm-4">
-                            
-                            <label class="control-label req">Additional Features</label>
-                            <div class="checkbox">
-                                <label><input type="checkbox" id="qt_vipvt_feature_sunroof" 
-                                              name="qt_vipvt_feature_sunroof" value="">sunroof</label>
+                                <label class="control-label req">Additional Features</label>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" id="qt_vipvt_feature_sunroof" 
+                                                  name="qt_vipvt_feature_sunroof" value="">sunroof</label>
+                                </div>
+
+                                <div class="checkbox">
+                                    <label><input type="checkbox" id="qt_vipvt_feature_soft_top"
+                                                  name="qt_vipvt_feature_soft_top" value="">soft-top</label>
+                                </div>
+
+                                <div class="checkbox">
+                                    <label><input type="checkbox" id="qt_vipvt_feature_turbo_engine" 
+                                                  name="qt_vipvt_feature_turbo_engine" value="">turbo engine</label>
+                                </div>
+
+                                <div class="checkbox">
+                                    <label><input type="checkbox" id="qt_vipvt_feature_moonroof" 
+                                                  name="qt_vipvt_feature_moonroof" value="">moonroof</label>
+                                </div>								
+
+                                <div class="checkbox">
+                                    <label><input type="checkbox" id="qt_vipvt_feature_skyroof" 
+                                                  name="qt_vipvt_feature_skyroof" value="">skyroof</label>
+                                </div>								
+
+                                <div class="checkbox">
+                                    <label><input type="checkbox" id="qt_vipvt_feature_roof_panoramic" 
+                                                  name="qt_vipvt_feature_roof_panoramic" value="">roof panoramic</label>
+                                </div>								
+
                             </div>
+                            <!--vehicle type-->
+                            <div class="col-sm-4">
 
-                            <div class="checkbox">
-                                <label><input type="checkbox" id="qt_vipvt_feature_soft_top"
-                                              name="qt_vipvt_feature_soft_top" value="">soft-top</label>
+                                <label class="control-label  req">Vehicle Type</label>							
+
+                                <div class="checkbox">
+                                    <label><input type="checkbox" id="qt_vipvt_type_sport_model"
+                                                  name="qt_vipvt_type_sport_model" value="">sport model</label>
+                                </div>
+
+                                <div class="checkbox">
+                                    <label><input type="checkbox" id="qt_vipvt_type_mpv"
+                                                  name="qt_vipvt_type_mpv" value="">MPV</label>
+                                </div>
+
+                                <div class="checkbox">
+                                    <label><input type="checkbox" id="qt_vipvt_type_suv"
+                                                  name="qt_vipvt_type_suv" value="">SUV</label>
+                                </div>
+
+                                <div class="checkbox">
+                                    <label><input type="checkbox" id="qt_vipvt_type_sedan" 
+                                                  name="qt_vipvt_type_sedan" value="">Sedan</label>
+                                </div>								
+
+                                <div class="checkbox">
+
+                                    <label><input type="checkbox" id="qt_vipvt_type_coupe" 
+                                                  name="qt_vipvt_type_coupe " value="">Coupe</label>
+                                </div>
+
+                                <div class="checkbox">
+                                    <label><input type="checkbox" id="qt_vipvt_type_cabriolet"
+                                                  name="qt_vipvt_type_cabriolet" value="">Cabriolet</label>
+                                </div>
+
+                                <div class="checkbox">
+                                    <label><input type="checkbox" id="qt_vipvt_type_parallel_import"
+                                                  name="qt_vipvt_type_parallel_import" value="">Parallel Import</label>
+                                </div>								
+
                             </div>
-
-                            <div class="checkbox">
-                                <label><input type="checkbox" id="qt_vipvt_feature_turbo_engine" 
-                                              name="qt_vipvt_feature_turbo_engine" value="">turbo engine</label>
-                            </div>
-
-                            <div class="checkbox">
-                                <label><input type="checkbox" id="qt_vipvt_feature_moonroof" 
-                                              name="qt_vipvt_feature_moonroof" value="">moonroof</label>
-                            </div>								
-
-                            <div class="checkbox">
-                                <label><input type="checkbox" id="qt_vipvt_feature_skyroof" 
-                                              name="qt_vipvt_feature_skyroof" value="">skyroof</label>
-                            </div>								
-
-                            <div class="checkbox">
-                                <label><input type="checkbox" id="qt_vipvt_feature_roof_panoramic" 
-                                              name="qt_vipvt_feature_roof_panoramic" value="">roof panoramic</label>
-                            </div>								
 
                         </div>
 
-                        <div class="col-sm-4">
-
-                            <label class="control-label  req">Vehicle Type</label>							
-
-                            <div class="checkbox">
-                                <label><input type="checkbox" id="qt_vipvt_type_sport_model"
-                                              name="qt_vipvt_type_sport_model" value="">sport model</label>
-                            </div>
-
-                            <div class="checkbox">
-                                <label><input type="checkbox" id="qt_vipvt_type_mpv"
-                                              name="qt_vipvt_type_mpv" value="">MPV</label>
-                            </div>
-
-                            <div class="checkbox">
-                                <label><input type="checkbox" id="qt_vipvt_type_suv"
-                                              name="qt_vipvt_type_suv" value="">SUV</label>
-                            </div>
-
-                            <div class="checkbox">
-                                <label><input type="checkbox" id="qt_vipvt_type_sedan" 
-                                              name="qt_vipvt_type_sedan" value="">Sedan</label>
-                            </div>								
-
-                            <div class="checkbox">
-
-                                <label><input type="checkbox" id="qt_vipvt_type_coupe" 
-                                              name="qt_vipvt_type_coupe "value="">Coupe</label>
-                            </div>
-
-                            <div class="checkbox">
-                                <label><input type="checkbox" id="qt_vipvt_type_cabriolet"
-                                              name="qt_vipvt_type_cabriolet" value="">Cabriolet</label>
-                            </div>
-
-                            <div class="checkbox">
-                                <label><input type="checkbox" id="qt_vipvt_type_parallel_import"
-                                              name="qt_vipvt_type_parallel_import" value="">Parallel Import</label>
-                            </div>								
-
-                        </div>
-
-                    </div>
-
-                    <div class="line line-dashed line-lg pull-in"></div>
-
+                        <div class="line line-dashed line-lg pull-in"></div>
+                    </div><!--end qt_type_pvt-->
                     <div class="form-group">
 
                         <label class="col-sm-3 control-label">Additional Accesories/Coverage</label>
                         <div class="col-sm-7">
-                            <input type="hidden" id="qt_vipvt_additional_accessories" name="qt_vipvt_additional_accessories" 
+                            <input type="hidden" id="qt_vi_additional_accessories" name="qt_vi_additional_accessories" 
                                    value="">
-                            <div id="qt_vipvt_additional_accessories_wrap" class="form-control" style="overflow:scroll;height:150px;max-height:150px"
+                            <div id="qt_vi_additional_accessories_wrap" class="form-control" style="overflow:scroll;height:150px;max-height:150px"
                                  contenteditable="true"></div>
                         </div>
                     </div>
@@ -760,6 +813,10 @@
             </section>
         </section>
         
+        <?/*
+         * Commercial part 
+         *
+         *          
         <!-- Commercial -->
         <section class="panel" id="panel_vehicle_info_com">
             <header class="panel-heading font-bold">
@@ -815,6 +872,7 @@
                     <div class="line line-dashed line-lg pull-in"></div>
 
                     <div class="form-group">
+                        
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label req" for="qt_vicom_type">Type</label>
                             <div class="col-md-6">
@@ -834,7 +892,7 @@
                                 </select>
                             </div>
                         </div>
-
+                        
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label req" for="qt_vicom_cc">CC</label>
                             <div class="col-md-6">
@@ -846,7 +904,7 @@
                     </div>
 
                     <div class="line line-dashed line-lg pull-in"></div>
-
+                    
                     <div class="form-group">
 
                         <div class="col-sm-6">
@@ -868,7 +926,7 @@
                     </div>
 
                     <div class="line line-dashed line-lg pull-in"></div>
-
+                    
                     <div class="form-group">
 
                         <div class="col-sm-6">
@@ -938,14 +996,15 @@
                             <!--button check point vehicle info commercial -->
                             <button type="button" id="btn_cp_vehicle_info_com"
                                     class="btn btn-primary btn-save pull-right">Save</button>
-                            <?php /*<div class="col-sm-3 m-b-xs" style="padding-left:0px;">
+                            <?php <div class="col-sm-3 m-b-xs" style="padding-left:0px;">
                                 <a href="prospect.html" class="btn btn-primary"> Save</a>
-                            </div>*/?>
+                            </div>
                         </div>
                     </div>
                 </form>
             </section>
         </section>
+        */?>
         
         <!-- Insurance Details -->
         <section class="panel" id="qt_insurance_details">
@@ -1035,7 +1094,7 @@
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label req" for="qt_id_current_excess">Current Excess</label>
                             <div class="col-md-6">
-                                <input type="number" class="form-control" id="qt_id_current_premium" required
+                                <input type="number" class="form-control" id="qt_id_current_excess" required
                                        name="qt_id_current_excess "placeholder="Current Excess">
                             </div>
                         </div>
@@ -1791,7 +1850,7 @@
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label req" for="qt_sid_company">Company</label>
                             <div class="col-md-6">
-                                <select name="qt_sid_company" name="qt_sid_company" class="form-control m-b">
+                                <select id="qt_sid_company" name="qt_sid_company" class="form-control m-b">
                                     <optgroup>
                                     <option>AIG</option>
                                     <option>AXA</option>
@@ -1840,7 +1899,7 @@
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label req" for="qt_sid_coverage_type">Type of Coverage</label>
                             <div class="col-md-6">
-                                <select name="qt_sid_coverage_type" name="qt_sid_coverage_type" class="form-control m-b">
+                                <select name="qt_sid_coverage_type" id="qt_sid_coverage_type" class="form-control m-b">
                                     <option>Comprehensive</option>
                                     <option>TPFT</option>
                                     <option>TPO</option>						
