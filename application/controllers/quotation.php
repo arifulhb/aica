@@ -22,9 +22,9 @@ class Quotation extends CI_Controller {
             //set pagination configuration
             $config=  getPaginationConfig();//this function is from helpers/ahb_helper.php file
             $config['base_url'] = base_url().'quotation/index';
-            $this->load->model('Quotation_model');
+            $this->load->model('quotation_model');
 
-            $config['total_rows'] = $this->Quotation_model->getTotalNum();        
+            $config['total_rows'] = $this->quotation_model->getTotalNum();        
             $config['use_page_numbers']=true;
             $config['per_page'] = 15;
             $config['num_links'] = 5;        
@@ -41,7 +41,7 @@ class Quotation extends CI_Controller {
 
                 $data['_pagi_msg']=  (($this->uri->segment(3)-1)*($config['per_page']+1)).' - '.$last;                            
                 //$data['_cust_list']=$this->customer_model->getList();
-                $data['_list']=$this->Quotation_model->getList($config['per_page'],($config['per_page']*($this->uri->segment(3)-1)+1));
+                $data['_list']=$this->quotation_model->getList($config['per_page'],($config['per_page']*($this->uri->segment(3)-1)+1));
                 
             }else{
                 if($config['total_rows']>$config['per_page']){
@@ -51,7 +51,7 @@ class Quotation extends CI_Controller {
                 }
 
                 $data['_pagi_msg'] = '1 - '.$last;                                  
-                $data['_list']=$this->Quotation_model->getList($config['per_page'],$this->uri->segment(3));
+                $data['_list']=$this->quotation_model->getList($config['per_page'],$this->uri->segment(3));
             }//end else pagination
             
             $data['_page_title']='All Ins Commission Application';
@@ -72,9 +72,9 @@ class Quotation extends CI_Controller {
             
             $ref_no=$this->uri->segment(3);            
                         
-            $this->load->model('Quotation_model');
-            $data['_record'] = $this->Quotation_model->getRecord($ref_no);
-            $data['_history']=$this->Quotation_model->getHistory($ref_no);
+            $this->load->model('quotation_model');
+            $data['_record'] = $this->quotation_model->getRecord($ref_no);
+            $data['_history']=$this->quotation_model->getHistory($ref_no);
             $data['_page_title']="Quotation View";
             $data['_page_caption']="Quotation View";
             $data['_page_description']="Quotation View";
@@ -101,9 +101,9 @@ class Quotation extends CI_Controller {
             $data['_page_caption']='New Quotation';
             $data['_page_description']='Entry Page for New Quotation';
             $data['_action']='add';
-            $this->load->model('Quotation_model');
+            $this->load->model('quotation_model');
 
-            $refno =$this->Quotation_model->getNewQuotationNo();
+            $refno =$this->quotation_model->getNewQuotationNo();
             if(empty($refno)){
                 $data['new_qt_ref_no']=1; //=> New Quotatioin No$refno=1;
             }else{
@@ -151,21 +151,21 @@ class Quotation extends CI_Controller {
             $data['qt_instructions']=$this->input->post('_qt_cust_instructions');
 
 
-            $this->load->model('Quotation_model');
+            $this->load->model('quotation_model');
 
 
             if($action=='add'){
                 //Insert
                 $data['add_by']=$this->session->userdata('user_sn');
 
-                $res=$this->Quotation_model->insert_quotation($data);
+                $res=$this->quotation_model->insert_quotation($data);
                 echo $res;
 
             }else{
                 //Update
                 $data['qt_ref_no']=$this->input->post('_qt_ref_no');
 
-                $res=$this->Quotation_model->update_quotation($data);
+                $res=$this->quotation_model->update_quotation($data);
 
                 if($res==1){
                     //update history
@@ -173,7 +173,7 @@ class Quotation extends CI_Controller {
                                 'update_by'=>$this->session->userdata('user_sn'),
                                 'update_from'=>$this->input->post('_qt_current_state'),
                                 'update_to'=>$this->input->post('_qt_details_state'));
-                    $this->Quotation_model->updateHistory($update);
+                    $this->quotation_model->updateHistory($update);
                 }
 
                 print_r($res);
@@ -252,12 +252,12 @@ class Quotation extends CI_Controller {
         $data['si_road_tax_due']=date('Y-m-d',strtotime($this->input->post('_qt_sid_road_tax_due',TRUE)));        
         $data['si_ncd_protection']=$this->input->post('_qt_sid_ncd_protection');
 
-        $this->load->model('Quotation_model');
+        $this->load->model('quotation_model');
 
 
         //print_r($data_pvt);
         //exit();
-       $res= $this->Quotation_model->update_full($data,$qt_ref_no);
+       $res= $this->quotation_model->update_full($data,$qt_ref_no);
         //$res=1;
         
         //print_r($new);
@@ -266,10 +266,10 @@ class Quotation extends CI_Controller {
             $sub='';
             if($qt_insurance_type=='Private'){
                 $sub='pvt';
-                $this->Quotation_model->update_vehicle_private($data_pvt,$qt_ref_no);
+                $this->quotation_model->update_vehicle_private($data_pvt,$qt_ref_no);
             }else{
                 $sub='com';
-                $this->Quotation_model->update_vehicle_commercial($data_com,$qt_ref_no);
+                $this->quotation_model->update_vehicle_commercial($data_com,$qt_ref_no);
             }
             //$new=array('recrd: '=>$qt_ref_no,'data'=>$data,'sub'=>$data_pvt,'status'=>$res);
             
@@ -278,7 +278,7 @@ class Quotation extends CI_Controller {
             'update_by'=>$this->session->userdata('user_sn'),
             'update_from'=>$this->input->post('_qt_current_state'),
             'update_to'=>$this->input->post('_qt_details_state'));
-            $this->Quotation_model->updateHistory($update);
+            $this->quotation_model->updateHistory($update);
             
             $new=array('recrd: '=>$qt_ref_no,'status'=>$res);
             print_r($new);
@@ -296,8 +296,8 @@ class Quotation extends CI_Controller {
 
         $qt_ref_no=$this->input->post('_qt_ref_no');
 
-        $this->load->model('Quotation_model');
-        $res=$this->Quotation_model->getHistory($qt_ref_no);
+        $this->load->model('quotation_model');
+        $res=$this->quotation_model->getHistory($qt_ref_no);
 
         echo json_encode($res);
         //echo $res[0];

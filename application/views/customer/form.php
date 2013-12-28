@@ -67,8 +67,9 @@
             $cust_gender  ='';
             $cust_marital_status    = '';
             $cust_type              = '';
-            $cust_contach_hp        = '';
-            $cust_contact_office    = '';
+            //$cust_contach_hp        = '';
+            $cust_contact_hp        = '';
+            $cust_contact_office    = '';            
             $cust_contact_house     = '';
             $cust_contact_fax       = '';
             $cust_contact_email     = '';

@@ -43,7 +43,8 @@ class Signin extends CI_Controller {
                 //pass
                 //echo ' login pass ';
                 if($user[0]['user_status']=='active'){
-                    echo 'active user';
+                    //echo 'active user';
+                    //print_r($user);
                     $user_ses = array(
                             'user_sn' => $user[0]['user_sn'],                            
                             'user_name' => $user[0]['user_name'],                            

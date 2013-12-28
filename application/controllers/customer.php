@@ -71,9 +71,9 @@ class Customer extends CI_Controller {
     public function getCustomerRecordJSON(){
         $cust_sn=$this->input->post('cust_sn');
         
-        //$this->model->load('Customer_model');
-        $this->load->model('Customer_model');
-        $res = $this->Customer_model->getRecord($cust_sn);
+        //$this->model->load('customer_model');
+        $this->load->model('customer_model');
+        $res = $this->customer_model->getRecord($cust_sn);
         
         echo json_encode($res);
         
@@ -145,10 +145,10 @@ class Customer extends CI_Controller {
         if ($this->form_validation->run() == TRUE)
         {                        
             $this->load->model('customer_model');
-            $data['actioin']=$this->input->post('action');
+            $actioin=$this->input->post('action');
             
             // Insert or Update
-            if($data['actioin']=='update'){                
+            if($actioin=='update'){                
                 //update
                  $data['cust_sn'] = $this->input->post('customer_sn',TRUE);                             
                  $res = $this->customer_model->update($data);                                  

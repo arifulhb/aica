@@ -18,7 +18,7 @@
                      class="form-control" required maxlength="50">
             </div>
                 <?php
-                //echo 'Now: '.date('Y-m-d h:i:s A',strtotime(date('Y-m-d H:i:s A'))).'<br>';
+                echo 'Server Time: '.date('Y-m-d h:i:s A',strtotime(date('Y-m-d H:i:s A'))).'<br>';
                 //echo 'Now: '.date( "Y-m-d h:i:s A", time() ).'<br>';
                 if($this->session->flashdata('notice')!='')
                 { ?>
