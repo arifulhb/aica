@@ -1,5 +1,4 @@
 <!--quotation/index-->
-
 <section class="scrollable" id="pjax-container">
           <header>
 			<div class="row b-b m-l-none m-r-none">
@@ -18,7 +17,7 @@
           </header>
           <section class="hbox stretch">
             <aside class="bg-white-only">
-              <section class="vbox">
+              <section class="vbox">                  
                 <header class="header bg-white b-b clearfix">
 				  <div class="row m-t-sm">
 					<div class="col-sm-6 m-b-xs">
@@ -40,8 +39,20 @@
                   </div>
                 </header>
                 <div class="wrapper">
+                    <?php
+                    if($this->session->flashdata('delete_success')==true){ ?>
+                            <div class="alert alert-warning fade in">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <strong>Delete Success!</strong> Record of <strong>"QT<?php echo $this->session->flashdata('delete_id');?>"</strong> is deleted.
+                          </div>
+                            
+                            <?php
+                    }//end if
+                    ?>
                   <section class="panel">
+                      
                     <div class="table-responsive">
+                        
                       <table class="table table-striped b-t text-sm">
                         <thead>
                           <tr>

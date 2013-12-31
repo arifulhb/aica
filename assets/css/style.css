@@ -1,3 +1,10 @@
+.commission_index .del_modal{padding: 0!important;border: 0!important;line-height: 0em;}
+.commission_index .del_modal:hover{color: red;}
+.modal-backdrop{ z-index: 10!important;}
+#remove_model{
+    margin-top: 0;
+}
+
 ul.ui-autocomplete.ui-menu {
   z-index: 1000;
 }

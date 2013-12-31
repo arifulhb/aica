@@ -53,7 +53,7 @@
                      */
                     if(in_array('css',$this->session->userdata('user_access'))){ ?>
                         <li>
-                            <a href="commission-main.html"><i class="icon-dollar"></i> Set Commission</a>
+                            <a href="<?php echo base_url().'commission'?>"><i class="icon-dollar"></i> Set Commission</a>
                         </li>                        
                         <li><hr></li>
                         <?php

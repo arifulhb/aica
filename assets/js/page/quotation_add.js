@@ -416,11 +416,12 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
         var _qt_sid_start_date=$('#qt_sid_start_date').val();
         var _qt_sid_end_date=$('#qt_sid_end_date').val();
         var _qt_sid_road_tax_due=$('#qt_sid_road_tax_due').val();
-        var _qt_sid_ncd_protection=$('#qt_sid_ncd_protection').val();
-        
+        var _qt_sid_ncd_protection=$('#qt_sid_ncd_protection :selected').text();
+        var _qt_aa_commission=$('#qt_aa_commission :selected').val();
         var data='qt_ref_no='+_qt_ref_no;
-            data+='&_qt_current_state='+_qt_current_state;
-            data+='&_qt_details_state='+_qt_details_state;
+            data+='&_qt_current_state='+_qt_current_state;            
+            data+='&_qt_details_state='+_qt_details_state;  
+            data+='&_qt_aa_commission='+_qt_aa_commission;
             data+='&_qt_insurance_type='+_qt_insurance_type;
             data+='&_qt_vi_number='+_qt_vi_number;
             data+='&_qt_vi_make'+_qt_vi_make;
@@ -481,6 +482,8 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
             data+='&_qt_sid_road_tax_due='+_qt_sid_road_tax_due;
             data+='&_qt_sid_ncd_protection='+_qt_sid_ncd_protection;
             
+            //console.log('data: '+data);
+            //return 0;
             $.ajax({
                 type:"POST",
                 data:data,

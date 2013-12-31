@@ -17,13 +17,7 @@ function site_data()
         $data['_site_description']='SITE DESCRIPTION';
         $data['_author']='Ariful Haque Bhuiyan';
 
-        $CI = get_instance();
-        /*$CI->load->model('taxonomy_model');
-        $data['_tax_size']=$CI->taxonomy_model->getItemTaxonomyList('tbl_size_type');
-        $data['_tax_breed']=$CI->taxonomy_model->getItemTaxonomyList('tbl_breed');
-        $data['_tax_char']=$CI->taxonomy_model->getItemTaxonomyList('tbl_char');
-        $data['_tax_color']=$CI->taxonomy_model->getItemTaxonomyList('tbl_color');
-        */
+        $CI = get_instance();        
         return $data;
 
     }// end site_data
@@ -110,36 +104,28 @@ function site_data()
 
             // Sales Consultant
             case 2:
-                return array(//'user','user_add','user_edit','user_delete','user_view',//user section
+                return array(
                              'quotation','quotation_add','quotation_edit','quotation_view','quotation_delete',//quotation
-                             'assign_commission', //Assigned Commission (in quotation)
-                             //'won_renew', 'won_export',  // Renewal & export of won deals
-                             //'css','_add','_edit','_view','_delete',  //css=Commission Schemes Structure (set commission)
-                             //'rec','rec_add','rec_edit','rec_view','rec_delete',  //Reconciliation                                                          
+                             'assign_commission', //Assigned Commission (in quotation)                             
                              'cust','cust_add','cust_edit','cust_view','cust_delete'  //Customer                             
                             );
                 break;
 
             // Quotation team
             case 3:
-                return array(//'user','user_add','user_edit','user_delete','user_view',//user section
+                return array(
                              'quotation','quotation_all','quotation_add','quotation_edit','quotation_view','quotation_delete',//quotation
-                             'assign_commission', //Assigned Commission (in quotation)
-                             //'won_renew', 'won_export',  // Renewal & export of won deals
-                             //'css','css_add','css_edit','css_view','css_delete',  //css=Commission Schemes Structure (set commission)
-                             //'rec','rec_add','rec_edit','rec_view','rec_delete',  //Reconciliation                             
+                             'assign_commission', //Assigned Commission (in quotation)                             
                              'cust','cust_add','cust_edit','cust_view','cust_delete'  //Customer                             
                             );
                 break;
 
             // Accountant
             case 4:
-                return array(//'user','user_add','user_edit','user_delete','user_view',//user section
+                return array(
                              'quotation','quotation_all','quotation_add','quotation_edit','quotation_view','quotation_delete',//quotation
-                             'qt_state_won','assign_commission', //Assigned Commission (in quotation)
-                            // 'won_renew', 
-                             'won_export',  // Renewal & export of won deals
-                             //'css','css_add','css_edit','css_view','css_delete',  //css=Commission Schemes Structure (set commission)
+                             'qt_state_won','assign_commission', //Assigned Commission (in quotation)                            
+                             'won_export',  // Renewal & export of won deals                             
                              'rec','rec_add','rec_edit','rec_view','rec_delete',  //Reconciliation                             
                              'cust','cust_add','cust_edit','cust_view','cust_delete'  //Customer                             
                             );                
@@ -147,15 +133,7 @@ function site_data()
             
             // External Agent
             case 5:
-                return array(//'user','user_add','user_edit','user_delete','user_view',//user section
-                             'quotation','quotation_view'
-                            //'quotation_all','quotation_add','quotation_edit', 'quotation_delete',//quotation
-                             //'assign_commission', //Assigned Commission (in quotation)
-                             //'won_renew', 'won_export',  // Renewal & export of won deals
-                             //'css','css_add','css_edit','css_view','css_delete',  //css=Commission Schemes Structure (set commission)
-                             //'rec','rec_add','rec_edit','rec_view','rec_delete',  //Reconciliation                             
-                             //'cust','cust_add','cust_edit','cust_view','cust_delete'  //Customer                             
-                            );                
+                return array('quotation','quotation_all','quotation_view');                
                 break;
 
             default:

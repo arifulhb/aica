@@ -42,6 +42,69 @@ class Template
 
     }//end home
 
+    public function commission_index($data){
+        
+        
+        $data['_content']=$this->_ci->load->view('commission/index',$data,true);
+
+        //Page Class Name
+        $data['_page_class']='commission_index';
+        
+        //noindex nofollow
+        $data['_noindex_meta']=true;
+        
+        //Load the page
+        $this->_ci->load->view('page_template.php',$data);
+        
+    }//end function
+
+    public function commission_add($data){
+        
+        
+        $data['_content']=$this->_ci->load->view('commission/form',$data,true);
+
+        //Page Class Name
+        $data['_page_class']='commission_add';
+        
+        //noindex nofollow
+        $data['_noindex_meta']=true;
+        
+        //Load the page
+        $this->_ci->load->view('page_template.php',$data);
+        
+    }//end function
+
+    public function commission_edit($data){
+        
+        
+        $data['_content']=$this->_ci->load->view('commission/form',$data,true);
+
+        //Page Class Name
+        $data['_page_class']='commission_edit';
+        
+        //noindex nofollow
+        $data['_noindex_meta']=true;
+        
+        //Load the page
+        $this->_ci->load->view('page_template.php',$data);
+        
+    }//end function
+
+    public function commission_view($data){
+        
+        
+        $data['_content']=$this->_ci->load->view('commission/view',$data,true);
+
+        //Page Class Name
+        $data['_page_class']='commission_view';
+        
+        //noindex nofollow
+        $data['_noindex_meta']=true;
+        
+        //Load the page
+        $this->_ci->load->view('page_template.php',$data);
+        
+    }//end function
     /**
      * Signin
      */

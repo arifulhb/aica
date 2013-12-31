@@ -39,7 +39,7 @@
             $cust_gender            = $customer[0]['cust_gender'];
             $cust_marital_status    = $customer[0]['cust_marital_status'];
             $cust_type              = $customer[0]['cust_type'];
-            $cust_contach_hp        = $customer[0]['cust_contact_hp'];
+           // $cust_contach_hp        = $customer[0]['cust_contact_hp'];
             $cust_contact_office    = $customer[0]['cust_contact_office'];
             $cust_contact_hp        = $customer[0]['cust_contact_hp'];
             $cust_contact_house     = $customer[0]['cust_contact_house'];

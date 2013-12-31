@@ -14,7 +14,12 @@ class Quotation extends CI_Controller {
         $data=site_data();
         
         if(in_array('quotation',$this->session->userdata('user_access'))){
-            
+            $quotation_all=null;
+            if(in_array('quotation_all',$this->session->userdata('user_access'))){
+                $quotation_all=NULL;
+            }else{
+                $quotation_all=$this->session->userdata('user_sn');
+            }
             
              //Load pagination library
             $this->load->library('pagination');
@@ -24,7 +29,7 @@ class Quotation extends CI_Controller {
             $config['base_url'] = base_url().'quotation/index';
             $this->load->model('quotation_model');
 
-            $config['total_rows'] = $this->quotation_model->getTotalNum();        
+            $config['total_rows'] = $this->quotation_model->getTotalNum($quotation_all);        
             $config['use_page_numbers']=true;
             $config['per_page'] = 15;
             $config['num_links'] = 5;        
@@ -39,9 +44,8 @@ class Quotation extends CI_Controller {
                 //if page number exisit
                 $last=$this->uri->segment(3)*$config['per_page']>$config['total_rows']?$config['total_rows']:$this->uri->segment(3)*$config['per_page'];
 
-                $data['_pagi_msg']=  (($this->uri->segment(3)-1)*($config['per_page']+1)).' - '.$last;                            
-                //$data['_cust_list']=$this->customer_model->getList();
-                $data['_list']=$this->quotation_model->getList($config['per_page'],($config['per_page']*($this->uri->segment(3)-1)+1));
+                $data['_pagi_msg']=  (($this->uri->segment(3)-1)*($config['per_page']+1)).' - '.$last;                                            
+                $data['_list']=$this->quotation_model->getList($config['per_page'],($config['per_page']*($this->uri->segment(3)-1)+1),$quotation_all);
                 
             }else{
                 if($config['total_rows']>$config['per_page']){
@@ -51,7 +55,7 @@ class Quotation extends CI_Controller {
                 }
 
                 $data['_pagi_msg'] = '1 - '.$last;                                  
-                $data['_list']=$this->quotation_model->getList($config['per_page'],$this->uri->segment(3));
+                $data['_list']=$this->quotation_model->getList($config['per_page'],$this->uri->segment(3),$quotation_all);
             }//end else pagination
             
             $data['_page_title']='All Ins Commission Application';
@@ -74,11 +78,25 @@ class Quotation extends CI_Controller {
                         
             $this->load->model('quotation_model');
             $data['_record'] = $this->quotation_model->getRecord($ref_no);
-            $data['_history']=$this->quotation_model->getHistory($ref_no);
-            $data['_page_title']="Quotation View";
-            $data['_page_caption']="Quotation View";
-            $data['_page_description']="Quotation View";
-            $this->template->quotation_view($data);   
+            if(in_array('quotation_all',$this->session->userdata('user_access'))){
+                $data['_history']=$this->quotation_model->getHistory($ref_no);
+                $data['_page_title']="Quotation View";
+                $data['_page_caption']="Quotation View";
+                $data['_page_description']="Quotation View";
+                $this->template->quotation_view($data);   
+            }else{
+                //check the author
+                if($data['_record'][0]['add_by']==$this->session->userdata('user_sn')){
+                    $data['_history']=$this->quotation_model->getHistory($ref_no);
+                    $data['_page_title']="Quotation View";
+                    $data['_page_caption']="Quotation View";
+                    $data['_page_description']="Quotation View";
+                    $this->template->quotation_view($data);  
+                }else{
+                    $this->template->access_denied($data);   
+                }
+            }
+            
             
         }else{
             $this->template->access_denied($data);   
@@ -95,19 +113,45 @@ class Quotation extends CI_Controller {
                         
             $this->load->model('quotation_model');
             $data['_record'] = $this->quotation_model->getRecord($ref_no);
-            $data['_history']=$this->quotation_model->getHistory($ref_no);
-                                    
-            $data['_page_title']="Edit Quotation";
-            $data['_page_caption']="Edit Quotation";
-            $data['_page_description']="Quotation Edit";
-            $data['new_qt_ref_no']=$ref_no;
-            $data['_action']='update';
-            
-            $this->load->model('user_model');
-            $data['consultants']=$this->user_model->getSmallList(2);//=> Sales Consultant List
-            $data['agents']=$this->user_model->getSmallList(5);//=> External Agent List
-            
-            $this->template->quotation_edit($data);   
+            if(in_array('quotation_all',$this->session->userdata('user_access'))){
+                $data['_history']=$this->quotation_model->getHistory($ref_no);
+
+                $data['_page_title']="Edit Quotation";
+                $data['_page_caption']="Edit Quotation";
+                $data['_page_description']="Quotation Edit";
+                $data['new_qt_ref_no']=$ref_no;
+                $data['_action']='update';
+
+                $this->load->model('user_model');
+                $data['consultants']=$this->user_model->getSmallList(2);//=> Sales Consultant List
+                $data['agents']=$this->user_model->getSmallList(5);//=> External Agent List
+
+                $this->load->model('commission_model');
+                $data['_commissions']=$this->commission_model->getCommissions();//=> Commissions
+
+                $this->template->quotation_edit($data);
+            }else{
+                 //check the author
+                if($data['_record'][0]['add_by']==$this->session->userdata('user_sn')){
+                    $data['_history']=$this->quotation_model->getHistory($ref_no);
+                    $data['_page_title']="Edit Quotation";
+                    $data['_page_caption']="Edit Quotation";
+                    $data['_page_description']="Quotation Edit";
+                    $data['new_qt_ref_no']=$ref_no;
+                    $data['_action']='update';
+
+                    $this->load->model('user_model');
+                    $data['consultants']=$this->user_model->getSmallList(2);//=> Sales Consultant List
+                    $data['agents']=$this->user_model->getSmallList(5);//=> External Agent List
+
+                    $this->load->model('commission_model');
+                    $data['_commissions']=$this->commission_model->getCommissions();//=> Commissions
+
+                    $this->template->quotation_edit($data);
+                }else{
+                    $this->template->access_denied($data);   
+                }
+            }                   
             
         }else{
             $this->template->access_denied($data);   
@@ -221,8 +265,8 @@ class Quotation extends CI_Controller {
         //$this->form_validation->set_rules('cust_name', 'Customer Name', 'trim|required|max_length[250]|xss_clean');
 
         $qt_ref_no=$this->input->post('qt_ref_no');
-        $qt_insurance_type=$this->input->post('_qt_insurance_type');
-
+        $qt_insurance_type=$this->input->post('_qt_insurance_type');        
+        
         $data['vi_number']=$this->input->post('_qt_vi_number');
         $data['vi_make']=$this->input->post('_qt_vi_make');
         $data['vi_model']=$this->input->post('_qt_vi_model');
@@ -282,7 +326,14 @@ class Quotation extends CI_Controller {
         $data['si_end_date']=date('Y-m-d',strtotime($this->input->post('_qt_sid_end_date',TRUE)));                        
         $data['si_road_tax_due']=date('Y-m-d',strtotime($this->input->post('_qt_sid_road_tax_due',TRUE)));        
         $data['si_ncd_protection']=$this->input->post('_qt_sid_ncd_protection');
-
+        $data['qt_state']=$this->input->post('_qt_details_state');
+        
+        if(in_array('assign_commission', $this->session->userdata('user_access'))){                        
+            
+            if($data['qt_state']=='Closed' || $data['qt_state']=='Won'){
+                $data['com_sn']=$this->input->post('_qt_aa_commission');            
+            }
+        }//end if
         $this->load->model('quotation_model');
 
 
@@ -313,7 +364,7 @@ class Quotation extends CI_Controller {
             'update_to'=>$this->input->post('_qt_details_state'));
             $this->quotation_model->updateHistory($update);
             
-            $new=array('recrd: '=>$qt_ref_no,'status'=>$res,'data: ',$data,'sub: '=>$sub);
+            $new=array('recrd: '=>$qt_ref_no,'status'=>$res,'data: '=>$data,'sub: '=>$sub);
             print_r($new);
         }//end if
         else{
@@ -323,6 +374,33 @@ class Quotation extends CI_Controller {
         //print_r($res);
         //print_r($data);
 
+    }//end function
+    
+    public function delete(){
+    
+        if(in_array('quotation_delete', $this->session->userdata('user_access'))){
+            
+            $qt_no=$this->input->post('del_qt_sn');
+            
+            $this->load->model('quotation_model');
+            $res=$this->quotation_model->deleteRecord($qt_no);
+            
+            if($res==TRUE){
+                $this->session->set_flashdata('delete_success', true);
+                $this->session->set_flashdata('delete_id', $qt_no);
+                redirect('quotation/index');
+            }else{
+                $this->session->set_flashdata('delete_fail', 'true');
+                echo 'failed to delete';
+            }
+            
+        
+        }else{
+             $data=  site_data();
+            $this->template->access_denied($data);
+        }
+        
+        
     }//end function
 
     public function getHistory(){

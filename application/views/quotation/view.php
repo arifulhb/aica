@@ -7,10 +7,12 @@
             </div>
             <div class="col-sm-2 m-b-xs" style="padding-left:0px; padding-top:17px">
                 <div class="col-sm-5">
-                    <a href="QT1e.html" class="btn btn-success"><i class="icon-edit"></i> Edit</a>
+                    <a href="<?php echo base_url().'quotation/edit/'.$_record[0]['qt_ref_no'];?>" class="btn btn-success"><i class="icon-edit"></i> Edit</a>
                 </div>
                 <div class="col-sm-7">
-                    <a href="QT1v.html" class="btn btn-success"><i class="icon-trash"></i> Delete</a>
+                    <?php /*<a href="#" class="btn btn-success"><i class="icon-trash"></i> Delete</a>*/?>
+                    <button id="del_quotation" value="<?php echo $_record[0]['qt_ref_no'];?>" 
+                            type="button" class="btn btn-danger"><i class="icon-trash"></i> Delete</button>
                 </div>
             </div>
         </div>
@@ -1184,7 +1186,7 @@
 
                             <label class="col-sm-3 control-label" >Commission</label>
 
-                            <div class="col-md-6"><?php echo $_record[0]['aa_commission'];?></div>
+                            <div class="col-md-6"><?php echo $_record[0]['com_coy_rate'];?>%</div>
 
                         </div>
                     </div>
@@ -1200,4 +1202,29 @@
         ?>
     </section>
 </section>
+<!-- Modal -->
+<div class="modal " id="remove_model" tabindex="-1" role="dialog" 
+   aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+      <form method="POST" action="<?php echo base_url().'quotation/delete';?>">
+          
+      
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title" id="myModalLabel">Delete Item</h4>
+    </div>
+    <div class="modal-body">                    
+            <input type="hidden" id="del_qt_sn" name="del_qt_sn" value="<?php echo $_record[0]['qt_ref_no'];?>"/>                        
+            <h4>Are you sure to delete <strong><span id="com_name"></span></strong> item?</h4>
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <button type="submit" id="delete_item_confirm" class="btn btn-danger"><i class="icon-trash"></i> Delete</button>
+    </div>
+      </form>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 <script>require(['page/quotation_view']);</script>

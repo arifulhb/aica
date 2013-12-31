@@ -22,6 +22,7 @@
             $_qt_consultant=$_record[0]['qt_consultant_sn'];
             $_qt_agent_sn=$_record[0]['qt_agent_sn'];
             $_cust_name=$_record[0]['customer_name'];
+            $_cust_sn=$_record[0]['cust_sn'];
             $_cust_nric=$_record[0]['cust_nric'];
             $_cust_dob=date('d M Y',$_record[0]['cust_dob']);
             $_cust_gender=$_record[0]['cust_gender'];
@@ -37,15 +38,15 @@
             $_qt_insured_driving=$_record[0]['qt_insured_driving'];
             $_qt_marital_status=$_record[0]['qt_marital_status'];
             $_qt_occupation=$_record[0]['qt_occupation'];
-            $_qt_dlicense_pass_date=$_record[0]['qt_dlicense_pass_date'];
+            $_qt_dlicense_pass_date=date('d-m-Y',$_record[0]['qt_dlicense_pass_date']);
             $_qt_instructions=$_record[0]['qt_instructions'];
             $_vi_number=$_record[0]['vi_number'];
             $_vi_make=$_record[0]['vi_make'];
             $_vi_model=$_record[0]['vi_model'];
             $_vi_cc=$_record[0]['vi_cc'];
             $_vi_man_year=$_record[0]['vi_man_year'];
-            $_vi_regn_date=$_record[0]['vi_regn_date'];
-            $_vi_tax_expire_date=$_record[0]['vi_tax_expire_date'];
+            $_vi_regn_date=date('d-m-Y',$_record[0]['vi_regn_date']);
+            $_vi_tax_expire_date=date('d-m-Y',$_record[0]['vi_tax_expire_date']);
             $_vi_additional=$_record[0]['vi_additional'];
             $_ci_company=$_record[0]['ci_company'];
             $_ci_coverage=$_record[0]['ci_coverage'];
@@ -57,10 +58,10 @@
             $_ci_ncd_per_renewal=$_record[0]['ci_ncd_per_renewal'];
             $_ci_ncd_affect=$_record[0]['ci_ncd_affect'];
             $_ci_ssd=$_record[0]['ci_ssd'];
-            $_ci_ssd_date=$_record[0]['ci_ssd_date'];
-            $_ci_period_start=$_record[0]['ci_period_start'];
-            $_ci_poi_end_date=$_record[0]['ci_poi_end_date'];
-            $_ci_road_tax_due_date=$_record[0]['ci_road_tax_due_date'];
+            $_ci_ssd_date=date('d-m-Y',$_record[0]['ci_ssd_date']);
+            $_ci_period_start=date('d-m-Y',$_record[0]['ci_period_start']);
+            $_ci_poi_end_date=date('d-m-Y',$_record[0]['ci_poi_end_date']);
+            $_ci_road_tax_due_date=date('d-m-Y',$_record[0]['ci_road_tax_due_date']);
             $_ci_ncd_protection=$_record[0]['ci_ncd_protection'];
             $_ci_claims_in_last3_year=$_record[0]['ci_claims_in_last3_year'];
             $_si_company=$_record[0]['si_company'];
@@ -72,12 +73,12 @@
             $_si_ncd=$_record[0]['si_ncd'];
             $_si_ncd_per_on_renewal=$_record[0]['si_ncd_per_on_renewal'];
             $_si_ssd=$_record[0]['si_ssd'];
-            $_si_ssd_date_check=$_record[0]['si_ssd_date_check'];
-            $_si_start_date=$_record[0]['si_start_date'];
-            $_si_end_date=$_record[0]['si_end_date'];
-            $_si_road_tax_due=$_record[0]['si_road_tax_due'];
+            $_si_ssd_date_check=date('d-m-Y',$_record[0]['si_ssd_date_check']);
+            $_si_start_date=date('d-m-Y',$_record[0]['si_start_date']);
+            $_si_end_date=date('d-m-Y',$_record[0]['si_end_date']);
+            $_si_road_tax_due=date('d-m-Y',$_record[0]['si_road_tax_due']);
             $_si_ncd_protection=$_record[0]['si_ncd_protection'];
-            $_aa_commission=$_record[0]['aa_commission'];
+            $_aa_commission=$_record[0]['com_sn'];
             $_vip_scheme_type=$_record[0]['vip_scheme_type'];
             $_vip_fet_sunroof=$_record[0]['vip_fet_sunroof'];
             $_vip_fet_soft_top=$_record[0]['vip_fet_soft_top'];
@@ -106,6 +107,7 @@
             $_cust_nric='';
             $_cust_dob='';//today
             $_cust_name='';
+            $_cust_sn='';
             $_cust_gender='';
             $_cust_contact_hp='';
             $_cust_contact_office='';
@@ -119,15 +121,16 @@
             $_qt_insured_driving='';
             $_qt_marital_status='';
             $_qt_occupation='';
-            $_qt_dlicense_pass_date='';
+            $_qt_dlicense_pass_date=date( "d M Y");
+            //echo 'date: '.$_qt_dlicense_pass_date;
             $_qt_instructions='';
             $_vi_number='';
             $_vi_make='';
             $_vi_model='';
             $_vi_cc='';
             $_vi_man_year='';
-            $_vi_regn_date='';
-            $_vi_tax_expire_date='';
+            $_vi_regn_date=date( "d M Y");
+            $_vi_tax_expire_date=date( "d M Y");
             $_vi_additional='';
             $_ci_company='';
             $_ci_coverage='';
@@ -139,13 +142,14 @@
             $_ci_ncd_per_renewal='';
             $_ci_ncd_affect='';
             $_ci_ssd='';
-            $_ci_ssd_date='';
-            $_ci_period_start='';
-            $_ci_poi_end_date='';
-            $_ci_road_tax_due_date='';
+            $_ci_ssd_date=date( "d M Y");;
+            $_ci_period_start=date( "d M Y");
+            $_ci_poi_end_date=date( "d M Y");
+            $_ci_road_tax_due_date=date( "d M Y");
             $_ci_ncd_protection='';
             $_ci_claims_in_last3_year='';
             $_si_company='';
+            $_si_policy_no='';
             $_si_coverage='';
             $_si_premium='';
             $_si_excess='';
@@ -153,10 +157,10 @@
             $_si_ncd='';
             $_si_ncd_per_on_renewal='';
             $_si_ssd='';
-            $_si_ssd_date_check='';
-            $_si_start_date='';
-            $_si_end_date='';
-            $_si_road_tax_due='';
+            $_si_ssd_date_check=date( "d M Y");;
+            $_si_start_date=date( "d M Y");;
+            $_si_end_date=date( "d M Y");;
+            $_si_road_tax_due=date( "d M Y");;
             $_si_ncd_protection='';
             $_aa_commission='';
             $_vip_scheme_type='';
@@ -419,16 +423,8 @@
                             <div class="col-md-6">
                                 <input type="text" maxlength="50" id="qt_customer_name" name="qt_customer_name"
                                        value="<?php echo $_cust_name;?>" class="form-control ui-autocomplete-input" placeholder="Insured Name">
-                                <input type="hidden" id="qt_customer_sn" name="qt_customer_sn">
-                                <?php /*
-                                <select id="qt_customer_sn" name="qt_customer_sn" class="form-control m-b">
-                                     <?php 
-                                    foreach($customers as $record): ?>
-                                    <option value="<?php echo $record['cust_sn'];?>"><?php echo $record['cust_name'];?></option>
-                                        <?php                                        
-                                    endforeach;
-                                    ?>                                      
-                                </select> */?>
+                                <input type="hidden" id="qt_customer_sn" name="qt_customer_sn" 
+                                       value="<?php echo $_cust_sn;?>">                         
                             </div>
                             <div class="col-md-3">
                                 <span id="results"></span>
@@ -634,8 +630,8 @@
                             <label class="col-sm-3 control-label  req" for="cust_license_date">Driving License Pass Date</label>
                             <div class="col-md-6">              
                                 <input type="hidden" name="qt_cust_license_date" id="qt_cust_license_date" 
-                                       value="<?php echo date('d-m-Y',$_qt_dlicense_pass_date);?>">
-                                <label class="control-label"><span id="cust_license_date"><?php echo date('d M Y',$_qt_dlicense_pass_date);?></span></label>                                
+                                       value="<?php echo $_qt_dlicense_pass_date;?>">
+                                <label class="control-label"><span id="cust_license_date"><?php echo $_qt_dlicense_pass_date;?></span></label>                                
                             </div>
                         </div>
                         
@@ -863,7 +859,7 @@
                         <div class="col-md-7">
                             <input class="input-sm datepicker-input form-control" id="qt_vi_regn_date" 
                                    size="16" type="text" name="qt_vi_regn_date" maxlength="12"  required
-                                   parsley-maxlength="12" parsley-trigger="focusout"  value="<?php echo date('d-m-Y',$_vi_regn_date);?>"
+                                   parsley-maxlength="12" parsley-trigger="focusout"  value="<?php echo $_vi_regn_date;?>"
                                    data-date-format="dd-mm-yyyy" placeholder="Regn. Date">                            
                         </div>
                     </div>
@@ -876,7 +872,7 @@
                         <div class="col-md-7">
                             <input class="input-sm datepicker-input form-control" id="qt_vi_road_tax_expire_date" 
                                    size="16" type="text" name="qt_vi_road_tax_expire_date" maxlength="12" 
-                                   parsley-maxlength="12" parsley-trigger="focusout"  required value="<?php echo date('d-m-Y',$_vi_tax_expire_date);?>"
+                                   parsley-maxlength="12" parsley-trigger="focusout"  required value="<?php echo $_vi_tax_expire_date;?>"
                                    data-date-format="dd-mm-yyyy" placeholder="Road Tax Expiry Date">   
                         </div>
                     </div>
@@ -1202,7 +1198,7 @@
                             <label class="col-sm-3 control-label req" for="qt_ssd_date_check">SDD Date Check</label>
                             <div class="col-md-6">
                                 <input class="input-sm datepicker-input form-control" id="qt_ssd_date_check" 
-                                       value="<?php echo date('d-m-Y',$_ci_ssd_date);?>"
+                                       value="<?php echo $_ci_ssd_date;?>"
                                    size="16" type="text" name="qt_ssd_date_check" maxlength="12" 
                                    parsley-maxlength="12" parsley-trigger="focusout" required
                                    data-date-format="dd-mm-yyyy" placeholder="SDD Date Check">   
@@ -1231,7 +1227,7 @@
                             <label class="col-sm-3 control-label req" for="qt_ci_start_date">Start Date</label>
                             <div class="col-md-6">
                                 <input class="input-sm datepicker-input form-control" id="qt_ci_start_date" 
-                                   value="<?php echo date('d-m-Y',$_ci_period_start);?>"
+                                   value="<?php echo $_ci_period_start;?>"
                                    size="16" type="text" name="qt_ci_start_date" maxlength="12" 
                                    parsley-maxlength="12" parsley-trigger="focusout" 
                                    data-date-format="dd-mm-yyyy" placeholder="Start Date">   
@@ -1241,7 +1237,7 @@
                             <label class="col-sm-3 control-label  req" for="qt_ci_poi_end_date">POI End Date</label>
                             <div class="col-md-6">
                                 <input class="input-sm datepicker-input form-control" id="qt_ci_poi_end_date" type="text"
-                                       value="<?php echo date('d-m-Y',$_ci_poi_end_date);?>"
+                                       value="<?php echo $_ci_poi_end_date;?>"
                                        size="16" type="text" name="qt_ci_poi_end_date" maxlength="12" 
                                        parsley-maxlength="12" parsley-trigger="focusout" 
                                        data-date-format="dd-mm-yyyy" placeholder="POI End Date">
@@ -1254,7 +1250,7 @@
                             <label class="col-sm-3 control-label req" for="qt_ci_road_tax_date">Road Tax Due</label>
                             <div class="col-md-6">
                                 <input class="input-sm datepicker-input form-control" id="qt_ci_road_tax_date" 
-                                   value="<?php echo date('d-m-Y',$_ci_road_tax_due_date);?>"
+                                   value="<?php echo $_ci_road_tax_due_date;?>"
                                    size="16" type="text" name="qt_ci_road_tax_date" maxlength="12" 
                                    parsley-maxlength="12" parsley-trigger="focusout" 
                                    data-date-format="dd-mm-yyyy" placeholder="Road Tax Due">   
@@ -1757,7 +1753,7 @@
                             <label class="col-sm-3 control-label req" for="qt_sid_sdd_date_check">SDD Date Check</label>
                             <div class="col-md-6">
                                 <input class="input-sm datepicker-input form-control" id="qt_sid_sdd_date_check" 
-                                       value="<?php echo date('d-m-Y',$_si_ssd_date_check);?>"
+                                       value="<?php echo $_si_ssd_date_check;?>"
                                    size="16" type="text" name="qt_sid_sdd_date_check" maxlength="12" 
                                    parsley-maxlength="12" parsley-trigger="focusout" 
                                    data-date-format="dd-mm-yyyy" placeholder="SDD Date Check">   
@@ -1771,7 +1767,7 @@
                             <label class="col-sm-3 control-label req" for="qt_sid_start_date">Start Date</label>
                             <div class="col-md-6">
                                  <input class="input-sm datepicker-input form-control" id="qt_sid_start_date" 
-                                        value="<?php echo date('d-m-Y',$_si_start_date);?>"
+                                        value="<?php echo $_si_start_date;?>"
                                    size="16" type="text" name="qt_sid_start_date" maxlength="12" 
                                    parsley-maxlength="12" parsley-trigger="focusout" 
                                    data-date-format="dd-mm-yyyy" placeholder="Start Date"> 
@@ -1781,7 +1777,7 @@
                             <label class="col-sm-3 control-label req" for="qt_sid_end_date">End Date</label>
                             <div class="col-md-6">
                                    <input class="input-sm datepicker-input form-control" id="qt_sid_end_date" 
-                                   value="<?php echo date('d-m-Y',$_si_end_date);?>"
+                                   value="<?php echo $_si_end_date;?>"
                                    size="16" type="text" name="qt_sid_end_date" maxlength="12" 
                                    parsley-maxlength="12" parsley-trigger="focusout" 
                                    data-date-format="dd-mm-yyyy" placeholder="End Date"> 
@@ -1794,7 +1790,7 @@
                             <label class="col-sm-3 control-label req" for="qt_sid_road_tax_due">Road Tax Due</label>
                             <div class="col-md-6">
                                  <input class="input-sm datepicker-input form-control" id="qt_sid_road_tax_due" 
-                                  value="<?php echo date('d-m-Y',$_si_road_tax_due);?>"
+                                  value="<?php echo $_si_road_tax_due;?>"
                                    size="16" type="text" name="qt_sid_road_tax_due" maxlength="12" 
                                    parsley-maxlength="12" parsley-trigger="focusout" 
                                    data-date-format="dd-mm-yyyy" placeholder="Road Tax Due"> 
@@ -1834,11 +1830,56 @@
             * => SHOW Account Assessment Panel here (panel_account_assessment.php)
             * END IF
             */        
-            if(isset($state)){
-                if($state=='Closed' || $state=='Won'){
-                    $this->load->view('quotation/panel_account_assessment');                
-                }
-            }
+            //echo 'state: '.$_qt_state;
+            if(isset($_qt_state)){
+                if($_qt_state=='Closed' || $_qt_state=='Won'){
+                   // echo 'set com: '.$_aa_commission;
+                    //$this->load->view('quotation/panel_account_assessment');                
+                    ?>
+<!-- Account Assessment -->
+<section class="panel" id="qt_account_assessment">
+    <header class="panel-heading font-bold">
+        <ul class="nav nav-pills pull-right">
+            <li>
+                <a href="#" class="panel-toggle text-muted">
+                    <i class="icon-caret-down text-active"></i>
+                    <i class="icon-caret-up text"></i>
+                </a>
+            </li>
+        </ul>Account Assessment</header>
+    <section class="panel-body">
+        <form class="form-horizontal" method="get">
+            <div class="form-group">
+                <div class="col-sm-6">
+                    <label class="col-sm-3 control-label" for="qt_aa_commission">Commission</label>
+                    <div class="col-md-6">
+                        
+                        <select name="qt_aa_commission" id="qt_aa_commission" class="form-control m-b">
+                            <?php
+                            foreach($_commissions as $row): ?>
+                            <option value="<?php echo $row['com_sn'];?>"
+                                <?php echo $_aa_commission==$row['com_sn']?'SELECTED':'';?>>
+                                <?php echo $row['com_name'];?> (<?php echo $row['com_coy_rate'];?>%)</option>
+                                <?php
+                            endforeach;
+                            ?>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="line line-dashed line-lg pull-in"></div>
+        </form>
+    </section>
+</section>
+                        
+                        
+                        
+                        
+                        <?php
+                    
+                }//end if closed or won
+            }//END IF
             
         }//end if
         
