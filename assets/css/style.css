@@ -1,3 +1,6 @@
+ul.ui-autocomplete.ui-menu {
+  z-index: 1000;
+}
 /* CONTENT */
 .vbox{z-index: 100;}
 /* PAGINATION */

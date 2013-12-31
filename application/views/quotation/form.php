@@ -11,6 +11,173 @@
         </div>
     </header>
     <section class="wrapper">
+        <?php
+        if(isset($_record)){
+            //print_r($_record);
+            $_qt_renewal=$_record[0]['qt_renewal']==0?'no':'yes';
+            $_qt_state=$_record[0]['qt_state'];
+            $qt_insurance_type=$_record[0]['qt_insurance_type'];
+            $_qt_reasons_lost=$_record[0]['qt_reasons_lost'];
+            $_qt_remarks=$_record[0]['qt_remarks'];
+            $_qt_consultant=$_record[0]['qt_consultant_sn'];
+            $_qt_agent_sn=$_record[0]['qt_agent_sn'];
+            $_cust_name=$_record[0]['customer_name'];
+            $_cust_nric=$_record[0]['cust_nric'];
+            $_cust_dob=date('d M Y',$_record[0]['cust_dob']);
+            $_cust_gender=$_record[0]['cust_gender'];
+            $_cust_contact_hp=$_record[0]['cust_contact_hp'];
+            $_cust_contact_office=$_record[0]['cust_contact_office'];
+            $_cust_contact_house=$_record[0]['cust_contact_house'];
+            $_cust_contact_fax=$_record[0]['cust_contact_fax'];
+            $_cust_contact_email=$_record[0]['cust_contact_email'];
+            $_cust_address_1=$_record[0]['cust_address_1'];
+            $_cust_address_2=$_record[0]['cust_address_2'];
+            $_cust_post_code=$_record[0]['cust_post_code'];
+            $_cust_license_date=$_record[0]['cust_license_date'];
+            $_qt_insured_driving=$_record[0]['qt_insured_driving'];
+            $_qt_marital_status=$_record[0]['qt_marital_status'];
+            $_qt_occupation=$_record[0]['qt_occupation'];
+            $_qt_dlicense_pass_date=$_record[0]['qt_dlicense_pass_date'];
+            $_qt_instructions=$_record[0]['qt_instructions'];
+            $_vi_number=$_record[0]['vi_number'];
+            $_vi_make=$_record[0]['vi_make'];
+            $_vi_model=$_record[0]['vi_model'];
+            $_vi_cc=$_record[0]['vi_cc'];
+            $_vi_man_year=$_record[0]['vi_man_year'];
+            $_vi_regn_date=$_record[0]['vi_regn_date'];
+            $_vi_tax_expire_date=$_record[0]['vi_tax_expire_date'];
+            $_vi_additional=$_record[0]['vi_additional'];
+            $_ci_company=$_record[0]['ci_company'];
+            $_ci_coverage=$_record[0]['ci_coverage'];
+            $_ci_current_premium=$_record[0]['ci_current_premium'];
+            $_ci_current_excess=$_record[0]['ci_current_excess'];
+            $_ci_finance_company=$_record[0]['ci_finance_company'];
+            $_ci_policy_no=$_record[0]['ci_policy_no'];
+            $_ci_current_ncd=$_record[0]['ci_current_ncd'];
+            $_ci_ncd_per_renewal=$_record[0]['ci_ncd_per_renewal'];
+            $_ci_ncd_affect=$_record[0]['ci_ncd_affect'];
+            $_ci_ssd=$_record[0]['ci_ssd'];
+            $_ci_ssd_date=$_record[0]['ci_ssd_date'];
+            $_ci_period_start=$_record[0]['ci_period_start'];
+            $_ci_poi_end_date=$_record[0]['ci_poi_end_date'];
+            $_ci_road_tax_due_date=$_record[0]['ci_road_tax_due_date'];
+            $_ci_ncd_protection=$_record[0]['ci_ncd_protection'];
+            $_ci_claims_in_last3_year=$_record[0]['ci_claims_in_last3_year'];
+            $_si_company=$_record[0]['si_company'];
+            $_si_coverage=$_record[0]['si_coverage'];
+            $_si_premium=$_record[0]['si_premium'];
+            $_si_excess=$_record[0]['si_excess'];
+            $_si_finance_company=$_record[0]['si_finance_company'];
+            $_si_policy_no=$_record[0]['si_policy_no'];
+            $_si_ncd=$_record[0]['si_ncd'];
+            $_si_ncd_per_on_renewal=$_record[0]['si_ncd_per_on_renewal'];
+            $_si_ssd=$_record[0]['si_ssd'];
+            $_si_ssd_date_check=$_record[0]['si_ssd_date_check'];
+            $_si_start_date=$_record[0]['si_start_date'];
+            $_si_end_date=$_record[0]['si_end_date'];
+            $_si_road_tax_due=$_record[0]['si_road_tax_due'];
+            $_si_ncd_protection=$_record[0]['si_ncd_protection'];
+            $_aa_commission=$_record[0]['aa_commission'];
+            $_vip_scheme_type=$_record[0]['vip_scheme_type'];
+            $_vip_fet_sunroof=$_record[0]['vip_fet_sunroof'];
+            $_vip_fet_soft_top=$_record[0]['vip_fet_soft_top'];
+            $_vip_fet_turbo_eng=$_record[0]['vip_fet_turbo_eng'];
+            $_vip_fet_moonroof=$_record[0]['vip_fet_moonroof'];
+            $_vip_fet_skyroof=$_record[0]['vip_fet_skyroof'];
+            $_vip_fet_roof_pan=$_record[0]['vip_fet_roof_pan'];
+            $_vip_vt_super_model=$_record[0]['vip_vt_super_model']; 
+            $_vip_vt_mpv=$_record[0]['vip_vt_mpv'];
+            $_vip_vt_suv=$_record[0]['vip_vt_suv'];
+            $_vip_vt_sedan=$_record[0]['vip_vt_sedan'];
+            $_vip_vt_couple=$_record[0]['vip_vt_couple'];
+            $_vip_vt_cabriolet=$_record[0]['vip_vt_cabriolet'];
+            $_vip_vt_parallel_import=$_record[0]['vip_vt_parallel_import'];
+            $_vic_type=$_record[0]['vic_type'];
+            $_vic_weight_unladen=$_record[0]['vic_weight_unladen']; 
+            $_vic_weight_laden=$_record[0]['vic_weight_laden']; 
+        }else{
+            $_qt_renewal='no';
+            $_qt_state='';
+            $qt_insurance_type="";
+            $_qt_reasons_lost='';
+            $_qt_remarks='';
+            $_qt_consultant='';
+            $_qt_agent_sn='';
+            $_cust_nric='';
+            $_cust_dob='';//today
+            $_cust_name='';
+            $_cust_gender='';
+            $_cust_contact_hp='';
+            $_cust_contact_office='';
+            $_cust_contact_house='';
+            $_cust_contact_fax='';
+            $_cust_contact_email='';
+            $_cust_address_1='';
+            $_cust_address_2='';
+            $_cust_post_code='';
+            $_cust_license_date=date('d M Y',time());
+            $_qt_insured_driving='';
+            $_qt_marital_status='';
+            $_qt_occupation='';
+            $_qt_dlicense_pass_date='';
+            $_qt_instructions='';
+            $_vi_number='';
+            $_vi_make='';
+            $_vi_model='';
+            $_vi_cc='';
+            $_vi_man_year='';
+            $_vi_regn_date='';
+            $_vi_tax_expire_date='';
+            $_vi_additional='';
+            $_ci_company='';
+            $_ci_coverage='';
+            $_ci_current_premium='';
+            $_ci_current_excess='';
+            $_ci_finance_company='';
+            $_ci_policy_no='';
+            $_ci_current_ncd='';
+            $_ci_ncd_per_renewal='';
+            $_ci_ncd_affect='';
+            $_ci_ssd='';
+            $_ci_ssd_date='';
+            $_ci_period_start='';
+            $_ci_poi_end_date='';
+            $_ci_road_tax_due_date='';
+            $_ci_ncd_protection='';
+            $_ci_claims_in_last3_year='';
+            $_si_company='';
+            $_si_coverage='';
+            $_si_premium='';
+            $_si_excess='';
+            $_si_finance_company='';
+            $_si_ncd='';
+            $_si_ncd_per_on_renewal='';
+            $_si_ssd='';
+            $_si_ssd_date_check='';
+            $_si_start_date='';
+            $_si_end_date='';
+            $_si_road_tax_due='';
+            $_si_ncd_protection='';
+            $_aa_commission='';
+            $_vip_scheme_type='';
+            $_vip_fet_sunroof='';
+            $_vip_fet_soft_top='';
+            $_vip_fet_turbo_eng='';
+            $_vip_fet_moonroof='';
+            $_vip_fet_skyroof='';
+            $_vip_fet_roof_pan='';
+            $_vip_vt_super_model=''; 
+            $_vip_vt_mpv='';
+            $_vip_vt_suv='';
+            $_vip_vt_sedan='';
+            $_vip_vt_couple='';
+            $_vip_vt_cabriolet='';
+            $_vip_vt_parallel_import='';
+            $_vic_type='';
+            $_vic_weight_unladen=''; 
+            $_vic_weight_laden=''; 
+        }//end else
+        ?>
         <!-- Quotation Details -->
         <section class="panel" id="qt_details">
             <header class="panel-heading font-bold">
@@ -23,43 +190,43 @@
                     </li>
                 </ul>Quotation Details</header>
             <section class="panel-body">
-           <form class="form-horizontal" method="post">
-               
+           
                <input type="hidden" id="_action" name="_action" value="<?php echo $_action;?>">
                     <div class="form-group">
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label req">Ref. No.</label>
                             <label class="col-md-6" style="padding-top: 7px;">QT<?php echo $new_qt_ref_no;?></label>
-                            <input type="hidden" id="qt_ref_no" name="qt_ref_no" >
+                            <input type="hidden" id="qt_ref_no" name="qt_ref_no" value="<?php echo isset($new_qt_ref_no)?$new_qt_ref_no:'';?>">
                         </div>
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label req">Date</label>
-                            <label class="col-md-6 " style="padding-top: 7px;"><span id="qt_date"></span></label>
+                            <label class="col-md-6 " style="padding-top: 7px;">
+                                <span id="qt_date"><?php echo isset($_record)?date('d M Y',$_record[0]['qt_date']):'';?></span>
+                            </label>
                         </div>
                     </div>
                     <div class="line line-dashed line-lg pull-in"></div>
 
-
                     <div class="form-group">
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label req">Renewal</label>
-                            <input type="hidden" name="qt_renewal" id="qt_renewal" value="no">
-                            <label class="col-md-6" style="padding-top: 7px;"><span id="qt_renewal_info">No</span></label>
+                            <input type="hidden" name="qt_renewal" id="qt_renewal" value="<?php echo $_qt_renewal;?>">
+                            <label class="col-md-6"><span id="qt_renewal_info"><?php echo $_qt_renewal;?></span></label>
                         </div>
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label req" for="qt_details_state">State </label>
                             <div class="col-md-6">
-                                <input type="hidden" id="current_status" name="current_status" value="">
+                                <input type="hidden" id="current_status" name="current_status" value="<?php echo $_qt_state;?>">
                                 <select name="qt_details_state" id="qt_details_state" class="form-control m-b" required>
-                                    <option>Draft</option>
-                                    <option>New</option>
-                                    <option>Renewal</option>
-                                    <option>Quoted</option>
-                                    <option>Sent</option>
-                                    <option>Accepted</option>
-                                    <option>Lost</option>
-                                    <option>Paid</option>
-                                    <option>Closed</option>
+                                    <option <?php echo $_qt_state=='Draft'?'SELECTED':'';?>>Draft</option>
+                                    <option <?php echo $_qt_state=='New'?'SELECTED':'';?>>New</option>
+                                    <option <?php echo $_qt_state=='Renewal'?'SELECTED':'';?>>Renewal</option>
+                                    <option <?php echo $_qt_state=='Quoted'?'SELECTED':'';?>>Quoted</option>
+                                    <option <?php echo $_qt_state=='Sent'?'SELECTED':'';?>>Sent</option>
+                                    <option <?php echo $_qt_state=='Accepted'?'SELECTED':'';?>>Accepted</option>
+                                    <option <?php echo $_qt_state=='Lost'?'SELECTED':'';?>>Lost</option>
+                                    <option <?php echo $_qt_state=='Paid'?'SELECTED':'';?>>Paid</option>
+                                    <option <?php echo $_qt_state=='Closed'?'SELECTED':'';?>>Closed</option>
                                     <?php
                                     /* IF Current user is a super admin or accountant
                                      * => will show the won optioin
@@ -68,7 +235,7 @@
                                     * Access Code: qt_state_won
                                     */
                                     if(in_array('qt_state_won',$this->session->userdata('user_access'))){?>
-                                    <option>Won</option>
+                                    <option <?php echo $_qt_state=='Won'?'SELECTED':'';?>>Won</option>
                                         <?php
                                     }//end if
                                     ?>
@@ -87,20 +254,21 @@
                                     <div class="radio">
                                         <label>
                                             <input type="radio" name="qt_details_insurance_type" id="qt_insurance_type_pvt" 
-                                                   value="Private" checked>Private</label>
+                                                   value="Private" <?php echo $qt_insurance_type=='Private'?'checked':'';?>
+                                                   <?php echo $qt_insurance_type!=''?'disabled':'';?>>Private</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="radio">
                                         <label>
                                             <input type="radio" name="qt_details_insurance_type" id="qt_insurance_type_com" 
-                                                   value="Commercial">Commercial</label>
+                                                   value="Commercial" <?php echo $qt_insurance_type=='Commercial'?'checked':''; ?>
+                                                   <?php echo $qt_insurance_type!=''?'disabled':'';?>>Commercial</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
-                        
+
                             <div class="col-sm-6">     
                                 <?php
                                 /**
@@ -108,20 +276,24 @@
                                  * => LOAD Reasons Lost 
                                  * END IF
                                  */
+                                $display='none';
+                                if($_qt_state=='Lost'){
+                                    $display='block';
+                                }
                                 ?>       
-                                <div id="qt_details_status_lost_wrapper" style="display: none;">
+                                <div id="qt_details_status_lost_wrapper" style="display: <?php echo $display?>;">
                                     <label class="col-sm-3 control-label req" for="qt_details_reason_lost">Reasons Lost</label>
                                     <div class="col-md-6">
                                         <select name="qt_details_reason_lost" id="qt_details_reason_lost" class="form-control m-b">
-                                            <option>Car Sold</option>
-                                            <option>Car Deregistered</option>
-                                            <option>Switched-Out</option>
-                                            <option>- Direct Insurer</option>
-                                            <option>- Competitive Pricing</option>
-                                            <option>- Scheme Price</option>
-                                            <option>- Staff Price</option>
-                                            <option>- Support Relatives/Friends</option>
-                                            <option>Others</option>
+                                            <option <?php echo $_qt_reasons_lost=='Car Sold'?'SELECTED':'';?>>Car Sold</option>
+                                            <option <?php echo $_qt_reasons_lost=='Car Deregistered'?'SELECTED':'';?>>Car Deregistered</option>
+                                            <option <?php echo $_qt_reasons_lost=='Switched-Out'?'SELECTED':'';?>>Switched-Out</option>
+                                            <option <?php echo $_qt_reasons_lost=='- Direct Insurer'?'SELECTED':'';?>>- Direct Insurer</option>
+                                            <option <?php echo $_qt_reasons_lost=='- Competitive Pricing'?'SELECTED':'';?>>- Competitive Pricing</option>
+                                            <option <?php echo $_qt_reasons_lost=='- Scheme Price'?'SELECTED':'';?>>- Scheme Price</option>
+                                            <option <?php echo $_qt_reasons_lost=='- Staff Price'?'SELECTED':'';?>>- Staff Price</option>
+                                            <option <?php echo $_qt_reasons_lost=='- Support Relatives/Friends'?'SELECTED':'';?>>- Support Relatives/Friends</option>
+                                            <option <?php echo $_qt_reasons_lost=='Others'?'SELECTED':'';?>>Others</option>
                                         </select>
                                     </div>
                                 </div><!--end kist wraooer-->
@@ -131,8 +303,35 @@
                     <div class="form-group">
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label">Quotation History</label>
-                            <div id="qt_history_wrapper" style="display: none;">
-                                <div class="col-md-9">Created by <span id="created_by">User A</span> on <span id="create_date"></span><br>
+                            
+                            <div id="qt_history_wrapper">
+                                <div class="col-md-9">
+                                     <?php 
+                                if(isset($_history)){                                
+                                    $h=1;
+                                    foreach($_history as $row):
+                                        if($h==1){?>
+                                            <p class="edit_history">Created by <?php echo $row->add_by_name;?> on <?php echo date('d M y',strtotime($row->add_date));?></p>
+                                            <?php                                                                               
+                                        }//end if
+                                         if($row->update_by_name!=''){
+                                             $name = explode(' ',trim($row->update_by_name));
+                                             if($row->update_from != $row->update_to){
+
+                                                 ?>
+                                                <p class="edit_history"><?php echo $name[0];?> edited state <?php echo $row->update_from;?> to <?php echo $row->update_to;?> on <?php echo date('d M y : h:i A',strtotime($row->update_date));?></p>
+                                                <?php                                        
+                                             }else{
+                                                 ?>
+                                                <p class="edit_history">Edited by <?php echo $name[0];?> on <?php echo date('d M y : h:i A',strtotime($row->update_date));?></p>
+                                                <?php                                        
+                                             }
+
+                                            }// update by name                                    
+                                        $h++;
+                                    endforeach;
+                                    }//end iseet
+                                ?>
                                     <div id="edit_history_wrap"></div>
                                 </div>
                             </div>
@@ -140,13 +339,12 @@
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label">Remarks</label>
                             <div class="col-md-6">
-                                <input type="hidden" id="qt_details_remark" name="qt_details_remark" value="">
+                                <input type="hidden" id="qt_details_remark" name="qt_details_remark" value="<?php echo $_qt_remarks;?>">
                                 <div id="qt_details_remark_div" class="form-control" style="overflow:scroll;height:150px;max-height:150px"
-                                     contenteditable="true"> </div>
+                                     contenteditable="true"><?php echo $_qt_remarks;?></div>
                             </div>
                         </div>
-                    </div>
-                </form>
+                    </div>                
             </section>
         </section>
         <!-- Assignees Details -->
@@ -161,7 +359,7 @@
                     </li>
                 </ul>Assignees</header>
             <section class="panel-body">
-                <form class="form-horizontal" method="get">
+                
                     <div class="form-group">
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label req" for="qt_consultant_sn">Consultant</label>
@@ -169,7 +367,8 @@
                                 <select name="qt_consultant_sn" id="qt_consultant_sn" class="form-control m-b" required>
                                     <?php 
                                     foreach($consultants as $record): ?>
-                                    <option value="<?php echo $record['user_sn'];?>"><?php echo $record['user_name'];?></option>
+                                    <option value="<?php echo $record['user_sn'];?>"
+                                            <?php echo $_qt_consultant==$record['user_sn']?'SELECTED':'';?>><?php echo $record['user_name'];?></option>
                                         <?php                                        
                                     endforeach;
                                     ?>                                    
@@ -186,17 +385,15 @@
                                     <option>None</option>
                                     <?php 
                                     foreach($agents as $record): ?>
-                                    <option value="<?php echo $record['user_sn'];?>"><?php echo $record['user_name'];?></option>
+                                    <option value="<?php echo $record['user_sn'];?>"
+                                            <?php echo $_qt_agent_sn==$record['user_sn']?'SELECTED':'';?>><?php echo $record['user_name'];?></option>
                                         <?php                                        
                                     endforeach;
                                     ?>                                    
                                 </select>
                             </div>
-
                         </div>
-
-                    </div>	  
-                </form>
+                    </div>	                  
             </section>
         </section>
         <!-- Customer Details -->
@@ -220,7 +417,10 @@
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label req" for="qt_customer_sn">Insured Name</label>
                             <div class="col-md-6">
-
+                                <input type="text" maxlength="50" id="qt_customer_name" name="qt_customer_name"
+                                       value="<?php echo $_cust_name;?>" class="form-control ui-autocomplete-input" placeholder="Insured Name">
+                                <input type="hidden" id="qt_customer_sn" name="qt_customer_sn">
+                                <?php /*
                                 <select id="qt_customer_sn" name="qt_customer_sn" class="form-control m-b">
                                      <?php 
                                     foreach($customers as $record): ?>
@@ -228,7 +428,10 @@
                                         <?php                                        
                                     endforeach;
                                     ?>                                      
-                                </select>
+                                </select> */?>
+                            </div>
+                            <div class="col-md-3">
+                                <span id="results"></span>
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -236,18 +439,14 @@
                             <label class="col-sm-3 control-label" for="cust_nric">NRIC/FIN/ACRA</label>
 
                             <div class="col-md-6">
-
-                                <select name="cust_nric" id="cust_nric" class="form-control m-b">
-                                    <?php 
-                                    foreach($customers as $record): ?>
-                                    <option value="<?php echo $record['cust_sn'];?>"><?php echo $record['cust_nric'];?></option>
-                                        <?php                                        
-                                    endforeach;
-                                    ?>
-                                </select>
+                                <input type="text" class="form-control" id="cust_nric" name="cust_nric" maxlength="50"
+                                       value="<?php echo $_cust_nric;?>"
+                                       placeholder="NRIC/FIN/ACRA">                                
                             </div>
-
-                        </div>
+                            <div class="col-sm3">
+                            <span id="res_nric"></span>
+                            </div>
+                        </div>                        
 
                     </div>
 
@@ -261,14 +460,14 @@
                                     <div class="radio">
                                         <label>
                                             <input type="radio" name="qt_cust_insured_driving" id="qt_cust_insured_driving_yes" 
-                                                   value="Yes" checked="">Yes</label>
+                                                   value="Yes" <?php echo $_qt_insured_driving=='Yes'?'checked':''; ?>>Yes</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="radio">
                                         <label>
                                             <input type="radio" name="qt_cust_insured_driving" id="qt_cust_insured_driving_no" 
-                                                   value="No" checked="">No</label>
+                                                   value="No" <?php echo $_qt_insured_driving=='No'?'checked':''; ?>>No</label>
                                     </div>
                                 </div>
                             </div>
@@ -276,7 +475,7 @@
                          <div class="col-sm-6">
                             <label class="col-sm-3 control-label" >Customer Type</label>
                             <div class="col-md-6">
-                                <label class="control-label"><span id="cust_type"></span></label>
+                                <label class="control-label"><span id="cust_type"><?php echo '';?></span></label>
                             </div>
                         </div>
                     </div>
@@ -290,10 +489,7 @@
                             <label class="col-sm-3 control-label">Date of Birth</label>
 
                             <div class="col-md-6">
-                                <label class="control-label"><span id="cust_dob"></span></label>
-                                <?php /*
-                                <input type="text" class="form-control" id="cust_dob" 
-                                       name="cust_dob" placeholder="Datepicker"/> */?>
+                                <label class="control-label"><span id="cust_dob"><?php echo date('d M Y',  strtotime($_cust_dob));?></span></label>                                
 
                             </div>
 
@@ -301,7 +497,7 @@
 
                         <div class="col-sm-6">
 
-                            <label class="col-sm-3 control-label" for="input-id-1">Age</label>
+                            <label class="col-sm-3 control-label">Age</label>
 
                             <div class="col-md-6">
 
@@ -315,35 +511,24 @@
 
                     </div>
                     <div class="line line-dashed line-lg pull-in"></div>
-
                     <div class="form-group">
-
                         <div class="col-sm-6">
-
                             <label class="col-sm-3 control-label" for="cust_gender">Gender</label>
-
                             <div class="col-md-6">
-                                <label class="control-label"><span id="cust_gender"></span></label>
-                                <?php /*
-                                <select name="cust_gender" id="cust_gender" class="form-control m-b">
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                </select>
-                                */?>
+                                <label class="control-label"><span id="cust_gender"><?php echo $_cust_gender;?></span></label>                                
                             </div>
-
                         </div>
-
                         <div class="col-sm-6">
-
                             <label class="col-sm-3 control-label" for="qt_cust_mstatus">Marital Status</label>
                             <div class="col-md-6">                                
                                 <select name="qt_cust_mstatus" id="qt_cust_mstatus" class="form-control m-b">
-                                    <option value="Single">Single</option>
-                                    <option value="Married">Married</option>
+                                    <option value="Single"
+                                            <?php echo $_qt_marital_status=='Single'?'SELECTED':'';?>
+                                            >Single</option>
+                                    <option value="Married"
+                                            <?php echo $_qt_marital_status=='Married'?'SELECTED':'';?>>Married</option>
                                 </select> 
                             </div>
-
                         </div>
 
                     </div>
@@ -356,11 +541,7 @@
                             <label class="col-sm-3 control-label" for="cust_contact_house">Contact (H)</label>
 
                             <div class="col-md-6">
-                                <label class="control-label"><span id="cust_contact_house"></span></label>
-                                <?php /*
-                                <input type="text" class="form-control" id="cust_contact_house"
-                                       name="cust_contact_house" placeholder="txt" maxlength="50"/>
-                                       */?>
+                                <label class="control-label"><span id="cust_contact_house"><?php echo $_cust_contact_house;?></span></label>                                
                             </div>
 
                         </div>
@@ -368,10 +549,7 @@
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label" for="cust_contact_office" >Contact (O)</label>
                             <div class="col-md-6">
-                                <label class="control-label"><span id="cust_contact_office"></span></label>
-                                <?php /*
-                                <input type="text" class="form-control" id="cust_contact_office"
-                                       name="cust_contact_office"placeholder="txt"  maxlength="50"/> */?>
+                                <label class="control-label"><span id="cust_contact_office"><?php echo $_cust_contact_office;?></span></label>                               
                             </div>
                         </div>
 
@@ -382,21 +560,14 @@
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label" for="cust_contact_hp">Contact (hp)</label>
                             <div class="col-md-6">
-                                <label class="control-label"><span id="cust_contact_hp"></span></label>
-                                <?php /*
-                                <input type="text" class="form-control" id="cust_contact_hp"
-                                       name="cust_contact_hp" maxlength="50" placeholder="txt"/> */?>
+                                <label class="control-label"><span id="cust_contact_hp"><?php echo $_cust_contact_hp;?></span></label>                                
                             </div>
                         </div>
 
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label" for="cust_contact_fax">Fax </label>
                             <div class="col-md-6">
-                                <label class="control-label"><span id="cust_contact_fax"></span></label>
-                                <?php /*
-                                <input type="text" class="form-control" id="cust_contact_hp"
-                                       name="cust_contact_hp"maxlength="50" placeholder="txt"/>
-                                       */?>
+                                <label class="control-label"><span id="cust_contact_fax"><?php echo $_cust_contact_fax;?></span></label>                                
                             </div>
                         </div>
                     </div>
@@ -407,11 +578,9 @@
 
                         <div class="col-sm-6">
 
-                            <label class="col-sm-3 control-label" for="input-id-1">E-mail</label>
+                            <label class="col-sm-3 control-label">E-mail</label>
                             <div class="col-md-6">
-                                <label class="control-label"><span id="cust_contact_email"></span></label>
-                                <?php /*
-                                <input type="text" class="form-control" id="input-id-1" placeholder="email"/> */?>
+                                <label class="control-label"><span id="cust_contact_email"><?php echo $_cust_contact_email;?></span></label>
                             </div>
                         </div>
 
@@ -422,26 +591,17 @@
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label req" for="cust_address_line1">Address Line 1</label>
                             <div class="col-md-6">
-                                <label class="control-label"><span id="cust_address_line1"></span></label>
-                                <?php /*
-                                <input type="text" class="form-control" id="input-id-1" placeholder="txt"/> */?>
+                                <label class="control-label"><span id="cust_address_line1"><?php echo $_cust_address_1;?></span></label>
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group">
-
                         <div class="col-sm-6">
-
                             <label class="col-sm-3 control-label req">Address Line 2</label>
-
                             <div class="col-md-6">
-                            <label class="control-label"><span id="cust_address_line2"></span></label>
-                                <?php /*
-                                <input type="text" class="form-control" id="input-id-1" placeholder="txt"/> */?>
-
+                            <label class="control-label"><span id="cust_address_line2"><?php echo $_cust_address_2;?></span></label>                                
                             </div>
-
                         </div>
 
                     </div>
@@ -449,17 +609,10 @@
                     <div class="form-group">
 
                         <div class="col-sm-6">
-
                             <label class="col-sm-3 control-label req">Postal Code</label>
-
                             <div class="col-md-6">
-
-                                <label class="control-label"><span id="cust_post_code"></span></label>
-                                <?php /*
-                                <input type="text" class="form-control" id="input-id-1" placeholder="txt"/> */?>
-
+                                <label class="control-label"><span id="cust_post_code"><?php echo $_cust_post_code;?></span></label>                                
                             </div>
-
                         </div>
 
                     </div>
@@ -469,6 +622,7 @@
                             <label class="col-sm-3 control-label" for="qt_cust_occupation">Occupation / Nature of Business</label>
                             <div class="col-md-6">
                                 <input type="text" class="form-control" id="qt_cust_occupation" 
+                                       value="<?php echo $_qt_occupation;?>"
                                        name="qt_cust_occupation" placeholder="Occupation / Nature of Business"/>
                             </div>
 
@@ -479,8 +633,9 @@
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label  req" for="cust_license_date">Driving License Pass Date</label>
                             <div class="col-md-6">              
-                                <input type="hidden" name="qt_cust_license_date" id="qt_cust_license_date" value="">
-                                <label class="control-label"><span id="cust_license_date"></span></label>                                
+                                <input type="hidden" name="qt_cust_license_date" id="qt_cust_license_date" 
+                                       value="<?php echo date('d-m-Y',$_qt_dlicense_pass_date);?>">
+                                <label class="control-label"><span id="cust_license_date"><?php echo date('d M Y',$_qt_dlicense_pass_date);?></span></label>                                
                             </div>
                         </div>
                         
@@ -500,9 +655,9 @@
 
                             <div class="col-md-6">
                                 <input type="hidden" name="qt_cust_instructions" 
-                                       id="qt_cust_instructions">
+                                       id="qt_cust_instructions" value="<?php echo $_qt_instructions;?>">
                                 <div id="cust_instructions_wrap" class="form-control" style="overflow:scroll;height:150px;max-height:150px"
-                                     contenteditable="true"></div>
+                                     contenteditable="true"><?php echo $_qt_instructions;?></div>
 
                             </div>
 
@@ -515,7 +670,7 @@
                         <div class="col-sm-2">                            
                                 <!--button check point customer -->
                                 <button type="button" id="btn_cp_customer"
-                                        class="btn btn-primary btn-save pull-right"><i class="icon-save"></i> customer Save</button>
+                                        class="btn btn-primary pull-right"><i class="icon-save"></i> Save</button>
                                 <!-- <div class="col-sm-3 m-b-xs" style="padding-left:0px;"></div> -->
                         </div>
                     </div>
@@ -537,7 +692,7 @@
 
                         </a>
                     </li>
-                </ul><span id="qt_ins_type_name">Vehicle Information (Private)</span>
+                </ul><span id="qt_ins_type_name">Vehicle Information (<?php echo $qt_insurance_type;?>)</span>
             </header>
             <section class="panel-body">
                 <form class="form-horizontal" method="get">
@@ -549,7 +704,7 @@
                             <label class="col-sm-3 control-label req" for="qt_vi_number">Number</label>
 
                             <div class="col-md-6">
-                                <input type="text" id="qt_vi_number" name="qt_vi_number" value=""
+                                <input type="text" id="qt_vi_number" name="qt_vi_number" value="<?php echo $_vi_number;?>"
                                        placeholder="Vehicle Number" class="form-control">
                             </div>
 
@@ -565,8 +720,8 @@
                             <label class="col-sm-3 control-label req" for="qt_vi_make">Make</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" id="qt_vi_make" required
-                                       name="qt_vi_make" placeholder="Make" value="" maxlength="50"/>
+                                <input type="text" class="form-control" id="qt_vi_make" required                                       
+                                       name="qt_vi_make" placeholder="Make" value="<?php echo $_vi_make;?>" maxlength="50"/>
                             </div>
                         </div>
 
@@ -574,7 +729,7 @@
                             <label class="col-sm-3 control-label  req" for="qt_vi_model">Model</label>
                             <div class="col-md-6">
                                 <input type="text" class="form-control" id="qt_vi_model" name="qt_vi_model" 
-                                       placeholder="Model" value="" required maxlength="50"/>
+                                       placeholder="Model" value="<?php echo $_vi_model;?>" required maxlength="50"/>
                             </div>
                         </div>
 
@@ -583,49 +738,67 @@
                     <div class="line line-dashed line-lg pull-in"></div>
 
                     <div class="form-group">
-                                                
+                        <?php                   
+                        if(isset($qt_insurance_type)){                        
+                        if($qt_insurance_type=='Private'){ ?>                       
                         <div class="col-sm-6 qt_type_pvt">
                             <!--private type-->
                             <label class="col-sm-3 control-label req" for="qt_vipvt_scheme_type">Scheme Type</label>
                             <div class="col-md-6">
-                                <select name="qt_vipvt_scheme_type" id="qt_vipvt_scheme_type" class="form-control m-b" required>
-                                    <option>Normal</option>
-                                    <option>Off-peak</option>
-                                    <option>Company</option>
+                                <select name="qt_vipvt_scheme_type" id="qt_vipvt_scheme_type" 
+                                        class="form-control m-b" required>
+                                    <option <?php echo $_vip_scheme_type=='Normal'?'SELECTED':'';?> >Normal</option>
+                                    <option <?php echo $_vip_scheme_type=='Off-peak'?'SELECTED':'';?>>Off-peak</option>
+                                    <option <?php echo $_vip_scheme_type=='Company'?'SELECTED':'';?>>Company</option>
                                 </select>
                             </div>
 
                         </div>
+                         <?php
+                         }      //pvt                   
+                        }//isset
+                         
+                        if(isset($qt_insurance_type)){
+                        //echo 'type: '.$qt_insurance_type;
+                        if($qt_insurance_type=='Commercial'){ ?>
                         <!--commercial type-->
                          <div class="col-sm-6 qt_type_com">
                             <label class="col-sm-3 control-label req" for="qt_vicom_type">Type</label>
                             <div class="col-md-6">
                                 <select name="qt_vicom_type" id="qt_vicom_type" class="form-control m-b" required>
-                                    <option>Hood/Canopy</option>
-                                    <option>Std Lorry</option>
-                                    <option>Std Van</option>
-                                    <option>Refrigerated Van</option>
-                                    <option>Crane/Tailgate</option>
-                                    <option>Garbage Truck</option>
-                                    <option>Mixer</option>
-                                    <option>Prime Mover</option>
-                                    <option>Tipper</option>
-                                    <option>Tanker</option>
-                                    <option>Ambulance</option>
-                                    <option>Tow Truck</option>
+                                    <option <?php echo $_vic_type=='Hood/Canopy'?'SELECTED':'';?>>Hood/Canopy</option>
+                                    <option <?php echo $_vic_type=='Std Lorry'?'SELECTED':'';?>>Std Lorry</option>
+                                    <option <?php echo $_vic_type=='Std Van'?'SELECTED':'';?>>Std Van</option>
+                                    <option <?php echo $_vic_type=='Refrigerated Van'?'SELECTED':'';?>>Refrigerated Van</option>
+                                    <option <?php echo $_vic_type=='Crane/Tailgate'?'SELECTED':'';?>>Crane/Tailgate</option>
+                                    <option <?php echo $_vic_type=='Garbage Truck'?'SELECTED':'';?>>Garbage Truck</option>
+                                    <option <?php echo $_vic_type=='Mixer'?'SELECTED':'';?>>Mixer</option>
+                                    <option <?php echo $_vic_type=='Prime Mover'?'SELECTED':'';?>>Prime Mover</option>
+                                    <option <?php echo $_vic_type=='Tipper'?'SELECTED':'';?>>Tipper</option>
+                                    <option <?php echo $_vic_type=='Tanker'?'SELECTED':'';?>>Tanker</option>
+                                    <option <?php echo $_vic_type=='Ambulance'?'SELECTED':'';?>>Ambulance</option>
+                                    <option <?php echo $_vic_type=='Tow Truck'?'SELECTED':'';?>>Tow Truck</option>
                                 </select>
                             </div>
                         </div>
-
+                        <?php
+                        } //
+                        }//
+                        ?>
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label req" for="qt_vi_cc">CC</label>
                             <div class="col-md-6">
                                 <input type="text" class="form-control" id="qt_vi_cc" required maxlength="50"
-                                       name="qt_vi_cc" placeholder="CC" value=""/>
+                                       name="qt_vi_cc" value="<?php echo $_vi_cc;?>" placeholder="CC" value=""/>
                             </div>
                         </div>
 
                     </div>
+                    <?php
+                    
+                    if(isset($qt_insurance_type)){
+                        //echo 'type: '.$qt_insurance_type;
+                        if($qt_insurance_type=='Commercial'){ ?>
                     <!--commercial Type-->
                     <div class="qt_type_com">
                         <div class="form-group">
@@ -634,6 +807,7 @@
                                 <label class="col-sm-3 control-label req" for="qt_vicom_unladen_weight">Unladen Weight</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" id="qt_vicom_unladen_weight" required
+                                           value="<?php echo $_vic_weight_laden;?>"
                                            name="qt_vicom_unladen_weight" placeholder="Unladen Weight"/>
                                 </div>
                             </div>
@@ -642,6 +816,7 @@
                                 <label class="col-sm-3 control-label req" for="qt_vicom_laden_weight">Laden Weight</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" id="qt_vicom_laden_weight" required
+                                           value="<?php echo $_vic_weight_laden;?>"
                                            name="qt_vicom_laden_weight" placeholder="Laden Weigh"/>
                                 </div>
                             </div>
@@ -663,6 +838,10 @@
                         </div>
                         
                     </div><!--end qt_type_com -->
+                            <?php
+                        }//end Commercial
+                    }//end if
+                    ?>                    
                     
                     <div class="line line-dashed line-lg pull-in"></div>
 
@@ -671,6 +850,7 @@
                         <label class="col-sm-3 control-label req" for="qt_vi_year_of_manufacture">Year of Manufacture</label>
                         <div class="col-md-7">
                             <input type="number" class="form-control" id="qt_vi_year_of_manufacture" maxlength="4" max="2030" min="1900"
+                                   value="<?php echo $_vi_man_year;?>"
                                    name="qt_vi_year_of_manufacture" placeholder="Year of Manufacture"/>
                         </div>
                     </div>
@@ -683,7 +863,7 @@
                         <div class="col-md-7">
                             <input class="input-sm datepicker-input form-control" id="qt_vi_regn_date" 
                                    size="16" type="text" name="qt_vi_regn_date" maxlength="12"  required
-                                   parsley-maxlength="12" parsley-trigger="focusout" 
+                                   parsley-maxlength="12" parsley-trigger="focusout"  value="<?php echo date('d-m-Y',$_vi_regn_date);?>"
                                    data-date-format="dd-mm-yyyy" placeholder="Regn. Date">                            
                         </div>
                     </div>
@@ -696,12 +876,15 @@
                         <div class="col-md-7">
                             <input class="input-sm datepicker-input form-control" id="qt_vi_road_tax_expire_date" 
                                    size="16" type="text" name="qt_vi_road_tax_expire_date" maxlength="12" 
-                                   parsley-maxlength="12" parsley-trigger="focusout"  required
+                                   parsley-maxlength="12" parsley-trigger="focusout"  required value="<?php echo date('d-m-Y',$_vi_tax_expire_date);?>"
                                    data-date-format="dd-mm-yyyy" placeholder="Road Tax Expiry Date">   
                         </div>
                     </div>
 
                     <div class="line line-dashed line-lg pull-in"></div>
+                    <?php
+                    if(isset($qt_insurance_type)){
+                        if($qt_insurance_type=='Private'){ ?>
                     <div class="qt_type_pvt">
                         <div class="form-group">
 
@@ -712,31 +895,37 @@
                                 <label class="control-label req">Additional Features</label>
                                 <div class="checkbox">
                                     <label><input type="checkbox" id="qt_vipvt_feature_sunroof" 
+                                                  <?php echo $_vip_fet_sunroof==1?'CHECKED':'';?>
                                                   name="qt_vipvt_feature_sunroof" value="">sunroof</label>
                                 </div>
 
                                 <div class="checkbox">
                                     <label><input type="checkbox" id="qt_vipvt_feature_soft_top"
+                                                  <?php echo $_vip_fet_soft_top==1?'CHECKED':'';?>
                                                   name="qt_vipvt_feature_soft_top" value="">soft-top</label>
                                 </div>
 
                                 <div class="checkbox">
                                     <label><input type="checkbox" id="qt_vipvt_feature_turbo_engine" 
+                                                  <?php echo $_vip_fet_turbo_eng==1?'CHECKED':'';?>
                                                   name="qt_vipvt_feature_turbo_engine" value="">turbo engine</label>
                                 </div>
 
                                 <div class="checkbox">
-                                    <label><input type="checkbox" id="qt_vipvt_feature_moonroof" 
+                                    <label><input type="checkbox" id="qt_vipvt_feature_moonroof"
+                                                  <?php echo $_vip_fet_moonroof==1?'CHECKED':'';?>
                                                   name="qt_vipvt_feature_moonroof" value="">moonroof</label>
                                 </div>								
 
                                 <div class="checkbox">
                                     <label><input type="checkbox" id="qt_vipvt_feature_skyroof" 
+                                                  <?php echo $_vip_fet_skyroof==1?'CHECKED':'';?>
                                                   name="qt_vipvt_feature_skyroof" value="">skyroof</label>
                                 </div>								
 
                                 <div class="checkbox">
                                     <label><input type="checkbox" id="qt_vipvt_feature_roof_panoramic" 
+                                                  <?php echo $_vip_fet_roof_pan==1?'CHECKED':'';?>
                                                   name="qt_vipvt_feature_roof_panoramic" value="">roof panoramic</label>
                                 </div>								
 
@@ -748,46 +937,57 @@
 
                                 <div class="checkbox">
                                     <label><input type="checkbox" id="qt_vipvt_type_sport_model"
+                                                  <?php echo $_vip_vt_super_model==1?'CHECKED':'';?>
                                                   name="qt_vipvt_type_sport_model" value="">sport model</label>
                                 </div>
 
                                 <div class="checkbox">
                                     <label><input type="checkbox" id="qt_vipvt_type_mpv"
+                                                  <?php echo $_vip_vt_mpv==1?'CHECKED':'';?>
                                                   name="qt_vipvt_type_mpv" value="">MPV</label>
                                 </div>
 
                                 <div class="checkbox">
                                     <label><input type="checkbox" id="qt_vipvt_type_suv"
+                                                  <?php echo $_vip_vt_suv==1?'CHECKED':'';?>
                                                   name="qt_vipvt_type_suv" value="">SUV</label>
                                 </div>
 
                                 <div class="checkbox">
                                     <label><input type="checkbox" id="qt_vipvt_type_sedan" 
+                                                  <?php echo $_vip_vt_sedan==1?'CHECKED':'';?>
                                                   name="qt_vipvt_type_sedan" value="">Sedan</label>
                                 </div>								
 
                                 <div class="checkbox">
 
                                     <label><input type="checkbox" id="qt_vipvt_type_coupe" 
+                                                  <?php echo $_vip_vt_couple==1?'CHECKED':'';?>
                                                   name="qt_vipvt_type_coupe " value="">Coupe</label>
                                 </div>
 
                                 <div class="checkbox">
                                     <label><input type="checkbox" id="qt_vipvt_type_cabriolet"
+                                                  <?php echo $_vip_vt_cabriolet==1?'CHECKED':'';?>
                                                   name="qt_vipvt_type_cabriolet" value="">Cabriolet</label>
                                 </div>
-
                                 <div class="checkbox">
                                     <label><input type="checkbox" id="qt_vipvt_type_parallel_import"
+                                                  <?php echo $_vip_vt_parallel_import==1?'CHECKED':'';?>
                                                   name="qt_vipvt_type_parallel_import" value="">Parallel Import</label>
                                 </div>								
-
                             </div>
-
                         </div>
 
                         <div class="line line-dashed line-lg pull-in"></div>
                     </div><!--end qt_type_pvt-->
+                    <?php                            
+                        }//Private end
+                    }//end if
+                    ?>
+                    
+                    
+                    
                     <div class="form-group">
 
                         <label class="col-sm-3 control-label">Additional Accesories/Coverage</label>
@@ -795,7 +995,7 @@
                             <input type="hidden" id="qt_vi_additional_accessories" name="qt_vi_additional_accessories" 
                                    value="">
                             <div id="qt_vi_additional_accessories_wrap" class="form-control" style="overflow:scroll;height:150px;max-height:150px"
-                                 contenteditable="true"></div>
+                                 contenteditable="true"><?php echo $_vi_additional;?></div>
                         </div>
                     </div>
 
@@ -805,207 +1005,13 @@
                         <div class="col-sm-2">
                              <!--button check point vehicle info pvt  -->
                                 <button type="button" id="btn_cp_vechicle_info_pvt"
-                                        class="btn btn-primary btn-save pull-right"><i class="icon-save"></i> Save</button>
-                            <!--<div class="col-sm-3 m-b-xs" style="padding-left:0px;"></div>-->
+                                        class="btn btn-primary btn-save pull-right"><i class="icon-save"></i> Save</button>                            
                         </div>
                     </div>
                 </form>
             </section>
         </section>
-        
-        <?/*
-         * Commercial part 
-         *
-         *          
-        <!-- Commercial -->
-        <section class="panel" id="panel_vehicle_info_com">
-            <header class="panel-heading font-bold">
-                <ul class="nav nav-pills pull-right">
-                    <li>
-                        <a href="#" class="panel-toggle text-muted">
-
-                            <i class="icon-caret-down text-active"></i>
-
-                            <i class="icon-caret-up text"></i>
-
-                        </a>
-                    </li>
-                </ul>Vehicle Information (Commercial)
-            </header>
-            <section class="panel-body">
-                <form class="form-horizontal" method="get">
-
-                    <div class="form-group">
-
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label req" for="qt_vicom_number">Number</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" id="qt_vicom_number" name="qt_vicom_number" 
-                                       required placeholder="Vehicle Number">
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="line line-dashed line-lg pull-in"></div>
-
-                    <div class="form-group">
-
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label req" for="qt_vicom_make">Make</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" id="qt_vicom_make"
-                                       name="qt_vicom_make" placeholder="Make" required/>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label req" for="qt_vicom_model">Model</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" id="qt_vicom_model" 
-                                       name="qt_vicom_model" placeholder="Model" required/>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="line line-dashed line-lg pull-in"></div>
-
-                    <div class="form-group">
-                        
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label req" for="qt_vicom_type">Type</label>
-                            <div class="col-md-6">
-                                <select name="qt_vicom_type" id="qt_vicom_type" class="form-control m-b" required>
-                                    <option>Hood/Canopy</option>
-                                    <option>Std Lorry</option>
-                                    <option>Std Van</option>
-                                    <option>Refrigerated Van</option>
-                                    <option>Crane/Tailgate</option>
-                                    <option>Garbage Truck</option>
-                                    <option>Mixer</option>
-                                    <option>Prime Mover</option>
-                                    <option>Tipper</option>
-                                    <option>Tanker</option>
-                                    <option>Ambulance</option>
-                                    <option>Tow Truck</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label req" for="qt_vicom_cc">CC</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" id="qt_vicom_cc" name="qt_vicom_cc"
-                                       placeholder="CC" required/>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="line line-dashed line-lg pull-in"></div>
-                    
-                    <div class="form-group">
-
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label req" for="qt_vicom_unladen_weight">Unladen Weight</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" id="qt_vicom_unladen_weight" required
-                                       name="qt_vicom_unladen_weight" placeholder="Unladen Weight"/>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label req" for="qt_vicom_laden_weight">Laden Weight</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" id="qt_vicom_laden_weight" required
-                                       name="qt_vicom_laden_weight" placeholder="Laden Weigh"/>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="line line-dashed line-lg pull-in"></div>
-                    
-                    <div class="form-group">
-
-                        <div class="col-sm-6">
-
-                            <label class="col-sm-3 control-label">Tonnage</label>
-
-                            <label class="col-sm-3 control-label" id="qt_vicom_tonnage">[Equation]</label>
-
-                        </div>
-
-                    </div>
-
-                    <div class="line line-dashed line-lg pull-in"></div>
-
-                    <div class="form-group">
-
-                        <label class="col-sm-3 control-label req" for="qt_vicom_year_of_manufacture">Year of Manufacture</label>
-
-                        <div class="col-md-7">
-
-                            <input type="number" class="form-control" id="qt_vicom_year_of_manufacture" maxlength="4"
-                                   placeholder="Year of Manufacture" required/>
-
-                        </div>
-
-                    </div>
-
-                    <div class="line line-dashed line-lg pull-in"></div>
-
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label req" for="qt_vicom_regn_date">Regn. Date</label>
-                        <div class="col-md-7">
-                             <input class="input-sm datepicker-input form-control" id="qt_vicom_regn_date" 
-                                   size="16" type="text" name="qt_vicom_regn_date" maxlength="12" 
-                                   parsley-maxlength="12" parsley-trigger="focusout" required
-                                   data-date-format="dd-mm-yyyy" placeholder="Regn. Date">
-                        </div>
-                    </div>
-
-                    <div class="line line-dashed line-lg pull-in"></div>
-
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label req" for="qt_vicom_road_tax_expire">Road Tax Expiry Date</label>
-                        <div class="col-md-7">
-                                    <input class="input-sm datepicker-input form-control" id="qt_vicom_road_tax_expire" 
-                                   size="16" type="text" name="qt_vicom_road_tax_expire" maxlength="12" required
-                                   parsley-maxlength="12" parsley-trigger="focusout" 
-                                   data-date-format="dd-mm-yyyy" placeholder="Road Tax Expiry Date">
-                        </div>
-                    </div>
-
-                    <div class="line line-dashed line-lg pull-in"></div>
-
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Additional Accesories/Coverage</label>
-                        <div class="col-sm-7">
-                            <input type="hidden" id="qt_vicom_additional_accessories" name="qt_vicom_additional_accessories">
-                            <div id="qt_vicom_additional_accessories_wrap" class="form-control" style="overflow:scroll;height:150px;max-height:150px"
-                                 contenteditable="true">multiline text</div>
-                        </div>
-                    </div>
-
-                    <div class="line line-dashed line-lg pull-in"></div>
-                    <div class="form-group">
-                        <div class="col-sm-10"></div>
-                        <div class="col-sm-2">
-                            <!--button check point vehicle info commercial -->
-                            <button type="button" id="btn_cp_vehicle_info_com"
-                                    class="btn btn-primary btn-save pull-right">Save</button>
-                            <?php <div class="col-sm-3 m-b-xs" style="padding-left:0px;">
-                                <a href="prospect.html" class="btn btn-primary"> Save</a>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </section>
-        </section>
-        */?>
-        
+                
         <!-- Insurance Details -->
         <section class="panel" id="qt_insurance_details">
             <header class="panel-heading font-bold">
@@ -1025,46 +1031,46 @@
                             <div class="col-md-6">
                                 <select id="qt_id_company" name="qt_id_company" required class="form-control m-b">
                                     <optgroup>
-                                    <option>AIG</option>
-                                    <option>AXA</option>
-                                    <option>China Taiping</option>
-                                    <option>Liberty</option>
-                                    <option>MSIG</option>
-                                    <option>NTUC Income</option>
+                                    <option <?php echo $_ci_company=='AIG'?'SELECTED':'';?>>AIG</option>
+                                    <option <?php echo $_ci_company=='AXA'?'SELECTED':'';?>>AXA</option>
+                                    <option <?php echo $_ci_company=='China Taiping'?'SELECTED':'';?>>China Taiping</option>
+                                    <option <?php echo $_ci_company=='Liberty'?'SELECTED':'';?>>Liberty</option>
+                                    <option <?php echo $_ci_company=='MSIG'?'SELECTED':'';?>>MSIG</option>
+                                    <option  <?php echo $_ci_company=='NTUC Income'?'SELECTED':'';?> >NTUC Income</option>
                                     </optgroup>
                                     <optgroup label="-----------------">                                   
-                                    <option>ACE</option>
-                                    <option>Aetna</option>
-                                    <option>Allianz Global</option>
-                                    <option>Allied World Assurance</option>
-                                    <option>Aviva</option>
-                                    <option>Cigna Europe</option>
-                                    <option>Direct Asia</option>
-                                    <option>ECICS</option>
-                                    <option>EQ</option>
-                                    <option>Etiqa</option>
-                                    <option>Federal</option>
-                                    <option>First Capital</option>
-                                    <option>HDI-Gerling Industrie Versicherung</option>
-                                    <option>HL Assurance</option>
-                                    <option>India International</option>
-                                    <option>InterGlobal</option>
-                                    <option>Liberty</option>
-                                    <option>Lloyds of London</option>
-                                    <option>Lonpac</option>
-                                    <option>Nipponkoa</option>
-                                    <option>Overseas Assurance</option>
-                                    <option>QBE</option>
-                                    <option>Raffle Health</option>
-                                    <option>Royah & Sun Alliance</option>
-                                    <option>Singapore Aviation</option>
-                                    <option>SHC</option>
-                                    <option>Starr International</option>
-                                    <option>Tenet Sompo</option>
-                                    <option>Tokio Marine</option>
-                                    <option>United Overseas</option>
-                                    <option>XL</option>
-                                    <option>Zurich</option>
+                                    <option <?php echo $_ci_company=='ACE'?'SELECTED':'';?> >ACE</option>
+                                    <option <?php echo $_ci_company=='Aetna'?'SELECTED':'';?> >Aetna</option>
+                                    <option <?php echo $_ci_company=='Allianz Global'?'SELECTED':'';?> >Allianz Global</option>
+                                    <option <?php echo $_ci_company=='Allied World Assurance'?'SELECTED':'';?> >Allied World Assurance</option>
+                                    <option <?php echo $_ci_company=='Aviva'?'SELECTED':'';?> >Aviva</option>
+                                    <option <?php echo $_ci_company=='Cigna Europe'?'SELECTED':'';?> >Cigna Europe</option>
+                                    <option <?php echo $_ci_company=='Direct Asia'?'SELECTED':'';?> >Direct Asia</option>
+                                    <option <?php echo $_ci_company=='ECICS'?'SELECTED':'';?> >ECICS</option>
+                                    <option <?php echo $_ci_company=='EQ'?'SELECTED':'';?> >EQ</option>
+                                    <option <?php echo $_ci_company=='Etiqa'?'SELECTED':'';?> >Etiqa</option>
+                                    <option <?php echo $_ci_company=='Federal'?'SELECTED':'';?> >Federal</option>
+                                    <option <?php echo $_ci_company=='First Capital'?'SELECTED':'';?> >First Capital</option>
+                                    <option <?php echo $_ci_company=='HDI-Gerling Industrie Versicherung'?'SELECTED':'';?> >HDI-Gerling Industrie Versicherung</option>
+                                    <option <?php echo $_ci_company=='HL Assurance'?'SELECTED':'';?> >HL Assurance</option>
+                                    <option <?php echo $_ci_company=='India International'?'SELECTED':'';?> >India International</option>
+                                    <option <?php echo $_ci_company=='InterGlobal'?'SELECTED':'';?> >InterGlobal</option>
+                                    <option <?php echo $_ci_company=='Liberty'?'SELECTED':'';?> >Liberty</option>
+                                    <option <?php echo $_ci_company=='Lloyds of London'?'SELECTED':'';?> >Lloyds of London</option>
+                                    <option <?php echo $_ci_company=='Lonpac'?'SELECTED':'';?> >Lonpac</option>
+                                    <option <?php echo $_ci_company=='Nipponkoa'?'SELECTED':'';?> >Nipponkoa</option>
+                                    <option <?php echo $_ci_company=='Overseas Assurance'?'SELECTED':'';?> >Overseas Assurance</option>
+                                    <option <?php echo $_ci_company=='QBE'?'SELECTED':'';?> >QBE</option>
+                                    <option <?php echo $_ci_company=='Raffle Health'?'SELECTED':'';?> >Raffle Health</option>
+                                    <option <?php echo $_ci_company=='Royah & Sun Alliance'?'SELECTED':'';?> >Royah & Sun Alliance</option>
+                                    <option <?php echo $_ci_company=='Singapore Aviation'?'SELECTED':'';?> >Singapore Aviation</option>
+                                    <option <?php echo $_ci_company=='SHC'?'SELECTED':'';?> >SHC</option>
+                                    <option <?php echo $_ci_company=='Starr International'?'SELECTED':'';?> >Starr International</option>
+                                    <option <?php echo $_ci_company=='Tenet Sompo'?'SELECTED':'';?> >Tenet Sompo</option>
+                                    <option <?php echo $_ci_company=='Tokio Marine'?'SELECTED':'';?> >Tokio Marine</option>
+                                    <option <?php echo $_ci_company=='United Overseas'?'SELECTED':'';?> >United Overseas</option>
+                                    <option <?php echo $_ci_company=='XL'?'SELECTED':'';?> >XL</option>
+                                    <option <?php echo $_ci_company=='Zurich'?'SELECTED':'';?> >Zurich</option>
                                     </optgroup>
                                 </select>
                             </div>
@@ -1074,9 +1080,9 @@
                             <div class="col-md-6">
                                 <select name="qt_id_type_of_coverage" id="qt_id_type_of_coverage" class="form-control m-b"
                                         required>
-                                    <option>Comprehensive</option>
-                                    <option>TPFT</option>
-                                    <option>TPO</option>							
+                                    <option <?php echo $_ci_coverage=='Comprehensive'?'SELECTED':'';?> >Comprehensive</option>
+                                    <option <?php echo $_ci_coverage=='TPFT'?'SELECTED':'';?> >TPFT</option>
+                                    <option <?php echo $_ci_coverage=='TPO'?'SELECTED':'';?> >TPO</option>							
                                 </select>
                             </div>
                         </div>
@@ -1088,6 +1094,7 @@
                             <label class="col-sm-3 control-label req" for="qt_id_current_premium">Current Premium</label>
                             <div class="col-md-6">
                                 <input type="number" class="form-control" id="qt_id_current_premium" required
+                                       value="<?php echo $_ci_current_premium;?>"
                                        name="qt_id_current_premium" placeholder="Current premium">
                             </div>
                         </div>
@@ -1095,6 +1102,7 @@
                             <label class="col-sm-3 control-label req" for="qt_id_current_excess">Current Excess</label>
                             <div class="col-md-6">
                                 <input type="number" class="form-control" id="qt_id_current_excess" required
+                                       value="<?php echo $_ci_current_excess;?>"
                                        name="qt_id_current_excess "placeholder="Current Excess">
                             </div>
                         </div>
@@ -1106,9 +1114,18 @@
                             <label class="col-sm-3 control-label req" for="qt_id_finance_company">Finance Company</label>
                             <div class="col-md-6">
                                 <input type="text" class="form-control" id="qt_id_finance_company" maxlength="100" required
+                                       value="<?php echo $_ci_finance_company;?>"
                                        name="qt_id_finance_company" placeholder="Finance Company">
                             </div>
                         </div>
+                        <div class="col-sm-6">
+                            <label class="col-sm-3 control-label req" for="qt_id_policy_no">Current Policy No</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="qt_id_policy_no" maxlength="50" required
+                                       value="<?php echo $_ci_policy_no;?>"
+                                       name="qt_id_policy_no" placeholder="Current Policy No">
+                            </div>
+                        </div>                        
                     </div>  
                     <div class="line line-dashed line-lg pull-in"></div>
 
@@ -1117,6 +1134,7 @@
                             <label class="col-sm-3 control-label req" for="qt_id_current_ncd">Current NCD</label>
                             <div class="col-md-6">
                                 <input type="text" class="form-control" id="qt_id_current_ncd"
+                                       value="<?php echo $_ci_current_ncd;?>"
                                        name="qt_id_current_ncd" placeholder="Current NCD">
                             </div>
                         </div>
@@ -1124,12 +1142,12 @@
                             <label class="col-sm-3 control-label req" for="qt_id_ncd_on_renewal">NCD % on Renewal</label>
                             <div class="col-md-6">
                                 <select name="qt_id_ncd_on_renewal" name="qt_id_ncd_on_renewal" class="form-control m-b" required>
-                                    <option>0</option>
-                                    <option>10</option>
-                                    <option>20</option>
-                                    <option>30</option>
-                                    <option>40</option>
-                                    <option>50</option>
+                                    <option <?php echo $_ci_ncd_per_renewal=='0'?'SELECTED':'';?> >0</option>
+                                    <option <?php echo $_ci_ncd_per_renewal=='10'?'SELECTED':'';?> >10</option>
+                                    <option <?php echo $_ci_ncd_per_renewal=='20'?'SELECTED':'';?> >20</option>
+                                    <option <?php echo $_ci_ncd_per_renewal=='30'?'SELECTED':'';?> >30</option>
+                                    <option <?php echo $_ci_ncd_per_renewal=='40'?'SELECTED':'';?> >40</option>
+                                    <option <?php echo $_ci_ncd_per_renewal=='50'?'SELECTED':'';?> >50</option>
                                 </select>
                             </div>
                         </div>
@@ -1144,13 +1162,15 @@
                                     <div class="radio">
                                         <label>
                                             <input type="radio" name="qt_id_ncd_on_change" id="qt_id_ncd_on_change_yes" 
-                                                   value="Yes" checked="">Yes</label>
+                                                   <?php echo $_ci_ncd_affect=='Yes'?'CHECKED':'';?>
+                                                   value="Yes" >Yes</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="radio">
                                         <label>
                                             <input type="radio" name="qt_id_ncd_on_change" id="qt_id_ncd_on_change_no" 
+                                                   <?php echo $_ci_ncd_affect=='No'?'CHECKED':'';?>
                                                    value="No" checked="">No</label>
                                     </div>
                                 </div>
@@ -1166,12 +1186,14 @@
                             <div class="col-md-6">
                                 <div class="col-md-6">
                                     <div class="radio">
-                                        <label><input type="radio" name="qt_id_ssd" id="qt_id_ssd_yes" value="Yes" checked="">Yes</label>
+                                        <label><input type="radio" name="qt_id_ssd" id="qt_id_ssd_yes" value="Yes" 
+                                                      <?php echo $_ci_ssd=='Yes'?'CHECKED':'';?>>Yes</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="radio">
-                                        <label><input type="radio" name="qt_id_ssd" id="qt_id_ssd_no" value="No" checked="">No</label>
+                                        <label><input type="radio" name="qt_id_ssd" id="qt_id_ssd_no" value="No" 
+                                                      <?php echo $_ci_ssd=='No'?'CHECKED':'';?>>No</label>
                                     </div>
                                 </div>
                             </div>
@@ -1180,6 +1202,7 @@
                             <label class="col-sm-3 control-label req" for="qt_ssd_date_check">SDD Date Check</label>
                             <div class="col-md-6">
                                 <input class="input-sm datepicker-input form-control" id="qt_ssd_date_check" 
+                                       value="<?php echo date('d-m-Y',$_ci_ssd_date);?>"
                                    size="16" type="text" name="qt_ssd_date_check" maxlength="12" 
                                    parsley-maxlength="12" parsley-trigger="focusout" required
                                    data-date-format="dd-mm-yyyy" placeholder="SDD Date Check">   
@@ -1196,11 +1219,8 @@
                 <ul class="nav nav-pills pull-right">
                     <li>
                         <a href="#" class="panel-toggle text-muted">
-
                             <i class="icon-caret-down text-active"></i>
-
                             <i class="icon-caret-up text"></i>
-
                         </a>
                     </li>
                 </ul>Current Insurance Period</header>
@@ -1211,6 +1231,7 @@
                             <label class="col-sm-3 control-label req" for="qt_ci_start_date">Start Date</label>
                             <div class="col-md-6">
                                 <input class="input-sm datepicker-input form-control" id="qt_ci_start_date" 
+                                   value="<?php echo date('d-m-Y',$_ci_period_start);?>"
                                    size="16" type="text" name="qt_ci_start_date" maxlength="12" 
                                    parsley-maxlength="12" parsley-trigger="focusout" 
                                    data-date-format="dd-mm-yyyy" placeholder="Start Date">   
@@ -1220,6 +1241,7 @@
                             <label class="col-sm-3 control-label  req" for="qt_ci_poi_end_date">POI End Date</label>
                             <div class="col-md-6">
                                 <input class="input-sm datepicker-input form-control" id="qt_ci_poi_end_date" type="text"
+                                       value="<?php echo date('d-m-Y',$_ci_poi_end_date);?>"
                                        size="16" type="text" name="qt_ci_poi_end_date" maxlength="12" 
                                        parsley-maxlength="12" parsley-trigger="focusout" 
                                        data-date-format="dd-mm-yyyy" placeholder="POI End Date">
@@ -1232,6 +1254,7 @@
                             <label class="col-sm-3 control-label req" for="qt_ci_road_tax_date">Road Tax Due</label>
                             <div class="col-md-6">
                                 <input class="input-sm datepicker-input form-control" id="qt_ci_road_tax_date" 
+                                   value="<?php echo date('d-m-Y',$_ci_road_tax_due_date);?>"
                                    size="16" type="text" name="qt_ci_road_tax_date" maxlength="12" 
                                    parsley-maxlength="12" parsley-trigger="focusout" 
                                    data-date-format="dd-mm-yyyy" placeholder="Road Tax Due">   
@@ -1241,9 +1264,9 @@
                             <label class="col-sm-3 control-label req" for="qt_ci_ncd_protection">NCD Protection</label>
                             <div class="col-md-6">
                                 <select name="qt_ci_ncd_protection" id="qt_ci_ncd_protection" class="form-control m-b">
-                                    <option>Unknown</option>
-                                    <option>Yes</option>
-                                    <option>No</option>
+                                    <option <?php echo $_ci_ncd_protection=='Unknown'?'SELECTED':'';?> >Unknown</option>
+                                    <option <?php echo $_ci_ncd_protection=='Yes'?'SELECTED':'';?> >Yes</option>
+                                    <option <?php echo $_ci_ncd_protection=='No'?'SELECTED':'';?> >No</option>
                                 </select>
                             </div>
                         </div>
@@ -1258,14 +1281,14 @@
                                     <div class="radio">
                                         <label>
                                             <input type="radio" name="qt_ci_claim_in_3_years" id="qt_ci_claim_in_3_years_yes" 
-                                                   value="yes" checked="">Yes</label>
+                                                   value="yes" <?php echo $_ci_claims_in_last3_year=='yes'?'CHECKED':'';?>>Yes</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="radio">
                                         <label>
                                             <input type="radio" name="qt_ci_claim_in_3_years" id="qt_ci_claim_in_3_years_no" 
-                                                   value="no" checked="">No</label>
+                                                   value="no"  <?php echo $_ci_claims_in_last3_year=='no'?'CHECKED':'';?>>No</label>
                                     </div>
                                 </div>
                             </div>
@@ -1277,10 +1300,7 @@
                         <div class="col-sm-10"></div>
                         <div class="col-sm-2">
                             <button type="button" id="btn_cp_current_insurance"
-                                    class="btn btn-primary btn-save pull-right">current insurance Save</button>
-                            <?php /*<div class="col-sm-3 m-b-xs" style="padding-left:0px;">
-                                <a href="prospect.html" class="btn btn-primary"> Save</a>
-                            </div> */?>
+                                    class="btn btn-primary btn-save pull-right"><i class="icon-save"></i> Save</button>                            
                         </div>
                     </div>
 
@@ -1419,133 +1439,7 @@
                 </form>
             </section>
         </section>
-        <?php /*
-         * Claim History 
-        <section class="panel">
-            <header class="panel-heading font-bold">
-                <ul class="nav nav-pills pull-right">
-                    <li>
-                        <a href="#" class="panel-toggle text-muted">
-                            <i class="icon-caret-down text-active"></i>
-                            <i class="icon-caret-up text"></i>
-                        </a>
-                    </li>
-                </ul>Claim History (2)</header>
-            <section class="panel-body">
-                <form class="form-horizontal" method="get">
-                    <div class="form-group">
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" for="input-id-1">Driver Name</label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" id="input-id-1" placeholder="txt">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" for="input-id-1">Vehicle No.</label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" id="input-id-1" placeholder="txt">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="line line-dashed line-lg pull-in"></div>
-                    <div class="form-group">
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" for="input-id-1">Accident Date</label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" id="input-id-1" placeholder="datepicker">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" for="input-id-1">Reporting Date</label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" id="input-id-1" placeholder="datepicker">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="line line-dashed line-lg pull-in"></div>
-                    <div class="form-group">
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" for="input-id-1">Claims Paid (OD)</label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" id="input-id-1" placeholder="number">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" for="input-id-1">Claims Paid (TPPD)</label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" id="input-id-1" placeholder="number">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="line line-dashed line-lg pull-in"></div>
-                    <div class="form-group">
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" for="input-id-1">Claims Paid (TPBI)</label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" id="input-id-1" placeholder="number">
-                            </div>
-                        </div>
-                    </div>	
-                    <div class="line line-dashed line-lg pull-in"></div>
-                    <div class="form-group">
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" for="input-id-1">Claims Reserved (TPPD)</label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" id="input-id-1" placeholder="number">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" for="input-id-1">Claims Reserved (TPBI)</label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" id="input-id-1" placeholder="number">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="line line-dashed line-lg pull-in"></div>
-                    <div class="form-group">
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" for="input-id-1">Windscreen</label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" id="input-id-1" placeholder="txt">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" for="input-id-1">Reporting Only</label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" id="input-id-1" placeholder="txt">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="line line-dashed line-lg pull-in"></div>
-                    <div class="form-group">
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" for="input-id-1">Private Settlement</label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" id="input-id-1" placeholder="txt">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" for="input-id-1">Referred to Partner Workshop</label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" id="input-id-1" placeholder="txt">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="line line-dashed line-lg pull-in"></div>
-                    <div class="form-group">
-                        <div class="col-sm-10"></div>
-                        <div class="col-sm-2">
-                            <div class="col-sm-3 m-b-xs" style="padding-left:0px;">
-                                <a href="prospect.html" class="btn btn-primary"> Save</a>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </section>
-        </section>
-        */?>
-        
+                
         <!-- Named Driver 1 & 2 -->
 
         <section class="panel" id="qt_driver_1">
@@ -1668,128 +1562,6 @@
             </section>
         </section>
         
-        <?php /*
-         * Named Driver 2
-        <section class="panel">
-            <header class="panel-heading font-bold">
-                <ul class="nav nav-pills pull-right">
-                    <li>
-                        <a href="#" class="panel-toggle text-muted">
-                            <i class="icon-caret-down text-active"></i>
-                            <i class="icon-caret-up text"></i>
-                        </a>
-                    </li>
-                </ul>Named Driver (2)</header>
-            <section class="panel-body">
-                <form class="form-horizontal" method="get">
-                    <div class="form-group">
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" for="input-id-1">Name</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" id="input-id-1" placeholder="txt">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="line line-dashed line-lg pull-in"></div>
-                    <div class="form-group">
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" for="input-id-1">NRIC/FIN</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" id="input-id-1" placeholder="txt">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" for="input-id-1">Relationship</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" id="input-id-1" placeholder="txt">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="line line-dashed line-lg pull-in"></div>
-                    <div class="form-group">
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" for="input-id-1">Date of Birth</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" id="input-id-1" placeholder="datepicker">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" for="input-id-1">Age</label>
-                            <div class="col-md-6">
-                                <label class="col-sm-3 control-label" for="input-id-1">[Equation]</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="line line-dashed line-lg pull-in"></div>
-                    <div class="form-group">
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" for="input-id-1">Gender</label>
-                            <div class="col-md-6">
-                                <select name="account" class="form-control m-b">
-                                    <option>Male</option>
-                                    <option>Female</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" for="input-id-1">Marital Status</label>
-                            <div class="col-md-6">
-                                <select name="account" class="form-control m-b">
-                                    <option>Single</option>
-                                    <option>Married</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>  
-                    <div class="line line-dashed line-lg pull-in"></div>				  
-                    <div class="form-group">
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" for="input-id-1">Occupation</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" id="input-id-1" placeholder="txt">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="line line-dashed line-lg pull-in"></div>
-                    <div class="form-group">
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" for="input-id-1">Driving License Pass Date</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" id="input-id-1" placeholder="datepicker">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" for="input-id-1">Driving Experience</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" id="input-id-1" placeholder="Equation">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="line line-dashed line-lg pull-in"></div>
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <label class="col-sm-3 control-label" for="input-id-1">Claim History (3 Years)</label>
-                            <div class="col-sm-7">
-                                <div id="editor" class="form-control" style="overflow:scroll;height:150px;max-height:150px" contenteditable="true">Multiline Text</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="line line-dashed line-lg pull-in"></div>
-                    <div class="form-group">
-                        <div class="col-sm-10"></div>
-                        <div class="col-sm-2">
-                            <div class="col-sm-3 m-b-xs" style="padding-left:0px;">
-                                <a href="prospect.html" class="btn btn-primary"> Save</a>
-                            </div>
-                        </div>
-                    </div>
-
-                </form>
-            </section>
-        </section>
-        */?>
-        
         <!-- Quotation (Private and Commercial) -->
         <!-- Private -->
         <section class="panel" id="qt_quot_pvt">
@@ -1797,11 +1569,8 @@
                 <ul class="nav nav-pills pull-right">
                     <li>
                         <a href="#" class="panel-toggle text-muted">
-
                             <i class="icon-caret-down text-active"></i>
-
                             <i class="icon-caret-up text"></i>
-
                         </a>
                     </li>
                 </ul>Quotation (Private)
@@ -1818,11 +1587,8 @@
                 <ul class="nav nav-pills pull-right">
                     <li>
                         <a href="#" class="panel-toggle text-muted">
-
                             <i class="icon-caret-down text-active"></i>
-
                             <i class="icon-caret-up text"></i>
-
                         </a>
                     </li>
                 </ul>Quotation (Commercial)
@@ -1852,46 +1618,46 @@
                             <div class="col-md-6">
                                 <select id="qt_sid_company" name="qt_sid_company" class="form-control m-b">
                                     <optgroup>
-                                    <option>AIG</option>
-                                    <option>AXA</option>
-                                    <option>China Taiping</option>
-                                    <option>Liberty</option>
-                                    <option>MSIG</option>
-                                    <option>NTUC Income</option>
+                                    <option <?php echo $_si_company=='AIG'?'SELECTED':'';?> >AIG</option>
+                                    <option <?php echo $_si_company=='AXA'?'SELECTED':'';?> >AXA</option>
+                                    <option <?php echo $_si_company=='China Taiping'?'SELECTED':'';?> >China Taiping</option>
+                                    <option <?php echo $_si_company=='Liberty'?'SELECTED':'';?> >Liberty</option>
+                                    <option <?php echo $_si_company=='MSIG'?'SELECTED':'';?> >MSIG</option>
+                                    <option <?php echo $_si_company=='NTUC Income'?'SELECTED':'';?> >NTUC Income</option>
                                     </optgroup>
                                     <optgroup label="———">                                                                                                                
-                                    <option>ACE</option>
-                                    <option>Aetna</option>
-                                    <option>Allianz Global</option>
-                                    <option>Allied World Assurance</option>
-                                    <option>Aviva</option>
-                                    <option>Cigna Europe</option>
-                                    <option>Direct Asia</option>
-                                    <option>ECICS</option>
-                                    <option>EQ</option>
-                                    <option>Etiqa</option>
-                                    <option>Federal</option>
-                                    <option>First Capital</option>
-                                    <option>HDI-Gerling Industrie Versicherung</option>
-                                    <option>HL Assurance</option>
-                                    <option>India International</option>
-                                    <option>InterGlobal</option>
-                                    <option>Liberty</option>
-                                    <option>Lloyds of London</option>
-                                    <option>Lonpac</option>
-                                    <option>Nipponkoa</option>
-                                    <option>Overseas Assurance</option>
-                                    <option>QBE</option>
-                                    <option>Raffle Health</option>
-                                    <option>Royah & Sun Alliance</option>
-                                    <option>Singapore Aviation</option>
-                                    <option>SHC</option>
-                                    <option>Starr International</option>
-                                    <option>Tenet Sompo</option>
-                                    <option>Tokio Marine</option>
-                                    <option>United Overseas</option>
-                                    <option>XL</option>
-                                    <option>Zurich</option>
+                                    <option <?php echo $_si_company=='ACE'?'SELECTED':'';?> >ACE</option>
+                                    <option <?php echo $_si_company=='Aetna'?'SELECTED':'';?> >Aetna</option>
+                                    <option <?php echo $_si_company=='Allianz Global'?'SELECTED':'';?> >Allianz Global</option>
+                                    <option <?php echo $_si_company=='Allied World Assurance'?'SELECTED':'';?> >Allied World Assurance</option>
+                                    <option <?php echo $_si_company=='Aviva'?'SELECTED':'';?> >Aviva</option>
+                                    <option <?php echo $_si_company=='Cigna Europe'?'SELECTED':'';?> >Cigna Europe</option>
+                                    <option <?php echo $_si_company=='Direct Asia'?'SELECTED':'';?> >Direct Asia</option>
+                                    <option <?php echo $_si_company=='ECICS'?'SELECTED':'';?> >ECICS</option>
+                                    <option <?php echo $_si_company=='EQ'?'SELECTED':'';?> >EQ</option>
+                                    <option <?php echo $_si_company=='Etiqa'?'SELECTED':'';?> >Etiqa</option>
+                                    <option <?php echo $_si_company=='Federal'?'SELECTED':'';?> >Federal</option>
+                                    <option <?php echo $_si_company=='First Capital'?'SELECTED':'';?> >First Capital</option>
+                                    <option <?php echo $_si_company=='HDI-Gerling Industrie Versicherung'?'SELECTED':'';?> >HDI-Gerling Industrie Versicherung</option>
+                                    <option <?php echo $_si_company=='HL Assurance'?'SELECTED':'';?> >HL Assurance</option>
+                                    <option <?php echo $_si_company=='India International'?'SELECTED':'';?> >India International</option>
+                                    <option <?php echo $_si_company=='InterGlobal'?'SELECTED':'';?> >InterGlobal</option>
+                                    <option <?php echo $_si_company=='Liberty'?'SELECTED':'';?> >Liberty</option>
+                                    <option <?php echo $_si_company=='Lloyds of London'?'SELECTED':'';?> >Lloyds of London</option>
+                                    <option <?php echo $_si_company=='Lonpac'?'SELECTED':'';?> >Lonpac</option>
+                                    <option <?php echo $_si_company=='Nipponkoa'?'SELECTED':'';?> >Nipponkoa</option>
+                                    <option <?php echo $_si_company=='Overseas Assurance'?'SELECTED':'';?> >Overseas Assurance</option>
+                                    <option <?php echo $_si_company=='QBE'?'SELECTED':'';?> >QBE</option>
+                                    <option <?php echo $_si_company=='Raffle Health'?'SELECTED':'';?> >Raffle Health</option>
+                                    <option <?php echo $_si_company=='Royah & Sun Alliance'?'SELECTED':'';?> >Royah & Sun Alliance</option>
+                                    <option <?php echo $_si_company=='Singapore Aviation<'?'SELECTED':'';?> >Singapore Aviation</option>
+                                    <option <?php echo $_si_company=='SHC'?'SELECTED':'';?> >SHC</option>
+                                    <option <?php echo $_si_company=='Starr International'?'SELECTED':'';?> >Starr International</option>
+                                    <option <?php echo $_si_company=='Tenet Sompo'?'SELECTED':'';?> >Tenet Sompo</option>
+                                    <option <?php echo $_si_company=='Tokio Marine'?'SELECTED':'';?> >Tokio Marine</option>
+                                    <option <?php echo $_si_company=='United Overseas'?'SELECTED':'';?> >United Overseas</option>
+                                    <option <?php echo $_si_company=='XL'?'SELECTED':'';?> >XL</option>
+                                    <option <?php echo $_si_company=='Zurich'?'SELECTED':'';?> >Zurich</option>
                                     </optgroup>
                                 </select>
                             </div>
@@ -1900,9 +1666,9 @@
                             <label class="col-sm-3 control-label req" for="qt_sid_coverage_type">Type of Coverage</label>
                             <div class="col-md-6">
                                 <select name="qt_sid_coverage_type" id="qt_sid_coverage_type" class="form-control m-b">
-                                    <option>Comprehensive</option>
-                                    <option>TPFT</option>
-                                    <option>TPO</option>						
+                                    <option <?php echo $_si_coverage=='Comprehensive'?'SELECTED':'';?> >Comprehensive</option>
+                                    <option <?php echo $_si_coverage=='TPFT'?'SELECTED':'';?> >TPFT</option>
+                                    <option <?php echo $_si_coverage=='TPO'?'SELECTED':'';?> >TPO</option>						
                                 </select>
                             </div>
                         </div>
@@ -1914,6 +1680,7 @@
                             <label class="col-sm-3 control-label req" for="qt_sid_premium">Premium</label>
                             <div class="col-md-6">
                                 <input type="number" class="form-control" id="qt_sid_premium"
+                                       value="<?php echo $_si_premium;?>"
                                        name="qt_sid_premium" placeholder="Premium">
                             </div>
                         </div>
@@ -1921,6 +1688,7 @@
                             <label class="col-sm-3 control-label req" for="qt_sid_excess">Excess</label>
                             <div class="col-md-6">
                                 <input type="number" class="form-control" id="qt_sid_excess"
+                                       value="<?php echo $_si_excess;?>"
                                        name="qt_sid_excess" placeholder="Excess">
                             </div>
                         </div>
@@ -1932,9 +1700,18 @@
                             <label class="col-sm-3 control-label req" for="qt_sid_finance_company">Finance Company</label>
                             <div class="col-md-6">
                                 <input type="text" class="form-control" id="qt_sid_finance_company" 
+                                       value="<?php echo $_si_finance_company;?>"
                                        name="qt_sid_finance_company" placeholder="Finance Company">
                             </div>
                         </div>
+                        <div class="col-sm-6">
+                            <label class="col-sm-3 control-label req" for="qt_sid_policy_no">Policy No</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="qt_sid_policy_no" maxlength="50"
+                                       value="<?php echo $_si_policy_no;?>"
+                                       name="qt_sid_policy_no" placeholder="Policy No">
+                            </div>
+                        </div>                        
                     </div>  
                     <div class="line line-dashed line-lg pull-in"></div>
 
@@ -1943,6 +1720,7 @@
                             <label class="col-sm-3 control-label req" for="qt_sid_ncd">NCD</label>
                             <div class="col-md-6">
                                 <input type="number" class="form-control" id="qt_sid_ncd"
+                                       value="<?php echo $_si_ncd;?>"
                                        name="qt_sid_ncd" placeholder="NCD">
                             </div>
                         </div>
@@ -1950,6 +1728,7 @@
                             <label class="col-sm-3 control-label req" for="qt_sid_ncd_on_renewal">NCD % on Renewal</label>
                             <div class="col-md-6">
                                 <input type="text" class="form-control" id="qt_sid_ncd_on_renewal"
+                                       value="<?php echo $_si_ncd_per_on_renewal;?>"
                                        name="qt_sid_ncd_on_renewal" placeholder="NCD % on Renewal">
                             </div>
                         </div>
@@ -1962,12 +1741,14 @@
                             <div class="col-md-6">
                                 <div class="col-md-6">
                                     <div class="radio">
-                                        <label><input type="radio" name="qt_sid_ssd" id="qt_sid_ssd" value="Yes" checked="">Yes</label>
+                                        <label><input type="radio" name="qt_sid_ssd" id="qt_sid_ssd" value="Yes" 
+                                                      <?php echo $_si_ssd=='1'?'CHECKED':'';?>>Yes</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="radio">
-                                        <label><input type="radio" name="qt_sid_ssd" id="qt_sid_ssd_no" value="No" checked="">No</label>
+                                        <label><input type="radio" name="qt_sid_ssd" id="qt_sid_ssd_no" value="No" 
+                                                      <?php echo $_si_ssd=='0'?'CHECKED':'';?>>No</label>
                                     </div>
                                 </div>
                             </div>
@@ -1976,6 +1757,7 @@
                             <label class="col-sm-3 control-label req" for="qt_sid_sdd_date_check">SDD Date Check</label>
                             <div class="col-md-6">
                                 <input class="input-sm datepicker-input form-control" id="qt_sid_sdd_date_check" 
+                                       value="<?php echo date('d-m-Y',$_si_ssd_date_check);?>"
                                    size="16" type="text" name="qt_sid_sdd_date_check" maxlength="12" 
                                    parsley-maxlength="12" parsley-trigger="focusout" 
                                    data-date-format="dd-mm-yyyy" placeholder="SDD Date Check">   
@@ -1989,6 +1771,7 @@
                             <label class="col-sm-3 control-label req" for="qt_sid_start_date">Start Date</label>
                             <div class="col-md-6">
                                  <input class="input-sm datepicker-input form-control" id="qt_sid_start_date" 
+                                        value="<?php echo date('d-m-Y',$_si_start_date);?>"
                                    size="16" type="text" name="qt_sid_start_date" maxlength="12" 
                                    parsley-maxlength="12" parsley-trigger="focusout" 
                                    data-date-format="dd-mm-yyyy" placeholder="Start Date"> 
@@ -1998,6 +1781,7 @@
                             <label class="col-sm-3 control-label req" for="qt_sid_end_date">End Date</label>
                             <div class="col-md-6">
                                    <input class="input-sm datepicker-input form-control" id="qt_sid_end_date" 
+                                   value="<?php echo date('d-m-Y',$_si_end_date);?>"
                                    size="16" type="text" name="qt_sid_end_date" maxlength="12" 
                                    parsley-maxlength="12" parsley-trigger="focusout" 
                                    data-date-format="dd-mm-yyyy" placeholder="End Date"> 
@@ -2010,6 +1794,7 @@
                             <label class="col-sm-3 control-label req" for="qt_sid_road_tax_due">Road Tax Due</label>
                             <div class="col-md-6">
                                  <input class="input-sm datepicker-input form-control" id="qt_sid_road_tax_due" 
+                                  value="<?php echo date('d-m-Y',$_si_road_tax_due);?>"
                                    size="16" type="text" name="qt_sid_road_tax_due" maxlength="12" 
                                    parsley-maxlength="12" parsley-trigger="focusout" 
                                    data-date-format="dd-mm-yyyy" placeholder="Road Tax Due"> 
@@ -2019,24 +1804,22 @@
                             <label class="col-sm-3 control-label req" for="qt_sid_ncd_protection">NCD Protection</label>
                             <div class="col-md-6">
                                 <select name="qt_sid_ncd_protection" id="qt_sid_ncd_protection" class="form-control m-b">
-                                    <option>Yes</option>
-                                    <option>No</option>
+                                    <option <?php echo $_si_ncd_protection=='Yes'?'SELECTED':'';?> >Yes</option>
+                                    <option <?php echo $_si_ncd_protection=='No'?'SELECTED':'';?> >No</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="line line-dashed line-lg pull-in"></div>
-                        <div class="form-group">
-                            <div class="col-sm-10"></div>
-                            <div class="col-sm-2">
+                        <div class="line line-dashed line-lg pull-in"></div>                       
+                    </div>	
+                     <div class="form-group">
+                            <div class="col-sm-9"></div>
+                            <div class="col-sm-3">                                
                                 <!-- selected insurance -->
                                 <button type="button" id="btn_cp_selected_insurance"
-                                        class="btn btn-primary btn-save pull-right"> selected insurance Save</button>
-                                <?php /*<div class="col-sm-3 m-b-xs" style="padding-left:0px;">
-                                    <a href="prospect.html" class="btn btn-primary"> Save</a>
-                                </div> */?>
+                                        class="btn btn-primary btn-save pull-right">
+                                    <i class="icon-save"></i> Save</button>                                
                             </div>
                         </div>
-                    </div>	
                 </form>
             </section>
         </section>
@@ -2065,17 +1848,13 @@
         <div class="col-sm-6">
 
             <div class="col-sm-3"></div>
-            <div class="col-md-6">
-                <?php /*<button type="button" id="full_save"
-                        class="btn btn-primary"><i class="icon-save"></i> Save</button>*/?>
-                
-                <div class="col-sm-3 m-b-xs" style="padding-left:0px;">
-                    <a href="#" id="full_save" class="btn btn-primary"> Save</a>
+            <div class="col-md-6">                               
+                <div class="col-sm-4 m-b-xs" style="padding-left:0px;">                    
+                    <button type="button" id="full_save" class="btn btn-primary"><i class="icon-save"></i> Save</button>
                 </div> 
                 <div class="col-sm-1 m-b-xs" style="padding-left:0px;">
                     <a href="#" class="btn btn-white"> Cancel</a>
                 </div>
-
             </div>
         </div>
     </section>

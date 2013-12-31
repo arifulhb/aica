@@ -67,7 +67,26 @@ class Customer extends CI_Controller {
         
     }//end index
     
+    public function searchCustomers()
+    {
+        $this->load->model('customer_model');
+        $keyword=$this->input->post('keyword');
+        $res = $this->customer_model->search_customers($keyword);
+        
+        echo json_encode($res);
+        
+    }//end function
     
+    public function searchCustomersByNric()
+    {
+        $this->load->model('customer_model');
+        $keyword=$this->input->post('keyword');
+        $res = $this->customer_model->search_customers_by_nric($keyword);
+        
+        echo json_encode($res);
+        
+    }//end function
+
     public function getCustomerRecordJSON(){
         $cust_sn=$this->input->post('cust_sn');
         

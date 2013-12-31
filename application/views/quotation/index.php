@@ -70,15 +70,15 @@
                             <b>
                                 <a href="<?php echo base_url().'quotation/view/'.$row['qt_ref_no'];?>" style="color:#13608b;">QT<?php echo $row['qt_ref_no'];?></a>
                             </b> 
-                            <a href="/#"><i class="icon-edit"></i></a></td>
+                            <a href="<?php echo base_url().'quotation/edit/'.$row['qt_ref_no'];?>"><i class="icon-edit"></i></a></td>
                             <td><?php echo $row['cust_name'];?></td>
                             <td align="middle"><?php echo $row['reg_no'];?></td>
                             <td align="middle"><?php echo date('d M y',$row['regn_date']);?></td>
-                            <td align="middle">-?</td>
-                            <td align="middle">- ?</td>
+                            <td align="middle"><?php echo $row['ci_company'];?></td>
+                            <td align="middle"><?php echo $row['ci_policy_no'];?></td>
                             <td align="middle"><?php echo date('d M y',$row['start_date']);?></td>
                             <td align="middle"><?php echo date('d M y',$row['end_date']);?></td>
-                            <td align="middle">- ?</td>
+                            <td align="middle"><?php echo $row['premium'];?></td>
                             <td><?php echo $row['consultant_name'];?></td>
                             <td><?php echo $row['agent_name'];?></td>
                             <td><?php echo $row['qt_state'];?></td>

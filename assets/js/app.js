@@ -16,7 +16,7 @@ requirejs.config({
         'order'     :'lib/order',
         'bootstrap' :'../plugins/bootstrap/js/bootstrap',
         //'json2'     :'lib/json2',
-        'jquery-ui'     :'lib/jquery-ui-1.10.3.custom.min',
+        'jquery-ui'     :'https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min',
         'jquery-touch'  :'lib/jquery.ui.touch-punch.min',        
         'jquery'    :'https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min'        
     },

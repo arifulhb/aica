@@ -86,6 +86,35 @@ class Quotation extends CI_Controller {
         
     }//end function
 
+    public function edit(){
+        $data=site_data();
+        
+        if(in_array('quotation_edit', $this->session->userdata('user_access'))){
+            
+            $ref_no=$this->uri->segment(3);            
+                        
+            $this->load->model('quotation_model');
+            $data['_record'] = $this->quotation_model->getRecord($ref_no);
+            $data['_history']=$this->quotation_model->getHistory($ref_no);
+                                    
+            $data['_page_title']="Edit Quotation";
+            $data['_page_caption']="Edit Quotation";
+            $data['_page_description']="Quotation Edit";
+            $data['new_qt_ref_no']=$ref_no;
+            $data['_action']='update';
+            
+            $this->load->model('user_model');
+            $data['consultants']=$this->user_model->getSmallList(2);//=> Sales Consultant List
+            $data['agents']=$this->user_model->getSmallList(5);//=> External Agent List
+            
+            $this->template->quotation_edit($data);   
+            
+        }else{
+            $this->template->access_denied($data);   
+        }
+        
+    }//end function
+    
     public function add(){
 
         /**
@@ -224,7 +253,8 @@ class Quotation extends CI_Controller {
             $data_com['vic_weight_laden']=$this->input->post('_qt_vicom_laden_weight');
         }
         $data['ci_company']=$this->input->post('_qt_id_company');
-         $data['ci_coverage']=$this->input->post('_qt_id_type_of_coverage');
+        $data['ci_policy_no']=$this->input->post('_qt_id_policy_no');
+        $data['ci_coverage']=$this->input->post('_qt_id_type_of_coverage');
         $data['ci_current_premium']=$this->input->post('_qt_id_current_premium');
         $data['ci_current_excess']=$this->input->post('_qt_id_current_excess');
         $data['ci_finance_company']=$this->input->post('_qt_id_finance_company');
@@ -239,6 +269,7 @@ class Quotation extends CI_Controller {
         $data['ci_ncd_protection']=$this->input->post('_qt_ci_ncd_protection');
         $data['ci_claims_in_last3_year']=$this->input->post('_qt_ci_claim_in_3_years');
         $data['si_company']=$this->input->post('_qt_sid_company');
+        $data['si_policy_no']=$this->input->post('_qt_sid_policy_no');
         $data['si_coverage']=$this->input->post('_qt_sid_coverage_type');
         $data['si_premium']=$this->input->post('_qt_sid_premium');
         $data['si_excess']=$this->input->post('_qt_sid_excess');
@@ -258,6 +289,7 @@ class Quotation extends CI_Controller {
         //print_r($data_pvt);
         //exit();
        $res= $this->quotation_model->update_full($data,$qt_ref_no);
+       
         //$res=1;
         
         //print_r($new);
@@ -266,10 +298,11 @@ class Quotation extends CI_Controller {
             $sub='';
             if($qt_insurance_type=='Private'){
                 $sub='pvt';
-                $this->quotation_model->update_vehicle_private($data_pvt,$qt_ref_no);
+                $sub.=' : '+$this->quotation_model->update_vehicle_private($data_pvt,$qt_ref_no);
+                
             }else{
                 $sub='com';
-                $this->quotation_model->update_vehicle_commercial($data_com,$qt_ref_no);
+                $sub.=' : '+$this->quotation_model->update_vehicle_commercial($data_com,$qt_ref_no);
             }
             //$new=array('recrd: '=>$qt_ref_no,'data'=>$data,'sub'=>$data_pvt,'status'=>$res);
             
@@ -280,7 +313,7 @@ class Quotation extends CI_Controller {
             'update_to'=>$this->input->post('_qt_details_state'));
             $this->quotation_model->updateHistory($update);
             
-            $new=array('recrd: '=>$qt_ref_no,'status'=>$res);
+            $new=array('recrd: '=>$qt_ref_no,'status'=>$res,'data: ',$data,'sub: '=>$sub);
             print_r($new);
         }//end if
         else{

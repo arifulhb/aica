@@ -12,6 +12,42 @@ class Customer_model extends CI_Model
 
     }//end constract
     
+    public function search_customers($keyword){        
+        $this->db->select('c.cust_sn, c.cust_name, c.cust_nric, UNIX_TIMESTAMP(c.cust_dob) as cust_dob, ');
+        $this->db->select('c.cust_gender, c.cust_marital_status, c.cust_type');
+        $this->db->select('c.cust_contact_hp, c.cust_contact_office, c.cust_contact_house, c.cust_contact_fax, c.cust_contact_email, ');
+        $this->db->select('c.cust_address_1, c.cust_address_2, c.cust_post_code, c.cust_occupation, UNIX_TIMESTAMP(c.cust_license_date) cust_license_date, ');
+        $this->db->select('c.cust_instructions, '); 
+        $this->db->select('c.add_by, u.user_name as add_by_name, UNIX_TIMESTAMP(c.date_of_add) as date_of_add,');        
+        $this->db->select('c.update_by, up.user_name as update_by_name, c.update_date ');
+        $this->db->from('aica_customer as c');
+        $this->db->join('aica_user as u', 'u.user_sn = c.add_by');
+        $this->db->join('aica_user as up', 'up.user_sn = c.update_by');
+        $this->db->like('c.cust_name',$keyword);
+        $res=$this->db->get();
+        //echo $this->db->last_query();
+        return $res->result_array();
+        
+    }//end function
+    
+    public function search_customers_by_nric($keyword){        
+        $this->db->select('c.cust_sn, c.cust_name, c.cust_nric, UNIX_TIMESTAMP(c.cust_dob) as cust_dob, ');
+        $this->db->select('c.cust_gender, c.cust_marital_status, c.cust_type');
+        $this->db->select('c.cust_contact_hp, c.cust_contact_office, c.cust_contact_house, c.cust_contact_fax, c.cust_contact_email, ');
+        $this->db->select('c.cust_address_1, c.cust_address_2, c.cust_post_code, c.cust_occupation, UNIX_TIMESTAMP(c.cust_license_date) cust_license_date, ');
+        $this->db->select('c.cust_instructions, '); 
+        $this->db->select('c.add_by, u.user_name as add_by_name, UNIX_TIMESTAMP(c.date_of_add) as date_of_add,');        
+        $this->db->select('c.update_by, up.user_name as update_by_name, c.update_date ');
+        $this->db->from('aica_customer as c');
+        $this->db->join('aica_user as u', 'u.user_sn = c.add_by');
+        $this->db->join('aica_user as up', 'up.user_sn = c.update_by');
+        $this->db->like('c.cust_nric',$keyword);
+        $res=$this->db->get();
+        //echo $this->db->last_query();
+        return $res->result_array();
+        
+    }//end function    
+
     public function getAllCustomerList(){
         $this->db->select('cust_sn, cust_name, cust_nric');
         $this->db->from('aica_customer');

@@ -28,6 +28,8 @@
 
       //Bootstrap
         echo link_tag('assets/plugins/bootstrap/css/bootstrap.css');
+        echo link_tag('http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css');
+        //code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css
         echo link_tag('assets/css/animate.css');
         
         //Loading Font-Awesome

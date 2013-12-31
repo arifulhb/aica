@@ -1,11 +1,13 @@
-require(['order!jquery','order!apppath','order!moment','order!nprogress','order!bootstrap','order!json2',
+require(['order!jquery','order!apppath','order!moment','order!nprogress','order!bootstrap','order!json2','order!jquery-ui',
     'order!appplugin','order!appaica'], function($,apppath,moment,NProgress){    
    
    
    //initialize
-    $('#qt_date').text(moment().format('DD MMMM, YYYY'));
-    $('.qt_type_pvt').show();
-    $('.qt_type_com').hide();
+   if($('#_action').val()!='update'){
+        $('#qt_date').text(moment().format('DD MMMM, YYYY'));        
+        $('.qt_type_pvt').show();
+        $('.qt_type_com').hide();
+   }    
         
     if($('#_action').val()==='add'){
         $('#qt_history_wrapper').css('display','none');
@@ -60,6 +62,179 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
         }
          
     });
+    
+    $('#cust_nric').autocomplete({
+        source:function(request, response){
+               $('#qt_customer_sn').val('');
+                $.ajax({
+                  type: "POST",
+                  url: apppath+'/customer/searchCustomersByNric',
+                  data: 'keyword='+$("#cust_nric").val(),
+                  success: function(data ) {                                            
+                        response( $.map( JSON.parse(data), function( item ) {                            
+                          return {  label: item.cust_name+' ('+item.cust_nric+')',
+                                    value: item.cust_name,
+                                    cust_nric: item.cust_nric,
+                                    cust_dob:item.cust_dob,
+                                    cust_gender:item.cust_gender,
+                                    cust_marital_status:item.cust_marital_status,
+                                    cust_type: item.cust_type,
+                                    cust_contact_hp: item.cust_contact_hp,
+                                    cust_contact_office: item.cust_contact_office,
+                                    cust_contact_house: item.cust_contact_house,
+                                    cust_contact_fax: item.cust_contact_fax,
+                                    cust_contact_email: item.cust_contact_email,
+                                    cust_address_1: item.cust_address_1,
+                                    cust_address_2: item.cust_address_2,
+                                    cust_post_code: item.cust_post_code,
+                                    cust_occupation: item.cust_occupation,
+                                    cust_license_date: item.cust_license_date,
+                                    cust_instructions:item.cust_instructions,
+                                    key  : item.cust_sn}
+                        }));
+                    },
+                    error: function(error){console.log('autocomplete error: '+error);}
+                });
+        },
+        delay: 500,
+        minLength:3,
+        select: function (event,ui)
+        {
+            console.log(ui);
+            $('#cust_type').text(ui.item.cust_type);                       
+            var d= new Date(ui.item.cust_dob*1000);            
+            $('#cust_dob').text(d.getDate()+'-'+(d.getMonth()+1)+'-'+d.getFullYear());
+            $('#cust_age').text(moment($('#cust_dob').text(), "DD-MM-YYYY").fromNow(true));                              
+            $('#cust_dob').text(moment(ui.item.cust_dob*1000).format('DD MMMM, YYYY'));                  
+            
+            var cust_dlpd= new Date(ui.item.cust_license_date*1000);                  
+            $('#cust_license_date').text(cust_dlpd.getDate()+'-'+(cust_dlpd.getMonth()+1)+'-'+cust_dlpd.getFullYear());
+            $('#cust_driving_experience').text(moment($('#cust_license_date').text(), "DD-MM-YYYY").fromNow(true));
+            $('#cust_license_date').text(moment(cust_dlpd).format('DD MMMM, YYYY'));            
+            $('#qt_cust_license_date').val(cust_dlpd.getDate()+'-'+(cust_dlpd.getMonth()+1)+'-'+cust_dlpd.getFullYear());
+                                    
+            $('#cust_gender').text(ui.item.cust_gender);                      
+             var _mstatus=$('#qt_cust_mstatus').select();                  
+                  var options_m = $('option', _mstatus);                  
+                    options_m.each(function() {if ($(this).text() === ui.item.cust_marital_status){$('#qt_cust_mstatus').val(ui.item.cust_marital_status);}});
+                 
+            $('#cust_contact_house').text(ui.item.cust_contact_house);
+            $('#cust_contact_house').text(ui.item.cust_contact_house);
+            $('#cust_contact_office').text(ui.item.cust_contact_office);
+            $('#cust_contact_hp').text(ui.item.cust_contact_hp);
+            $('#cust_contact_fax').text(ui.item.cust_contact_fax);
+            $('#cust_contact_email').text(ui.item.cust_contact_email);
+            $('#cust_address_line1').text(ui.item.cust_address_1);
+            $('#cust_address_line2').text(ui.item.cust_address_2);
+            $('#cust_post_code').text(ui.item.cust_post_code);
+            $('#qt_cust_occupation').val(ui.item.cust_occupation);
+            $('#cust_instructions').text(ui.item.cust_instructions);
+            $('#qt_cust_instructions').val(ui.item.cust_instructions);            
+            $('#qt_customer_sn').val(ui.item.key);
+            $('#cust_nric').val(ui.item.cust_nric);
+            $('#qt_customer_name').val(ui.item.value);
+            $('#res_nric').text('');
+            return false;
+        },
+        response:function(event, ui){
+            console.log('Autocomplete response : '+ui.content.length);
+            if(ui.content.length == 0){
+                $('#res_nric').html(' 0 results found.');
+                $('#qt_customer_sn').val($('#cust_nric').val());
+            }else{
+                $('#res_nric').html(' '+ui.content.length+' results found.');
+            }
+        }
+    });// nric autocomplete
+    
+    //Customer Search
+    $('#qt_customer_name').autocomplete({
+        source:function(request, response){
+               $('#qt_customer_sn').val('');
+                $.ajax({
+                  type: "POST",
+                  url: apppath+'/customer/searchCustomers',
+                  data: 'keyword='+$("#qt_customer_name").val(),
+                  success: function(data ) {                      
+                      //console.log('ajax success: '+data);
+                        response( $.map( JSON.parse(data), function( item ) {                            
+                          return {  label: item.cust_name,
+                                    value: item.cust_name,
+                                    cust_nric: item.cust_nric,
+                                    cust_dob:item.cust_dob,
+                                    cust_gender:item.cust_gender,
+                                    cust_marital_status:item.cust_marital_status,
+                                    cust_type: item.cust_type,
+                                    cust_contact_hp: item.cust_contact_hp,
+                                    cust_contact_office: item.cust_contact_office,
+                                    cust_contact_house: item.cust_contact_house,
+                                    cust_contact_fax: item.cust_contact_fax,
+                                    cust_contact_email: item.cust_contact_email,
+                                    cust_address_1: item.cust_address_1,
+                                    cust_address_2: item.cust_address_2,
+                                    cust_post_code: item.cust_post_code,
+                                    cust_occupation: item.cust_occupation,
+                                    cust_license_date: item.cust_license_date,
+                                    cust_instructions:item.cust_instructions,
+                                    key  : item.cust_sn}
+                        }));
+                    },
+                    error: function(error){
+                console.log('autocomplete error: '+error);}
+                });
+        },
+        delay: 500,
+        minLength:3,
+        select: function (event,ui)
+        {
+            //console.log(ui);
+            $('#cust_type').text(ui.item.cust_type);                       
+            var d= new Date(ui.item.cust_dob*1000);    
+           // console.log('dob: '+ui.item.cust_dob+' : '+d.getDate()+'-'+(d.getMonth()+1)+'-'+d.getFullYear());
+            $('#cust_dob').text(d.getDate()+'-'+(d.getMonth()+1)+'-'+d.getFullYear());
+            $('#cust_age').text(moment($('#cust_dob').text(), "DD-MM-YYYY").fromNow(true));                              
+            $('#cust_dob').text(moment(ui.item.cust_dob*1000).format('DD MMMM, YYYY'));                  
+            
+            var cust_dlpd= new Date(ui.item.cust_license_date*1000);                  
+            $('#cust_license_date').text(cust_dlpd.getDate()+'-'+(cust_dlpd.getMonth()+1)+'-'+cust_dlpd.getFullYear());
+            $('#cust_driving_experience').text(moment($('#cust_license_date').text(), "DD-MM-YYYY").fromNow(true));
+            $('#cust_license_date').text(moment(cust_dlpd).format('DD MMMM, YYYY'));            
+            $('#qt_cust_license_date').val(cust_dlpd.getDate()+'-'+(cust_dlpd.getMonth()+1)+'-'+cust_dlpd.getFullYear());
+                                    
+            $('#cust_gender').text(ui.item.cust_gender);       
+            //$('#qt_cust_mstatus').text(ui.item.cust_marital_status);       
+             var _mstatus=$('#qt_cust_mstatus').select();                  
+                  var options_m = $('option', _mstatus);                  
+                    options_m.each(function() {if ($(this).text() === ui.item.cust_marital_status){$('#qt_cust_mstatus').val(ui.item.cust_marital_status);}});
+                 
+            $('#cust_contact_house').text(ui.item.cust_contact_house);
+            $('#cust_contact_house').text(ui.item.cust_contact_house);
+            $('#cust_contact_office').text(ui.item.cust_contact_office);
+            $('#cust_contact_hp').text(ui.item.cust_contact_hp);
+            $('#cust_contact_fax').text(ui.item.cust_contact_fax);
+            $('#cust_contact_email').text(ui.item.cust_contact_email);
+            $('#cust_address_line1').text(ui.item.cust_address_1);
+            $('#cust_address_line2').text(ui.item.cust_address_2);
+            $('#cust_post_code').text(ui.item.cust_post_code);
+            $('#qt_cust_occupation').val(ui.item.cust_occupation);
+            $('#cust_instructions').text(ui.item.cust_instructions);
+            $('#qt_cust_instructions').val(ui.item.cust_instructions);            
+            $('#qt_customer_sn').val(ui.item.key);
+            $('#qt_customer_name').val(ui.item.value);
+            $('#cust_nric').val(ui.item.cust_nric);
+            $('#results').text('');
+            return false;
+        },
+        response:function(event, ui){
+            console.log('Autocomplete response : '+ui.content.length);
+            if(ui.content.length == 0){
+                $('#results').html(' 0 results found.');
+                $('#qt_customer_sn').val($('#qt_customer_name').val());
+            }else{
+                $('#results').html(' '+ui.content.length+' results found.');
+            }
+        }
+    });//end autocomplete
     
     //Save 1: Quotationi & customer 
     $('#btn_cp_customer').click(function(){
@@ -210,6 +385,7 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
         //
         //Current insurance        
         var _qt_id_company=$('#qt_id_company').val();
+        var _qt_id_policy=$('#qt_id_policy_no').val();
         var _qt_id_type_of_coverage=$('#qt_id_type_of_coverage').val();
         var _qt_id_current_premium=$('#qt_id_current_premium').val();
         var _qt_id_current_excess=$('#qt_id_current_excess').val();
@@ -228,6 +404,7 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
         
         //Selected Insurance
         var _qt_sid_company=$('#qt_sid_company').val();
+        var _qt_sid_policy=$('#qt_sid_policy_no').val();
         var _qt_sid_coverage_type=$('#qt_sid_coverage_type').val();
         var _qt_sid_premium=$('#qt_sid_premium').val();
         var _qt_sid_excess=$('#qt_sid_excess').val();
@@ -274,6 +451,7 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
                 data+='&_qt_vicom_laden_weight='+_qt_vicom_laden_weight;
             }
             data+='&_qt_id_company='+_qt_id_company;
+            data+='&_qt_id_policy_no='+_qt_id_policy;
             data+='&_qt_id_type_of_coverage='+_qt_id_type_of_coverage;
             data+='&_qt_id_current_premium='+_qt_id_current_premium;
             data+='&_qt_id_current_excess='+_qt_id_current_excess;
@@ -289,6 +467,7 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
             data+='&_qt_ci_ncd_protection='+_qt_ci_ncd_protection;
             data+='&_qt_ci_claim_in_3_years='+_qt_ci_claim_in_3_years;
             data+='&_qt_sid_company='+_qt_sid_company;
+            data+='&_qt_sid_policy_no='+_qt_sid_policy;
             data+='&_qt_sid_coverage_type='+_qt_sid_coverage_type;
             data+='&_qt_sid_premium='+_qt_sid_premium;
             data+='&_qt_sid_excess='+_qt_sid_excess;
@@ -307,7 +486,7 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
                 data:data,
                 url: apppath+'/quotation/update',
                 success:function(res){
-                        //console.log('updated ');
+                        console.log('updated '+res);
                         console.log(res);
                          $.fn.getQuotationHistory();
                         $("#save_message").show().delay(5000).queue(function(n) {
@@ -345,9 +524,10 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
                         $('#create_date').text(moment(record[i].add_date).format("DD MMM 'YY"));
                         if(record[i].update_by_name!=null){
                             if(record[i].update_to != record[i].update_from){
-                            history+='<p class="edit_history">'+record[i].update_by_name.split(" ")[0]+' Edited state "'+record[i].update_from+'" to "'+record[i].update_to+'" on '+moment(record[i].update_date).format("DD MMM 'YY - hh:MM A")+'</p>';
+                            history+='<p class="edit_history">'+record[i].update_by_name.split(" ")[0]+' Edited state "'+record[i].update_from+'" to "'+record[i].update_to+'" on '+moment(record[i].update_date).format("DD MMM 'YY - hh:mm A")+'</p>';
                             }else{
-                                history+='<p class="edit_history">Edited by '+record[i].update_by_name.split(" ")[0]+' on '+moment(record[i].update_date).format("DD MMM 'YY - hh:MM A")+'</p>';
+                                history+='<p class="edit_history">Edited by '+record[i].update_by_name.split(" ")[0]+' on '+moment(record[i].update_date).format("DD MMM 'YY - hh:mm A")+'</p>';
+                                
                             }
                         }
                         
@@ -355,10 +535,11 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
                     else{                                                
                         if(record[i].update_by_name!=null){                        
                             if(record[i].update_to != record[i].update_from){
-                                history+='<p class="edit_history">'+record[i].update_by_name.split(" ")[0]+' Edited state "'+record[i].update_from+'" to "'+record[i].update_to+'" on '+moment(record[i].update_date).format("DD MMM 'YY - hh:MM A")+'</p>';
+                                history+='<p class="edit_history">'+record[i].update_by_name.split(" ")[0]+' Edited state "'+record[i].update_from+'" to "'+record[i].update_to+'" on '+moment(record[i].update_date).format("DD MMM 'YY - hh:mm A")+'</p>';
                             }else{
-                                history+='<p class="edit_history">'+record[i].update_by_name.split(" ")[0]+' Edited on '+moment(record[i].update_date).format("DD MMM 'YY - hh:MM A")+'</p>';
+                                history+='<p class="edit_history">'+record[i].update_by_name.split(" ")[0]+' Edited on '+moment(record[i].update_date).format("DD MMM 'YY - hh:mm A")+'</p>';
                             }
+                            //console.log('date: '+record[i].update_date+' mod: '+moment(record[i].update_date).format("DD MMM 'YY - hh:mm A"));
                         }
                     }
                     
@@ -405,100 +586,76 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
     });//end click
         
     //show customer details
-    $('#qt_customer_sn').bind('change ready',function(){
-        var cust_sn=$('#qt_customer_sn option:selected').val();
-        //$('.').hide();
-        //alert(cust_sn);
-        $.ajax({            
-            type:"POST",
-             data:'cust_sn='+cust_sn,   
-              url: apppath+'/customer/getCustomerRecordJSON',
-              success:function(res){                  
-                  var cust = $.parseJSON(res);                    
-                  
-                  //var cust_sn     = cust[0].cust_sn;
-                  //var cust_name     = cust[0].cust_name;
-                  var cust_type     = cust[0].cust_type;
-                  var cust_nric     = cust[0].cust_nric;
-                  var cust_dob      = cust[0].cust_dob;
-                  var cust_gender   = cust[0].cust_gender;
-                  var cust_occupation   = cust[0].cust_occupation;
-                  var cust_mstatus  = cust[0].cust_marital_status;                  
-                  var cust_con_home   = cust[0].cust_contact_house;
-                  var cust_con_ofc      =cust[0].cust_contact_office;
-                  var cust_con_hp   =cust[0].cust_contact_hp;
-                  var cust_email    =cust[0].cust_contact_email;
-                  var cust_fax      =cust[0].cust_contact_fax;
-                  var cust_address_line1=cust[0].cust_address_1;
-                  var cust_address_line2=cust[0].cust_address_2;
-                  var cust_post_code    =cust[0].cust_post_code;
-                  //var cust_dlpd=cust[0].cust_license_date;
-                  var cust_instructions =cust[0].cust_instructions;
-                  
-                  
-                  var d= new Date(cust_dob*1000);
-                  $('#cust_dob').text(d.getDate()+'-'+(d.getMonth()+1)+'-'+d.getFullYear());
-                  $('#cust_age').text(moment($('#cust_dob').text(), "DD-MM-YYYY").fromNow(true));                  
-                  $('#cust_dob').text(moment(cust_dob*1000).format('DD MMMM, YYYY'));                  
-                  var cust_dlpd= new Date(cust[0].cust_license_date*1000);                  
-                  $('#cust_license_date').text(cust_dlpd.getDate()+'-'+(cust_dlpd.getMonth()+1)+'-'+cust_dlpd.getFullYear());
-                  $('#cust_driving_experience').text(moment($('#cust_license_date').text(), "DD-MM-YYYY").fromNow(true));
-                  $('#cust_license_date').text(moment(cust_dlpd).format('DD MMMM, YYYY'));
-                  $('#qt_cust_license_date').val(cust_dlpd.getDate()+'-'+(cust_dlpd.getMonth()+1)+'-'+cust_dlpd.getFullYear());
-                  
-                  $('#cust_type').text(cust_type);
-                  $('#cust_gender').text(cust_gender);
-                  //$('#cust_mstatus').text(cust_mstatus);
-                  $('#cust_contact_house').text(cust_con_home);
-                  $('#cust_contact_office').text(cust_con_ofc);
-                  $('#cust_contact_hp').text(cust_con_hp);
-                  $('#cust_contact_fax').text(cust_fax);
-                  $('#cust_contact_email').text(cust_email);
-                  $('#cust_address_line1').text(cust_address_line1);
-                  $('#cust_address_line2').text(cust_address_line2);
-                  $('#cust_post_code').text(cust_post_code);
-                  $('#qt_cust_occupation').val(cust_occupation);
-                  $('#cust_instructions').text(cust_instructions);
-                  $('#qt_cust_instructions').val(cust_instructions);
-                  
-                  
-                  //NRIC
-                  var nric=$('#cust_nric').select();                        
-                  var options = $('option', nric);
-                    options.each(function() {if ($(this).text() === cust_nric){$('#cust_nric').val(cust_sn);}});                    
-                  //Marital Status
-                  var _mstatus=$('#qt_cust_mstatus').select();                  
-                  var options_m = $('option', _mstatus);                  
-                    options_m.each(function() {if ($(this).text() === cust_mstatus){$('#qt_cust_mstatus').val(cust_mstatus);}});
-                  //console.log('got customer');
-              },
-              errr:function(error){
-                console.log('ERROR: '+error);
-              }
-        });
-               
-        NProgress.configure({ showSpinner: false });        
-        $(document).ajaxStart(function(){
-//            if(saving_operation===true){
-//                NProgress.start();        
-//            }
-            //console.log('AJAX Start');
-            
-            //$('input, select').attr('disabled','DISABLED');
-            //$('input, select').css('pointer','pointer');            
-        });
-        $(document).ajaxStop(function(){
-            //if(saving_operation===true){
-              //  NProgress.done();        
-            //}
-           //console.log('AJAX Stop');
-            //console.log('AJAX Stop');
-            //NProgress.done();
-            //$('input, select').removeAttr('disabled');
-            //$('input, select').css('pointer','default');
-        });
-                
-    });
+//    $('#qt_customer_sn').bind('change ready',function(){
+//        var cust_sn=$('#qt_customer_sn option:selected').val();        
+//        $.ajax({            
+//            type:"POST",
+//             data:'cust_sn='+cust_sn,   
+//              url: apppath+'/customer/getCustomerRecordJSON',
+//              success:function(res){                  
+//                  var cust = $.parseJSON(res);                    
+//                  
+//                  //var cust_sn     = cust[0].cust_sn;
+//                  //var cust_name     = cust[0].cust_name;
+//                  var cust_type     = cust[0].cust_type;
+//                  var cust_nric     = cust[0].cust_nric;
+//                  var cust_dob      = cust[0].cust_dob;
+//                  var cust_gender   = cust[0].cust_gender;
+//                  var cust_occupation   = cust[0].cust_occupation;
+//                  var cust_mstatus  = cust[0].cust_marital_status;                  
+//                  var cust_con_home   = cust[0].cust_contact_house;
+//                  var cust_con_ofc      =cust[0].cust_contact_office;
+//                  var cust_con_hp   =cust[0].cust_contact_hp;
+//                  var cust_email    =cust[0].cust_contact_email;
+//                  var cust_fax      =cust[0].cust_contact_fax;
+//                  var cust_address_line1=cust[0].cust_address_1;
+//                  var cust_address_line2=cust[0].cust_address_2;
+//                  var cust_post_code    =cust[0].cust_post_code;
+//                  //var cust_dlpd=cust[0].cust_license_date;
+//                  var cust_instructions =cust[0].cust_instructions;
+//                  
+//                  
+//                  var d= new Date(cust_dob*1000);
+//                  $('#cust_dob').text(d.getDate()+'-'+(d.getMonth()+1)+'-'+d.getFullYear());
+//                  $('#cust_age').text(moment($('#cust_dob').text(), "DD-MM-YYYY").fromNow(true));                  
+//                  $('#cust_dob').text(moment(cust_dob*1000).format('DD MMMM, YYYY'));                  
+//                  var cust_dlpd= new Date(cust[0].cust_license_date*1000);                  
+//                  $('#cust_license_date').text(cust_dlpd.getDate()+'-'+(cust_dlpd.getMonth()+1)+'-'+cust_dlpd.getFullYear());
+//                  $('#cust_driving_experience').text(moment($('#cust_license_date').text(), "DD-MM-YYYY").fromNow(true));
+//                  $('#cust_license_date').text(moment(cust_dlpd).format('DD MMMM, YYYY'));
+//                  $('#qt_cust_license_date').val(cust_dlpd.getDate()+'-'+(cust_dlpd.getMonth()+1)+'-'+cust_dlpd.getFullYear());
+//                  
+//                  $('#cust_type').text(cust_type);
+//                  $('#cust_gender').text(cust_gender);
+//                  //$('#cust_mstatus').text(cust_mstatus);
+//                  $('#cust_contact_house').text(cust_con_home);
+//                  $('#cust_contact_office').text(cust_con_ofc);
+//                  $('#cust_contact_hp').text(cust_con_hp);
+//                  $('#cust_contact_fax').text(cust_fax);
+//                  $('#cust_contact_email').text(cust_email);
+//                  $('#cust_address_line1').text(cust_address_line1);
+//                  $('#cust_address_line2').text(cust_address_line2);
+//                  $('#cust_post_code').text(cust_post_code);
+//                  $('#qt_cust_occupation').val(cust_occupation);
+//                  $('#cust_instructions').text(cust_instructions);
+//                  $('#qt_cust_instructions').val(cust_instructions);
+//                  
+//                  
+//                  //NRIC
+//                  var nric=$('#cust_nric').select();                        
+//                  var options = $('option', nric);
+//                    options.each(function() {if ($(this).text() === cust_nric){$('#cust_nric').val(cust_sn);}});                    
+//                  //Marital Status
+//                  var _mstatus=$('#qt_cust_mstatus').select();                  
+//                  var options_m = $('option', _mstatus);                  
+//                    options_m.each(function() {if ($(this).text() === cust_mstatus){$('#qt_cust_mstatus').val(cust_mstatus);}});
+//                  //console.log('got customer');
+//              },
+//              errr:function(error){
+//                console.log('ERROR: '+error);
+//              }
+//        });                                      
+//    });
     
     //Multiline Text
     //quotation remark
