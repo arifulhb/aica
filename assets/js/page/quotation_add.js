@@ -14,10 +14,10 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
     }
     
     //temp hide
-    $('#qt_claim_history_1').hide();
-    $('#qt_driver_1').hide();
-    $('#qt_quot_pvt').hide();
-    $('#qt_quot_com').hide();
+    //$('#qt_claim_history_1').hide();
+    //$('#qt_driver_1').hide();
+    //$('#qt_quot_pvt').hide();
+    //$('#qt_quot_com').hide();
     
     //Account Assessment Panel is off by default
     $('#panel_vehicle_info_com').css('display','none');    ;
@@ -668,5 +668,9 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
     //Customer instructions
     $('#cust_instructions_wrap').bind('change keypress focusout',function(){
         $('#qt_cust_instructions').val($(this).text());
+    });
+    //Vehicle Info
+    $('#qt_vi_additional_accessories_wrap').bind('change keypress focusout',function(){
+        $('#qt_vi_additional_accessories').val($(this).text());
     });
 });
