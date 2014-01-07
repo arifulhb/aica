@@ -68,7 +68,7 @@ class Signin extends CI_Controller {
                 }//end else
             }else{
                 //Signin Auth fail
-                echo 'signin auth fail';
+                //echo 'signin auth fail';
                 //$data['title'] = ucfirst($this->config->item('site_title'));
                 //$data['header_title'] = 'Koronio - Open Source Project Management Tool';
                 //$data['message'] = 'Username OR Password does\'t match';

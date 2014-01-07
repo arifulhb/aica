@@ -78,9 +78,11 @@ class Quotation extends CI_Controller {
             
             $ref_no=$this->uri->segment(3);            
                         
-            $this->load->model('quotation_model');
-            $data['_record'] = $this->quotation_model->getRecord($ref_no);
+            $this->load->model('quotation_model');            
+            
             if(in_array('quotation_all',$this->session->userdata('user_access'))){
+                $data['_record'] = $this->quotation_model->getRecord($ref_no);
+                $data['_claim_history']=$this->quotation_model->getClaimHistoryList($ref_no);
                 $data['_history']=$this->quotation_model->getHistory($ref_no);
                 $data['_page_title']="Quotation View";
                 $data['_page_caption']="Quotation View";
@@ -89,6 +91,8 @@ class Quotation extends CI_Controller {
             }else{
                 //check the author
                 if($data['_record'][0]['add_by']==$this->session->userdata('user_sn')){
+                    $data['_record'] = $this->quotation_model->getRecord($ref_no);
+                    $data['_claim_history']=$this->quotation_model->getClaimHistoryList($ref_no);
                     $data['_history']=$this->quotation_model->getHistory($ref_no);
                     $data['_page_title']="Quotation View";
                     $data['_page_caption']="Quotation View";

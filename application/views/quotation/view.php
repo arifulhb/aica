@@ -697,6 +697,10 @@
             </section>
         </section>
         <!-- Claim History 1 & 2 -->
+        <?php
+        $h=0;
+        foreach($_claim_history as $claim):?>    
+        <div class="form-horizontal">
         <section class="panel">
             <header class="panel-heading font-bold">
                 <ul class="nav nav-pills pull-right">
@@ -706,19 +710,19 @@
                             <i class="icon-caret-up text"></i>
                         </a>
                     </li>
-                </ul>Claim History (1)</header>
+                </ul>Claim History (<?php echo $claim['clh_no'];?>)</header>
             <section class="panel-body">                
                     <div class="form-group">
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label" >Driver Name</label>
                             <div class="col-md-9" style="padding-top: 7px;">
-                                Driver A
+                                <?php echo $claim['clh_driver_name'];?>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label" >Vehicle No.</label>
                             <div class="col-md-9" style="padding-top: 7px;">
-                                SAB1234C
+                                <?php echo $claim['clh_vehicle_no'];?>
                             </div>
                         </div>
                     </div>
@@ -727,13 +731,13 @@
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label" >Accident Date</label>
                             <div class="col-md-9" style="padding-top: 7px;">
-                                01 Jan 01
+                                <?php echo date('d M Y',$claim['clh_accident_date']);?>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label" >Reporting Date</label>
                             <div class="col-md-9" style="padding-top: 7px;">
-                                01 Jan 01
+                                <?php echo date('d M Y',$claim['clh_reporting_date']);?>
                             </div>
                         </div>
                     </div>
@@ -742,156 +746,62 @@
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label" >Claims Paid (OD)</label>
                             <div class="col-md-9" style="padding-top: 7px;">
-                                $1000
+                                $<?php echo $claim['clh_paid_od'];?>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label" >Claims Paid (TPPD)</label>
-                            <div class="col-md-9" style="padding-top: 7px;">$1000</div>
+                            <div class="col-md-9" style="padding-top: 7px;">$<?php echo $claim['clh_paid_tppd'];?></div>
                         </div>
                     </div>
                     <div class="line line-dashed line-lg pull-in"></div>
                     <div class="form-group">
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label" >Claims Paid (TPBI)</label>
-                            <div class="col-md-9" style="padding-top: 7px;">$1000</div>
+                            <div class="col-md-9" style="padding-top: 7px;">$<?php echo $claim['clh_paid_tpbi'];?></div>
                         </div>
                     </div>
                     <div class="line line-dashed line-lg pull-in"></div>
                     <div class="form-group">
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label" >Claims Reserved (TPPD)</label>
-                            <div class="col-md-9" style="padding-top: 7px;">$1000</div>
+                            <div class="col-md-9" style="padding-top: 7px;">$<?php echo $claim['clh_reserved_tppd'];?></div>
                         </div>
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label" >Claims Reserved (TPBI)</label>
-                            <div class="col-md-9" style="padding-top: 7px;">$1000</div>
+                            <div class="col-md-9" style="padding-top: 7px;">$<?php echo $claim['clh_reserved_tpbi'];?></div>
                         </div>
                     </div>
                     <div class="line line-dashed line-lg pull-in"></div>
                     <div class="form-group">
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label" >Windscreen</label>
-                            <div class="col-md-9" style="padding-top: 7px;">NA</div>
+                            <div class="col-md-9" style="padding-top: 7px;"><?php echo $claim['clh_windscreen'];?></div>
                         </div>
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label" >Reporting Only</label>
-                            <div class="col-md-9" style="padding-top: 7px;">$NA</div>
+                            <div class="col-md-9" style="padding-top: 7px;"><?php echo $claim['clh_reporting_only'];?></div>
                         </div>
                     </div>
                     <div class="line line-dashed line-lg pull-in"></div>
                     <div class="form-group">
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label" >Private Settlement</label>
-                            <div class="col-md-9" style="padding-top: 7px;">NA</div>
+                            <div class="col-md-9" style="padding-top: 7px;"><?php echo $claim['clh_private_statement'];?></div>
                         </div>
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label" >Referred to Partner Workshop</label>
-                            <div class="col-md-9" style="padding-top: 7px;">No</div>
+                            <div class="col-md-9" style="padding-top: 7px;"><?php echo $claim['clh_ref_to_partner'];?></div>
                         </div>
                     </div>
                 
             </section>
         </section>
-
-        <section class="panel">
-            <header class="panel-heading font-bold">
-                <ul class="nav nav-pills pull-right">
-                    <li>
-                        <a href="#" class="panel-toggle text-muted">
-                            <i class="icon-caret-down text-active"></i>
-                            <i class="icon-caret-up text"></i>
-                        </a>
-                    </li>
-                </ul>Claim History (2)</header>
-            <section class="panel-body">
-                
-                    <div class="form-group">
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" >Driver Name</label>
-                            <div class="col-md-9" style="padding-top: 7px;">
-                                Driver A
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" >Vehicle No.</label>
-                            <div class="col-md-9" style="padding-top: 7px;">
-                                SAB1234C
-                            </div>
-                        </div>
-                    </div>
-                    <div class="line line-dashed line-lg pull-in"></div>
-                    <div class="form-group">
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" >Accident Date</label>
-                            <div class="col-md-9" style="padding-top: 7px;">
-                                01 Jan 01
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" >Reporting Date</label>
-                            <div class="col-md-9" style="padding-top: 7px;">
-                                01 Jan 01
-                            </div>
-                        </div>
-                    </div>
-                    <div class="line line-dashed line-lg pull-in"></div>
-                    <div class="form-group">
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" >Claims Paid (OD)</label>
-                            <div class="col-md-9" style="padding-top: 7px;">
-                                $1000
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" >Claims Paid (TPPD)</label>
-                            <div class="col-md-9" style="padding-top: 7px;">$1000</div>
-                        </div>
-                    </div>
-                    <div class="line line-dashed line-lg pull-in"></div>
-                    <div class="form-group">
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" >Claims Paid (TPBI)</label>
-                            <div class="col-md-9" style="padding-top: 7px;">$1000</div>
-                        </div>
-                    </div>
-                    <div class="line line-dashed line-lg pull-in"></div>
-                    <div class="form-group">
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" >Claims Reserved (TPPD)</label>
-                            <div class="col-md-9" style="padding-top: 7px;">$1000</div>
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" >Claims Reserved (TPBI)</label>
-                            <div class="col-md-9" style="padding-top: 7px;">$1000</div>
-                        </div>
-                    </div>
-                    <div class="line line-dashed line-lg pull-in"></div>
-                    <div class="form-group">
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" >Windscreen</label>
-                            <div class="col-md-9" style="padding-top: 7px;">NA</div>
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" >Reporting Only</label>
-                            <div class="col-md-9" style="padding-top: 7px;">$NA</div>
-                        </div>
-                    </div>
-                    <div class="line line-dashed line-lg pull-in"></div>
-                    <div class="form-group">
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" >Private Settlement</label>
-                            <div class="col-md-9" style="padding-top: 7px;">NA</div>
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" >Referred to Partner Workshop</label>
-                            <div class="col-md-9" style="padding-top: 7px;">No</div>
-                        </div>
-                    </div>
-                
-            </section>
-        </section>
-
+        </div>
+            <?php
+        $h++;
+        endforeach;
+        ?>
         <!-- Named Driver 1 & 2 -->
 
         <section class="panel">
@@ -1176,7 +1086,10 @@
         <?php
         //if($_record[0]['qt_state']=='Lost' || $_record[0]['qt_state']=='Won'){
             
-         if(in_array('assign_commission', $this->session->userdata('user_access'))){ ?>
+         if(in_array('assign_commission', $this->session->userdata('user_access'))){
+              
+                if($_record[0]['qt_insurance_type']=='Closed' || $_record[0]['qt_insurance_type']=='Won'){
+             ?>
                                
         <!-- Account Assessment -->
         <section class="panel">
@@ -1206,6 +1119,7 @@
             </section>
         </section>
         <?php
+              }//Closed or Won                          
          }//end if permission
             
         //}//end if
