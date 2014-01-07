@@ -72,6 +72,8 @@ class Quotation extends CI_Controller {
     public function view(){
         $data=site_data();
         
+        //print_r($this->session->userdata('user_access'));
+        //exit();
         if(in_array('quotation_view', $this->session->userdata('user_access'))){
             
             $ref_no=$this->uri->segment(3);            
@@ -113,6 +115,8 @@ class Quotation extends CI_Controller {
                         
             $this->load->model('quotation_model');
             $data['_record'] = $this->quotation_model->getRecord($ref_no);
+            $data['_claim_history']=$this->quotation_model->getClaimHistoryList($ref_no);
+            
             if(in_array('quotation_all',$this->session->userdata('user_access'))){
                 $data['_history']=$this->quotation_model->getHistory($ref_no);
 
@@ -309,9 +313,14 @@ class Quotation extends CI_Controller {
         $data['ci_ssd_date']=date('Y-m-d',strtotime($this->input->post('_qt_ssd_date_check',TRUE)));                 
         $data['ci_period_start_date']=date('Y-m-d',strtotime($this->input->post('_qt_ci_start_date',TRUE)));                 
         $data['ci_poi_end_date']=date('Y-m-d',strtotime($this->input->post('_qt_ci_poi_end_date',TRUE)));                
-         $data['ci_road_tax_due_date']=date('Y-m-d',strtotime($this->input->post('_qt_ci_road_tax_date',TRUE)));                 
+        $data['ci_road_tax_due_date']=date('Y-m-d',strtotime($this->input->post('_qt_ci_road_tax_date',TRUE)));                 
         $data['ci_ncd_protection']=$this->input->post('_qt_ci_ncd_protection');
         $data['ci_claims_in_last3_year']=$this->input->post('_qt_ci_claim_in_3_years');
+        $data['quot_insurer']=$this->input->post('_qt_quot_insurer');
+        $data['quot_workshop']=$this->input->post('_qt_quot_worksop');
+        $data['quot_premium']=$this->input->post('_qt_quot_premium');
+        $data['quot_excess']=$this->input->post('_qt_quot_excess');
+        $data['quot_remark']=$this->input->post('_qt_quot_remark');
         $data['si_company']=$this->input->post('_qt_sid_company');
         $data['si_policy_no']=$this->input->post('_qt_sid_policy_no');
         $data['si_coverage']=$this->input->post('_qt_sid_coverage_type');
@@ -413,6 +422,36 @@ class Quotation extends CI_Controller {
         echo json_encode($res);
         //echo $res[0];
 
+    }//end function
+    
+    public function update_claim_history(){
+        
+        $qt_ref_no=$this->input->post('_qt_ref_no');
+        $clh_no=$this->input->post('_chsn');
+        $data['clh_driver_name']=$this->input->post('_driver_name');
+        $data['clh_vehicle_no']=$this->input->post('_vehicle_no');
+        
+        $data['clh_accident_date']=date('Y-m-d', strtotime($this->input->post('_accident_date')));
+        $data['clh_reporting_date']=date('Y-m-d', strtotime($this->input->post('_reporting_date')));
+        $data['clh_paid_od']=$this->input->post('_claims_paid_od');
+        $data['clh_paid_tppd']=$this->input->post('_claims_paid_tppd');
+        $data['clh_paid_tpbi']=$this->input->post('_claims_paid_tpbi');
+        $data['clh_reserved_tppd']=$this->input->post('_claims_reserved_tppd');
+        $data['clh_reserved_tpbi']=$this->input->post('_claims_reserved_tpbi');
+        $data['clh_windscreen']=$this->input->post('_windscreen');
+        $data['clh_reporting_only']=$this->input->post('_reporting_only');
+        $data['clh_private_statement']=$this->input->post('_private_sattlement');
+        $data['clh_ref_to_partner']=$this->input->post('_referred');
+        
+        $this->load->model('quotation_model');
+        $res=$this->quotation_model->update_claim_history($data,$qt_ref_no,$clh_no);
+        //$res=true;
+        if($res==true){
+            echo $res;
+        }else{
+            echo 'fail';
+        }
+                
     }//end function
 
 }//end class

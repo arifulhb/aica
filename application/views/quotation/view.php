@@ -6,14 +6,24 @@
                 <p class="block text-muted"><?php echo $_page_description;?></p>
             </div>
             <div class="col-sm-2 m-b-xs" style="padding-left:0px; padding-top:17px">
+                <?php
+                if(in_array('quotation_edit', $this->session->userdata('user_access'))){ ?>
+                    
                 <div class="col-sm-5">
                     <a href="<?php echo base_url().'quotation/edit/'.$_record[0]['qt_ref_no'];?>" class="btn btn-success"><i class="icon-edit"></i> Edit</a>
                 </div>
+                <?php                    
+                }//end if
+                if(in_array('quotation_delete', $this->session->userdata('user_access'))){ 
+                ?>                
                 <div class="col-sm-7">
                     <?php /*<a href="#" class="btn btn-success"><i class="icon-trash"></i> Delete</a>*/?>
                     <button id="del_quotation" value="<?php echo $_record[0]['qt_ref_no'];?>" 
                             type="button" class="btn btn-danger"><i class="icon-trash"></i> Delete</button>
                 </div>
+                <?php                    
+                }//end if
+                ?>
             </div>
         </div>
     </header>

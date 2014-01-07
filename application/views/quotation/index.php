@@ -152,7 +152,7 @@
                 </div>
               </section>
             </aside>
-			<aside class="aside bg-white b-r" id="subNav">
+            <aside class="aside bg-white b-r" id="subNav" >
               <div class="wrapper b-b font-bold">Filters</div>
               
 			  <form class="form-horizontal" method="get">

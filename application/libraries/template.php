@@ -244,7 +244,7 @@ class Template
         $data['_content']=$this->_ci->load->view('quotation/form',$data,true);
 
         //Page Class Name
-        $data['_page_class']='quotation_view';
+        $data['_page_class']='quotation_new';
         
         //noindex nofollow
         $data['_noindex_meta']=true;

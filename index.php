@@ -18,6 +18,7 @@
  * NOTE: If you change these, also change the error_reporting() code below
  *
  */
+ini_set('date.timezone', 'Asia/Singapore');
 	define('ENVIRONMENT', 'development');
 /*
  *---------------------------------------------------------------

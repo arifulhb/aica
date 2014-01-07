@@ -11,16 +11,10 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
         
     if($('#_action').val()==='add'){
         $('#qt_history_wrapper').css('display','none');
-    }
-    
-    //temp hide
-    //$('#qt_claim_history_1').hide();
-    //$('#qt_driver_1').hide();
-    //$('#qt_quot_pvt').hide();
-    //$('#qt_quot_com').hide();
+    }    
     
     //Account Assessment Panel is off by default
-    $('#panel_vehicle_info_com').css('display','none');    ;
+    $('#panel_vehicle_info_com').css('display','none');
     $('#panel_quot_com').css('display','none');
     
     //ADD/UPDATE Status update
@@ -401,7 +395,12 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
         var _qt_ci_road_tax_date=$('#qt_ci_road_tax_date').val();
         var _qt_ci_ncd_protection=$('#qt_ci_ncd_protection option:selected').val();
         var _qt_ci_claim_in_3_years=$('input[name=qt_ci_claim_in_3_years]:checked').val();
-        
+        //Quotation
+        var _qt_quot_insurer=$('#qt_quot_insurer option:selected').text();
+        var _qt_quot_workshop=$('#qt_quot_workshop option:selected').text();
+        var _qt_quot_premium=$('#qt_quot_premium').val();
+        var _qt_quot_excess=$('#qt_quot_excess').val();
+        var _qt_quot_remark=$('#qt_quot_remark').val();
         //Selected Insurance
         var _qt_sid_company=$('#qt_sid_company').val();
         var _qt_sid_policy=$('#qt_sid_policy_no').val();
@@ -467,6 +466,11 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
             data+='&_qt_ci_road_tax_date='+_qt_ci_road_tax_date;
             data+='&_qt_ci_ncd_protection='+_qt_ci_ncd_protection;
             data+='&_qt_ci_claim_in_3_years='+_qt_ci_claim_in_3_years;
+            data+='&_qt_quot_insurer='+_qt_quot_insurer;
+            data+='&_qt_quot_worksop='+_qt_quot_workshop;
+            data+='&_qt_quot_premium='+_qt_quot_premium;
+            data+='&_qt_quot_excess='+_qt_quot_excess;
+            data+='&_qt_quot_remark='+_qt_quot_remark;
             data+='&_qt_sid_company='+_qt_sid_company;
             data+='&_qt_sid_policy_no='+_qt_sid_policy;
             data+='&_qt_sid_coverage_type='+_qt_sid_coverage_type;
@@ -558,7 +562,7 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
         
     };//end function
     
-    //CONDITION
+    //CONDITION LOST
     $('#qt_details_state').change(function(){
         var opt=$('#qt_details_state option:selected').val();        
         if(opt==='Lost'){
@@ -568,11 +572,30 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
         }
     });
     
-    //CONDITION
+    //CONDITION 
     $('#qt_insurance_type_pvt').click(function(){
-                
+        //PRIVATE                
         $('#qt_ins_type_name').empty();
         $('#qt_ins_type_name').text('Vehicle Information (Private)');
+        $('#qt_quot').empty();
+        $('#qt_quot').text('Private');
+        $('#qt_quot_insurer').empty();
+        var options='<option selected disabled>Select an Option</option>';
+            options+='<option value="AIG (All Age)">AIG (All Age)</option>';
+            options+='<option value="AIG (All Age NCD P)">AIG (All Age NCD P)</option>';
+            options+='<option value="AIG (Restricted Age)">AIG (Restricted Age)</option>';
+            options+='<option value="AIG (Restricted NCD P)">AIG (Restricted NCD P)</option>';
+            options+='<option value="AXA">AXA</option>';
+            options+='<option value="AXA (NCD P)">AXA (NCD P)</option>';
+            options+='<option value="China Taiping">China Taiping</option>';
+            options+='<option value="Liberty">Liberty</option>';
+            options+='<option value="Liberty (NCD P)">Liberty (NCD P)</option>';
+            options+='<option value="MSIG">MSIG</option>';
+            options+='<option value="MSIG (NCD P)">MSIG (NCD P)</option>';
+            options+='<option value="NTUC">NTUC</option>';
+            options+='<option value="NTUC (NCD P)">NTUC (NCD P)</option>';            
+        $('#qt_quot_insurer').append(options);
+        
         $('.qt_type_pvt').show();
         $('.qt_type_com').hide();
         
@@ -580,85 +603,23 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
     //
     //CONDITION
     $('#qt_insurance_type_com').click(function(){
-        
+        //Commercial
         $('#qt_ins_type_name').empty();
         $('#qt_ins_type_name').text('Vehicle Information (Commercial)');
+        $('#qt_quot').empty();
+        $('#qt_quot').text('Commercial');
+        $('#qt_quot_insurer').empty();
+        var options='<option selected disabled>Select an Option</option>';
+            options+='<option value="AIG">AIG</option>';
+            options+='<option value="AXA">AXA</option>';
+            options+='<option value="China Taiping">China Taiping</option>';
+            options+='<option value="MSIG">MSIG</option>';
+            options+='<option value="NTUC">NTUC</option>';
+        $('#qt_quot_insurer').append(options);
         $('.qt_type_pvt').hide();
         $('.qt_type_com').show();
         
-    });//end click
-        
-    //show customer details
-//    $('#qt_customer_sn').bind('change ready',function(){
-//        var cust_sn=$('#qt_customer_sn option:selected').val();        
-//        $.ajax({            
-//            type:"POST",
-//             data:'cust_sn='+cust_sn,   
-//              url: apppath+'/customer/getCustomerRecordJSON',
-//              success:function(res){                  
-//                  var cust = $.parseJSON(res);                    
-//                  
-//                  //var cust_sn     = cust[0].cust_sn;
-//                  //var cust_name     = cust[0].cust_name;
-//                  var cust_type     = cust[0].cust_type;
-//                  var cust_nric     = cust[0].cust_nric;
-//                  var cust_dob      = cust[0].cust_dob;
-//                  var cust_gender   = cust[0].cust_gender;
-//                  var cust_occupation   = cust[0].cust_occupation;
-//                  var cust_mstatus  = cust[0].cust_marital_status;                  
-//                  var cust_con_home   = cust[0].cust_contact_house;
-//                  var cust_con_ofc      =cust[0].cust_contact_office;
-//                  var cust_con_hp   =cust[0].cust_contact_hp;
-//                  var cust_email    =cust[0].cust_contact_email;
-//                  var cust_fax      =cust[0].cust_contact_fax;
-//                  var cust_address_line1=cust[0].cust_address_1;
-//                  var cust_address_line2=cust[0].cust_address_2;
-//                  var cust_post_code    =cust[0].cust_post_code;
-//                  //var cust_dlpd=cust[0].cust_license_date;
-//                  var cust_instructions =cust[0].cust_instructions;
-//                  
-//                  
-//                  var d= new Date(cust_dob*1000);
-//                  $('#cust_dob').text(d.getDate()+'-'+(d.getMonth()+1)+'-'+d.getFullYear());
-//                  $('#cust_age').text(moment($('#cust_dob').text(), "DD-MM-YYYY").fromNow(true));                  
-//                  $('#cust_dob').text(moment(cust_dob*1000).format('DD MMMM, YYYY'));                  
-//                  var cust_dlpd= new Date(cust[0].cust_license_date*1000);                  
-//                  $('#cust_license_date').text(cust_dlpd.getDate()+'-'+(cust_dlpd.getMonth()+1)+'-'+cust_dlpd.getFullYear());
-//                  $('#cust_driving_experience').text(moment($('#cust_license_date').text(), "DD-MM-YYYY").fromNow(true));
-//                  $('#cust_license_date').text(moment(cust_dlpd).format('DD MMMM, YYYY'));
-//                  $('#qt_cust_license_date').val(cust_dlpd.getDate()+'-'+(cust_dlpd.getMonth()+1)+'-'+cust_dlpd.getFullYear());
-//                  
-//                  $('#cust_type').text(cust_type);
-//                  $('#cust_gender').text(cust_gender);
-//                  //$('#cust_mstatus').text(cust_mstatus);
-//                  $('#cust_contact_house').text(cust_con_home);
-//                  $('#cust_contact_office').text(cust_con_ofc);
-//                  $('#cust_contact_hp').text(cust_con_hp);
-//                  $('#cust_contact_fax').text(cust_fax);
-//                  $('#cust_contact_email').text(cust_email);
-//                  $('#cust_address_line1').text(cust_address_line1);
-//                  $('#cust_address_line2').text(cust_address_line2);
-//                  $('#cust_post_code').text(cust_post_code);
-//                  $('#qt_cust_occupation').val(cust_occupation);
-//                  $('#cust_instructions').text(cust_instructions);
-//                  $('#qt_cust_instructions').val(cust_instructions);
-//                  
-//                  
-//                  //NRIC
-//                  var nric=$('#cust_nric').select();                        
-//                  var options = $('option', nric);
-//                    options.each(function() {if ($(this).text() === cust_nric){$('#cust_nric').val(cust_sn);}});                    
-//                  //Marital Status
-//                  var _mstatus=$('#qt_cust_mstatus').select();                  
-//                  var options_m = $('option', _mstatus);                  
-//                    options_m.each(function() {if ($(this).text() === cust_mstatus){$('#qt_cust_mstatus').val(cust_mstatus);}});
-//                  //console.log('got customer');
-//              },
-//              errr:function(error){
-//                console.log('ERROR: '+error);
-//              }
-//        });                                      
-//    });
+    });//end click            
     
     //Multiline Text
     //quotation remark
@@ -673,4 +634,162 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
     $('#qt_vi_additional_accessories_wrap').bind('change keypress focusout',function(){
         $('#qt_vi_additional_accessories').val($(this).text());
     });
+    //Quotation
+    $('#qt_quot_remark_wrap').bind('change keypress focusout',function(){
+        $('#qt_quot_remark').val($(this).text());
+    });
+    
+    //
+    //Dynamic
+    //
+    //Claim History
+    if($('#_action').val()!='update'){
+        var claim_history=1;
+    }else{
+        var claim_history=$('#total_claim_history').val();
+    }
+    $('.add_claim_history').on('click',function(){
+        claim_history++;
+        //var add='<label>Total Rows now: '+claim_history +'</label>';
+        var claim='<section class="panel" id="qt_claim_history_'+claim_history+'">';
+            claim+='<header class="panel-heading font-bold">';
+                claim+='<ul class="nav nav-pills pull-right">';                
+                claim+='<li><button class="btn btn-xs btn-link remove_dynamic remove_claim" value="'+claim_history+'" title="Remove"><i class="icon-trash"></i></button></li>';
+                claim+='<li><a href="#" class="panel-toggle text-muted">';
+                claim+='<i class="icon-caret-down text-active"></i>';
+                claim+='<i class="icon-caret-up text"></i></a></li>';
+                claim+='</ul>Claim History ('+claim_history+')</header>';
+                claim+='<section class="panel-body"><div class="form-horizontal">';                
+                
+                claim+='<div class="form-group"><div class="col-sm-6">';
+                claim+='<label class="col-sm-3 control-label req" for="qt_claim_'+claim_history+'_driver_name">Driver Name</label>';
+                claim+='<div class="col-md-9">';
+                claim+='<input type="text" class="form-control" id="qt_claim_'+claim_history+'_driver_name" maxlength="50" name="qt_claim_'+claim_history+'_driver_name" required="" placeholder="Driver Name">';
+                claim+='</div></div><div class="col-sm-6">';
+                claim+='<label class="col-sm-3 control-label req" for="qt_claim_'+claim_history+'_vehicle_no">Vehicle No.</label>';
+                claim+='<div class="col-md-9">';
+                claim+='<input type="text" class="form-control" id="qt_claim_'+claim_history+'_vehicle_no" name="qt_claim_'+claim_history+'_vehicle_no" required="" placeholder="Vehicle No.">';
+                claim+='</div></div></div>';
+                claim+='<div class="line line-dashed line-lg pull-in"></div>';
+                claim+='<div class="form-group"><div class="col-sm-6">';
+                claim+='<label class="col-sm-3 control-label req" for="qt_claim_'+claim_history+'_accident_date">Accident Date</label>';
+                claim+='<div class="col-md-9"><input class="input-sm datepicker-input form-control" id="qt_claim_'+claim_history+'_accident_date" size="16" type="text" name="qt_claim_'+claim_history+'_accident_date" maxlength="12" parsley-maxlength="12" parsley-trigger="focusout" data-date-format="dd-mm-yyyy" placeholder="Accident Date">';
+                claim+='</div></div>';
+                claim+='<div class="col-sm-6"><label class="col-sm-3 control-label req" for="qt_claim_'+claim_history+'_reporting_date">Reporting Date</label>';
+                claim+='<div class="col-md-9"><input class="input-sm datepicker-input form-control" id="qt_claim_'+claim_history+'_reporting_date" size="16" type="text" name="qt_claim_'+claim_history+'_reporting_date" maxlength="12" parsley-maxlength="12" parsley-trigger="focusout" data-date-format="dd-mm-yyyy" placeholder="Reporting Date">';
+                claim+='</div></div></div>';                
+                claim+='<div class="line line-dashed line-lg pull-in"></div>';
+                claim+='<div class="form-group"><div class="col-sm-6">';
+                claim+='<label class="col-sm-3 control-label" for="qt_claim_'+claim_history+'_claims_paid_od">Claims Paid (OD)</label><div class="col-md-9">';
+                claim+='<input type="text" class="form-control" id="qt_claim_'+claim_history+'_claims_paid_od" name="qt_claim_'+claim_history+'_claims_paid_od" placeholder="Claims Paid (OD)"></div></div>';
+                claim+='<div class="col-sm-6"><label class="col-sm-3 control-'+claim_history+'abel" for="qt_claim_'+claim_history+'_claims_paid_tppd">Claims Paid (TPPD)</label><div class="col-md-9">';
+                claim+='<input type="text" class="form-control" id="qt_claim_'+claim_history+'_claims_paid_tppd" name="qt_claim_'+claim_history+'_claims_paid_tppd" placeholder="Claims Paid (TPPD)">';
+                claim+='</div></div></div>'; 
+                claim+='<div class="line line-dashed line-lg pull-in"></div>';
+                claim+='<div class="form-group"><div class="col-sm-6">';
+                claim+='<label class="col-sm-3 control-label" for="qt_claim_'+claim_history+'_claims_paid_tpbi">Claims Paid (TPBI)</label><div class="col-md-9">';
+                claim+='<input type="text" class="form-control" id="qt_claim_'+claim_history+'_claims_paid_tpbi" name="qt_claim_'+claim_history+'_claims_paid_tpbi" placeholder="Claims Paid (TPBI)">';
+                claim+='</div></div></div>';
+                claim+='<div class="line line-dashed line-lg pull-in"></div>';
+                
+                claim+='<div class="form-group"><div class="col-sm-6">';
+                claim+='<label class="col-sm-3 control-label" for="qt_claim_'+claim_history+'_claims_reserved_tppd">Claims Reserved (TPPD)</label><div class="col-md-9">';
+                claim+='<input type="text" class="form-control" id="qt_claim_'+claim_history+'_claims_reserved_tppd" name="qt_claim_'+claim_history+'_claims_reserved_tppd" placeholder="Claims Reserved (TPPD)"></div></div>';
+                claim+='<div class="col-sm-6"><label class="col-sm-3 control-label" for="qt_claim_'+claim_history+'_claims_reserved_tpbi">Claims Reserved (TPBI)</label>';
+                claim+='<div class="col-md-9"><input type="text" class="form-control" id="qt_claim_'+claim_history+'_claims_reserved_tpbi" name="qt_claim_'+claim_history+'_claims_reserved_tpbi" placeholder="Claims Reserved (TPBI)">';
+                claim+='</div></div></div>';                
+                claim+='<div class="line line-dashed line-lg pull-in"></div>';
+                
+                claim+='<div class="form-group"><div class="col-sm-6">';
+                claim+='<label class="col-sm-3 control-label" for="qt_claim_'+claim_history+'_windscreen">Windscreen</label><div class="col-md-9">';
+                claim+='<input type="text" class="form-control" id="qt_claim_'+claim_history+'_windscreen" name="qt_claim_'+claim_history+'_windscreen" placeholder="Windscreen"></div></div>';
+                claim+='<div class="col-sm-6"><label class="col-sm-3 control-label" for="qt_claim_'+claim_history+'_reporting_only">Reporting Only</label>';
+                claim+='<div class="col-md-9"><input type="text" class="form-control" id="qt_claim_'+claim_history+'_reporting_only" name="qt_claim_'+claim_history+'_reporting_only" placeholder="Reporting Only">';
+                claim+='</div></div></div>';
+                
+                claim+='<div class="form-group"><div class="col-sm-6">';
+                claim+='<label class="col-sm-3 control-label" for="qt_claim_'+claim_history+'_private_sattlement">Private Settlement</label><div class="col-md-9">';
+                claim+='<input type="text" class="form-control" id="qt_claim_'+claim_history+'_private_sattlement" name="qt_claim_'+claim_history+'_private_sattlement" placeholder="Private Settlement"></div></div><div class="col-sm-6">';
+                claim+='<label class="col-sm-3 control-label req" for="qt_claim_'+claim_history+'_referred">Referred to Partner Workshop</label><div class="col-md-9">';
+                claim+='<select id="qt_claim_'+claim_history+'_referred" class="form-control"><option value="Yes">Yes</option><option value="No">No</option></select>';
+                claim+='</div></div></div>';                
+                
+                claim+='<div class="line line-dashed line-lg pull-in"></div>';
+                claim+='<div class="form-group"><div class="col-sm-10"></div>';
+                claim+='<div class="col-sm-2">';
+                claim+='<button type="button" class="btn btn-primary btn-save-claim pull-right" value="'+claim_history+'"><i class="icon-save"></i> Save</button>';
+                claim+='</div></div></div>';
+                claim+='</section>';
+            claim+='</section>';
+        $('#claim_history_wrap').append(claim);
+    });
+    $('#claim_history_wrap').on('click','.remove_claim',function(){
+        var id=$(this).val();        
+        $('#qt_claim_history_'+id).remove();
+    });
+    //Save Claim history
+    $('#claim_area').on('click','.btn-save-claim',function(){
+        NProgress.start();
+       var hid= $(this).val();
+       //Collect Data
+       var _qt_ref_no=$('#qt_ref_no').val();
+       var _driver_name=$('#qt_claim_'+hid+'_driver_name').val();
+       var _vehicle_no=$('#qt_claim_'+hid+'_vehicle_no').val();
+       var _accident_date=$('#qt_claim_'+hid+'_accident_date').val();
+       var _reporting_date=$('#qt_claim_'+hid+'_reporting_date').val();
+       var _claims_paid_od=$('#qt_claim_'+hid+'_claims_paid_od').val();
+       var _claims_paid_tppd=$('#qt_claim_'+hid+'_claims_paid_tppd').val();
+       var _claims_paid_tpbi=$('#qt_claim_'+hid+'_claims_paid_tpbi').val();
+       var _claims_reserved_tppd=$('#qt_claim_'+hid+'_claims_reserved_tppd').val();
+       var _claims_reserved_tpbi=$('#qt_claim_'+hid+'_claims_reserved_tpbi').val();
+       var _windscreen=$('#qt_claim_'+hid+'_windscreen').val();
+       var _reporting_only=$('#qt_claim_'+hid+'_reporting_only').val();
+       var _private_sattlement=$('#qt_claim_'+hid+'_private_sattlement').val();
+       var _referred=$('#qt_claim_'+hid+'_referred option:selected').val();
+       
+       //add in data variable
+       var  _data='_driver_name='+_driver_name;
+            _data+='&_chsn='+hid;
+            _data+='&_vehicle_no='+_vehicle_no;
+            _data+='&_accident_date='+_accident_date;
+            _data+='&_reporting_date='+_reporting_date;
+            _data+='&_claims_paid_od='+_claims_paid_od;
+            _data+='&_claims_paid_tppd='+_claims_paid_tppd;
+            _data+='&_claims_paid_tpbi='+_claims_paid_tpbi;
+            _data+='&_claims_reserved_tppd='+_claims_reserved_tppd;
+            _data+='&_claims_reserved_tpbi='+_claims_reserved_tpbi;
+            _data+='&_windscreen='+_windscreen;
+            _data+='&_reporting_only='+_reporting_only;
+            _data+='&_private_sattlement='+_private_sattlement;
+            _data+='&_referred='+_referred;            
+            _data+='&_qt_ref_no='+_qt_ref_no;
+            
+       //Ajax save
+       $.ajax({
+           type:"POST",
+           data:_data,
+           url:apppath+'/quotation/update_claim_history',
+           success:function(res){
+               if(res==1){
+                    $('#claim_area').find('#save_status_'+1).empty();
+                    $('#claim_area').find('#save_status_'+1).text('Saved');
+                    $('save_status_1').empty();
+                    $('save_status_1').text('Saved');
+                    $("#save_message").show().delay(5000).queue(function(n) {
+                            $(this).hide('fast'); n();
+                        });  
+               }
+               console.log(res);
+               
+           },
+           error:function(error){
+                console.log('ERROR: '+error);
+           }
+       });
+       
+       //update saved or unsaved variable
+       //alert('_referred: '+_referred);
+       NProgress.done();
+    });
+    
 });

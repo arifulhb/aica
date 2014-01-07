@@ -63,7 +63,12 @@
             $_ci_poi_end_date=date('d-m-Y',$_record[0]['ci_poi_end_date']);
             $_ci_road_tax_due_date=date('d-m-Y',$_record[0]['ci_road_tax_due_date']);
             $_ci_ncd_protection=$_record[0]['ci_ncd_protection'];
-            $_ci_claims_in_last3_year=$_record[0]['ci_claims_in_last3_year'];
+            $_ci_claims_in_last3_year=$_record[0]['ci_claims_in_last3_year'];            
+            $_quot_insurer=$_record[0]['quot_insurer'];
+            $_quot_workshop=$_record[0]['quot_workshop'];
+            $_quot_premium=$_record[0]['quot_premium'];
+            $_quot_excess=$_record[0]['quot_excess'];
+            $_quot_remarkr=$_record[0]['quot_remark'];            
             $_si_company=$_record[0]['si_company'];
             $_si_coverage=$_record[0]['si_coverage'];
             $_si_premium=$_record[0]['si_premium'];
@@ -148,6 +153,11 @@
             $_ci_road_tax_due_date=date( "d M Y");
             $_ci_ncd_protection='';
             $_ci_claims_in_last3_year='';
+            $_quot_insurer='';
+            $_quot_workshop='';
+            $_quot_premium='';
+            $_quot_excess='';
+            $_quot_remarkr='';            
             $_si_company='';
             $_si_policy_no='';
             $_si_coverage='';
@@ -1305,51 +1315,66 @@
         </section>
         
         <!-- Claim History 1 & 2 -->
-        <section class="panel" id="qt_claim_history_1">
+        <div id="claim_area">
+                
+        <?php         
+        $h=0;// History Counter
+        foreach($_claim_history as $claim):
+            //echo 'sn: '.$claim['clh_no'].'<br>';
+        
+    ?>
+        <section class="panel" id="qt_claim_history_<?php echo $claim['clh_no'];?>">
             <header class="panel-heading font-bold">
                 <ul class="nav nav-pills pull-right">
+                    <li>
+                        <a href="#" class="add_claim_history text-muted" title="Add New Claim History">
+                            <i class="icon-plus"></i>
+                        </a>
+                    </li>
                     <li>
                         <a href="#" class="panel-toggle text-muted">
                             <i class="icon-caret-down text-active"></i>
                             <i class="icon-caret-up text"></i>
                         </a>
                     </li>
-                </ul>Claim History (1)</header>
+                </ul>Claim History (<?php echo $claim['clh_no'];?>)</header>
             <section class="panel-body">
                 <form class="form-horizontal" method="get">
                     <div class="form-group">
                         <div class="col-sm-6">
-                            <label class="col-sm-3 control-label req" for="qt_claim_1_driver_name">Driver Name</label>
+                            <label class="col-sm-3 control-label req" for="qt_claim_<?php echo $claim['clh_no'];?>_driver_name">Driver Name</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="qt_claim_1_driver_name" maxlength="50"
-                                       name="qt_claim_1_driver_name" required placeholder="Driver Name">
+                                <input type="text" class="form-control" id="qt_claim_<?php echo $claim['clh_no'];?>_driver_name" maxlength="50"
+                                       name="qt_claim_<?php echo $claim['clh_no'];?>_driver_name" 
+                                       value="<?php echo $claim['clh_driver_name'];?>" required placeholder="Driver Name">
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <label class="col-sm-3 control-label req" for="qt_claim_1_vehicle_no">Vehicle No.</label>
+                            <label class="col-sm-3 control-label req" for="qt_claim_<?php echo $claim['clh_no'];?>_vehicle_no">Vehicle No.</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="qt_claim_1_vehicle_no"
-                                       name="qt_claim_1_vehicle_no" required placeholder="Vehicle No.">
+                                <input type="text" class="form-control" id="qt_claim_<?php echo $claim['clh_no'];?>_vehicle_no"
+                                       name="qt_claim_<?php echo $claim['clh_no'];?>_vehicle_no" 
+                                       value="<?php echo $claim['clh_vehicle_no'];?>" required placeholder="Vehicle No.">
                             </div>
                         </div>
                     </div>
                     <div class="line line-dashed line-lg pull-in"></div>
                     <div class="form-group">
                         <div class="col-sm-6">
-                            <label class="col-sm-3 control-label req" for="qt_claim_1_accident_date">Accident Date</label>
+                            <label class="col-sm-3 control-label req" for="qt_claim_<?php echo $claim['clh_no'];?>_accident_date">Accident Date</label>
                             <div class="col-md-9">
-                                <input class="input-sm datepicker-input form-control" id="qt_claim_1_accident_date" 
-                                   size="16" type="text" name="qt_claim_1_accident_date" maxlength="12" 
-                                   parsley-maxlength="12" parsley-trigger="focusout" 
+                                <input class="input-sm datepicker-input form-control" id="qt_claim_<?php echo $claim['clh_no'];?>_accident_date" 
+                                   size="16" type="text" name="qt_claim_<?php echo $claim['clh_no'];?>_accident_date" maxlength="12" 
+                                   parsley-maxlength="12" parsley-trigger="focusout" value="<?php echo date('d-m-Y',$claim['clh_accident_date']);?>"
                                    data-date-format="dd-mm-yyyy" placeholder="Accident Date">   
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <label class="col-sm-3 control-label req" for="qt_claim_1_reporting_date">Reporting Date</label>
+                            <label class="col-sm-3 control-label req" for="qt_claim_<?php echo $claim['clh_no'];?>_reporting_date">Reporting Date</label>
                             <div class="col-md-9">
-                                <input class="input-sm datepicker-input form-control" id="qt_claim_1_reporting_date" 
-                                   size="16" type="text" name="qt_claim_1_reporting_date" maxlength="12" 
-                                   parsley-maxlength="12" parsley-trigger="focusout" 
+                                <input class="input-sm datepicker-input form-control" id="qt_claim_<?php echo $claim['clh_no'];?>_reporting_date" 
+                                   size="16" type="text" name="qt_claim_<?php echo $claim['clh_no'];?>_reporting_date" maxlength="12" 
+                                   parsley-maxlength="12" parsley-trigger="focusout"  value="<?php echo date('d-m-Y',$claim['clh_reporting_date']);?>" 
                                    data-date-format="dd-mm-yyyy" placeholder="Reporting Date">  
                             </div>
                         </div>
@@ -1357,17 +1382,19 @@
                     <div class="line line-dashed line-lg pull-in"></div>
                     <div class="form-group">
                         <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" for="qt_claim_1_claims_paid_od">Claims Paid (OD)</label>
+                            <label class="col-sm-3 control-label" for="qt_claim_<?php echo $claim['clh_no'];?>_claims_paid_od">Claims Paid (OD)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="qt_claim_1_claims_paid_od" 
-                                       name="qt_claim_1_claims_paid_od" placeholder="Claims Paid (OD)">
+                                <input type="text" class="form-control" id="qt_claim_<?php echo $claim['clh_no'];?>_claims_paid_od" 
+                                       name="qt_claim_<?php echo $claim['clh_no'];?>_claims_paid_od" 
+                                       value="<?php echo $claim['clh_paid_od'];?>" placeholder="Claims Paid (OD)">
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" for="qt_claim_1_claims_paid_tppd">Claims Paid (TPPD)</label>
+                            <label class="col-sm-3 control-label" for="qt_claim_<?php echo $claim['clh_no'];?>_claims_paid_tppd">Claims Paid (TPPD)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="qt_claim_1_claims_paid_tppd"
-                                       name="qt_claim_1_claims_paid_tppd" placeholder="Claims Paid (TPPD)">
+                                <input type="text" class="form-control" id="qt_claim_<?php echo $claim['clh_no'];?>_claims_paid_tppd"
+                                       name="qt_claim_<?php echo $claim['clh_no'];?>_claims_paid_tppd" 
+                                       value="<?php echo $claim['clh_paid_tppd'];?>" placeholder="Claims Paid (TPPD)">
                             </div>
                         </div>
                     </div>
@@ -1376,71 +1403,99 @@
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label" for="qt_claim_1_claims_paid_tpbi">Claims Paid (TPBI)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="qt_claim_1_claims_paid_tpbi"
-                                       name="qt_claim_1_claims_paid_tpbi" placeholder="Claims Paid (TPBI)">
+                                <input type="text" class="form-control" id="qt_claim_<?php echo $claim['clh_no'];?>_claims_paid_tpbi"
+                                       name="qt_claim_<?php echo $claim['clh_no'];?>_claims_paid_tpbi" 
+                                       value="<?php echo $claim['clh_paid_tpbi'];?>" placeholder="Claims Paid (TPBI)">
                             </div>
                         </div>
                     </div>	
                     <div class="line line-dashed line-lg pull-in"></div>
                     <div class="form-group">
                         <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" for="qt_claim_1_claims_reserved_tppd">Claims Reserved (TPPD)</label>
+                            <label class="col-sm-3 control-label" for="qt_claim_<?php echo $claim['clh_no'];?>_claims_reserved_tppd">Claims Reserved (TPPD)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="qt_claim_1_claims_reserved_tppd"
-                                       name="qt_claim_1_claims_reserved_tppd" placeholder="Claims Reserved (TPPD)">
+                                <input type="text" class="form-control" id="qt_claim_<?php echo $claim['clh_no'];?>_claims_reserved_tppd"
+                                       name="qt_claim_<?php echo $claim['clh_no'];?>_claims_reserved_tppd" 
+                                       value="<?php echo $claim['clh_reserved_tppd'];?>" placeholder="Claims Reserved (TPPD)">
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" for="qt_claim_1_claims_reserved_tpbi">Claims Reserved (TPBI)</label>
+                            <label class="col-sm-3 control-label" for="qt_claim_<?php echo $claim['clh_no'];?>_claims_reserved_tpbi">Claims Reserved (TPBI)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="qt_claim_1_claims_reserved_tpbi"
-                                       name="qt_claim_1_claims_reserved_tpbi" placeholder="Claims Reserved (TPBI)">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="line line-dashed line-lg pull-in"></div>
-                    <div class="form-group">
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" for="qt_claim_1_windscreen">Windscreen</label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" id="qt_claim_1_windscreen"
-                                       name="qt_claim_1_windscreen" placeholder="Windscreen">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" for="qt_claim_1_reporting_only">Reporting Only</label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" id="qt_claim_1_reporting_only"
-                                       name="qt_claim_1_reporting_only" placeholder="Reporting Only">
+                                <input type="text" class="form-control" id="qt_claim_<?php echo $claim['clh_no'];?>_claims_reserved_tpbi"
+                                       name="qt_claim_<?php echo $claim['clh_no'];?>_claims_reserved_tpbi" 
+                                       value="<?php echo $claim['clh_reserved_tpbi'];?>" placeholder="Claims Reserved (TPBI)">
                             </div>
                         </div>
                     </div>
                     <div class="line line-dashed line-lg pull-in"></div>
                     <div class="form-group">
                         <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" for="qt_claim_1_private_sattlement">Private Settlement</label>
+                            <label class="col-sm-3 control-label" for="qt_claim_<?php echo $claim['clh_no'];?>_windscreen">Windscreen</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="qt_claim_1_private_sattlement" 
-                                       name="qt_claim_1_private_sattlement" placeholder="Private Settlement">
+                                <input type="text" class="form-control" id="qt_claim_<?php echo $claim['clh_no'];?>_windscreen"
+                                       name="qt_claim_<?php echo $claim['clh_no'];?>_windscreen" 
+                                       value="<?php echo $claim['clh_windscreen'];?>"  placeholder="Windscreen">
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <label class="col-sm-3 control-label req" for="qt_claim_1_referred">Referred to Partner Workshop</label>
+                            <label class="col-sm-3 control-label" for="qt_claim_<?php echo $claim['clh_no'];?>_reporting_only">Reporting Only</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="qt_claim_1_referred"
-                                       name="qt_claim_1_referred" placeholder="Referred to Partner Workshop">
+                                <input type="text" class="form-control" id="qt_claim_<?php echo $claim['clh_no'];?>_reporting_only"
+                                       name="qt_claim_<?php echo $claim['clh_no'];?>_reporting_only" 
+                                       value="<?php echo $claim['clh_reporting_only'];?>" placeholder="Reporting Only">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line line-dashed line-lg pull-in"></div>
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            <label class="col-sm-3 control-label" for="qt_claim_<?php echo $claim['clh_no'];?>_private_sattlement">Private Settlement</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="qt_claim_<?php echo $claim['clh_no'];?>_private_sattlement" 
+                                       name="qt_claim_<?php echo $claim['clh_no'];?>_private_sattlement" 
+                                       value="<?php echo $claim['clh_private_statement'];?>" placeholder="Private Settlement">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="col-sm-3 control-label req" for="qt_claim_<?php echo $claim['clh_no'];?>_referred">Referred to Partner Workshop</label>
+                            <div class="col-md-9">
+                                <select id="qt_claim_<?php echo $claim['clh_no'];?>_referred" class="form-control">
+                                    <option <?php echo $claim['clh_ref_to_partner']=='Yes'?'SELECTED':''; ?> value="Yes">Yes</option>
+                                    <option <?php echo $claim['clh_ref_to_partner']=='No'?'SELECTED':''; ?> value="No">No</option>
+                                </select>                                
                             </div>
                         </div>
                     </div>
                 </form>
+                 <div class="line line-dashed line-lg pull-in"></div>
+                    <div class="form-group">
+                        <div class="col-sm-10"></div>
+                        <div class="col-sm-2">
+                            <button type="button" class="btn btn-primary btn-save-claim pull-right"
+                                    value="<?php echo $claim['clh_no'];?>"><i class="icon-save"></i> Save</button>                            
+                        </div>
+                    </div>
             </section>
         </section>
-                
+            <?php
+            $h++;
+        endforeach;        
+        ?>        
+        <input id="total_claim_history" type="hidden" value="<?php echo $h;?>">        
+        <div id="claim_history_wrap">            
+        </div>
+        </div>
         <!-- Named Driver 1 & 2 -->
 
         <section class="panel" id="qt_driver_1">
             <header class="panel-heading font-bold">
                 <ul class="nav nav-pills pull-right">
+                    <li>
+                        <a href="#" class="add_named_driver text-muted" title="Add New Named Driver">
+                            <i class="icon-plus"></i>
+                        </a>
+                    </li>                    
                     <li>
                         <a href="#" class="panel-toggle text-muted">
                             <i class="icon-caret-down text-active"></i>
@@ -1449,7 +1504,7 @@
                     </li>
                 </ul>Named Driver (1)</header>
             <section class="panel-body">
-                <form class="form-horizontal" method="get">
+                
                     <div class="form-group">
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label req" for="qt_driver_1_name">Name</label>
@@ -1553,11 +1608,11 @@
                                 <div id="qt_driver_1_history_wrap" class="form-control" style="overflow:scroll;height:150px;max-height:150px" contenteditable="true">Multiline Text</div>
                             </div>
                         </div>
-                    </div>
-                </form>
+                    </div>                
             </section>
         </section>
-        
+        <div id="named_driver_wrap">            
+        </div>
         <!-- Quotation (Private and Commercial) -->
         <!-- Private -->
         <section class="panel" id="qt_quot_pvt">
@@ -1569,32 +1624,97 @@
                             <i class="icon-caret-up text"></i>
                         </a>
                     </li>
-                </ul>Quotation (Private)
+                </ul>Quotation (<span id="qt_quot"><?php echo $qt_insurance_type;?></span>)
             </header>
             <section class="panel-body">
-                <form class="form-horizontal" method="get">
+                <div class="form-group">
 
-                </form>
-            </section>
-        </section>
-        <!-- Commercial -->
-        <section class="panel" id="qt_quot_com">
-            <header class="panel-heading font-bold">
-                <ul class="nav nav-pills pull-right">
-                    <li>
-                        <a href="#" class="panel-toggle text-muted">
-                            <i class="icon-caret-down text-active"></i>
-                            <i class="icon-caret-up text"></i>
-                        </a>
-                    </li>
-                </ul>Quotation (Commercial)
-            </header>
-            <section class="panel-body">
-                <form class="form-horizontal" method="get">
+                    <div class="col-sm-6">
+                        <label class="col-sm-3 control-label req" for="qt_quot_insurer">Insurer</label>
+                        <div class="col-md-6">                            
+                            <select id="qt_quot_insurer" name="qt_quot_insurer" class="form-control  m-b">                                
+                                <option selected disabled>Select an Option</option>   
+                                <?php
+                                if(isset($qt_insurance_type)){
+                                    //isset
+                                    if($qt_insurance_type=='Private'){ ?>
+                                        <option selected="" disabled="">Select an Option</option>
+                                        <option <?php echo $_quot_insurer=='AIG (All Age)'?'SELECTED':'';?> value="AIG (All Age)">AIG (All Age)</option>
+                                        <option <?php echo $_quot_insurer=='AIG (All Age NCD P)'?'SELECTED':'';?>  value="AIG (All Age NCD P)">AIG (All Age NCD P)</option>
+                                        <option <?php echo $_quot_insurer=='AIG (Restricted Age)'?'SELECTED':'';?>  value="AIG (Restricted Age)">AIG (Restricted Age)</option>
+                                        <option <?php echo $_quot_insurer=='AIG (Restricted NCD P)'?'SELECTED':'';?>  value="AIG (Restricted NCD P)">AIG (Restricted NCD P)</option>
+                                        <option <?php echo $_quot_insurer=='AXA'?'SELECTED':'';?>  value="AXA">AXA</option>
+                                        <option <?php echo $_quot_insurer=='AXA (NCD P)'?'SELECTED':'';?>  value="AXA (NCD P)">AXA (NCD P)</option>
+                                        <option <?php echo $_quot_insurer=='China Taiping'?'SELECTED':'';?>  value="China Taiping">China Taiping</option>
+                                        <option <?php echo $_quot_insurer=='Liberty'?'SELECTED':'';?>  value="Liberty">Liberty</option>
+                                        <option <?php echo $_quot_insurer=='Liberty (NCD P)'?'SELECTED':'';?>  value="Liberty (NCD P)">Liberty (NCD P)</option>
+                                        <option <?php echo $_quot_insurer=='MSIG'?'SELECTED':'';?>  value="MSIG">MSIG</option>
+                                        <option <?php echo $_quot_insurer=='MSIG (NCD P)'?'SELECTED':'';?>  value="MSIG (NCD P)">MSIG (NCD P)</option>
+                                        <option <?php echo $_quot_insurer=='NTUC'?'SELECTED':'';?>  value="NTUC">NTUC</option>
+                                        <option <?php echo $_quot_insurer=='NTUC (NCD P)'?'SELECTED':'';?>  value="NTUC (NCD P)">NTUC (NCD P)</option>
+                                        <?php                                        
+                                    }elseif($qt_insurance_type=='Commercial'){?>
+                                        <option selected="" disabled="">Select an Option</option>
+                                        <option <?php echo $_quot_insurer=='AIG'?'SELECTED':'';?> value="AIG">AIG</option>
+                                        <option <?php echo $_quot_insurer=='AXA'?'SELECTED':'';?> value="AXA">AXA</option>
+                                        <option <?php echo $_quot_insurer=='China Taiping'?'SELECTED':'';?> value="China Taiping">China Taiping</option>
+                                        <option <?php echo $_quot_insurer=='MSIG'?'SELECTED':'';?> value="MSIG">MSIG</option>
+                                        <option <?php echo $_quot_insurer=='NTUC'?'SELECTED':'';?> value="NTUC">NTUC</option>
+                                        <?php 
+                                    }
+                                }//end if
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                     <div class="col-sm-6">
 
-                </form>
+                        <label class="col-sm-3 control-label req" for="qt_quot_workshop">Workshop</label>
+
+                        <div class="col-md-6">
+                            <select id="qt_quot_workshop" name="qt_quot_workshop"
+                                    class="form-control  m-b">
+                                <option selected disabled>Select an Option</option>
+                                <option  <?php echo $_quot_workshop=='Any'?'SELECTED':'';?> value="Any">Any</option>
+                                <option  <?php echo $_quot_workshop=='Authorised'?'SELECTED':'';?> value="Authorised">Authorised</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="line line-dashed line-lg pull-in"></div>
+                <div class="form-group">
+
+                    <div class="col-sm-6">
+                        <label class="col-sm-3 control-label req" for="qt_quot_premium">Premium</label>
+                        <div class="col-md-6">                            
+                            <input type="number" id="qt_quot_premium" name="qt_quot_premium" class="form-control m-b"
+                                   value="<?php echo $_quot_premium;?>" required>
+                        </div>
+                    </div>
+                     <div class="col-sm-6">
+                        <label class="col-sm-3 control-label req" for="qt_quot_excess">Excess</label>
+                        <div class="col-md-6">
+                            <input type="number" id="qt_quot_excess" name="qt_quot_excess" class="form-control m-b"
+                                   value="<?php echo $_quot_excess;?>" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="line line-dashed line-lg pull-in"></div>
+                <div class="form-group">
+                        <div class="col-sm-12">
+                            <label class="col-sm-3 control-label">Remark</label>
+                            <div class="col-sm-7">
+                                <input type="hidden" id="qt_quot_remark" name="qt_quot_remark" value="<?php echo $_quot_remarkr;?>" >
+                                <div id="qt_quot_remark_wrap" class="form-control" 
+                                     style="overflow:scroll;height:150px;max-height:150px" 
+                                     contenteditable="true"><?php echo $_quot_remarkr!=''?$_quot_remarkr:'Remark Text';;?></div>
+                            </div>
+                        </div>
+                    </div>
             </section>
-        </section>
+        </section>      
         <!-- Selected Insurance Detail -->
         <section class="panel" id="qt_selected_insurance_details">
             <header class="panel-heading font-bold">
@@ -1836,45 +1956,42 @@
                    // echo 'set com: '.$_aa_commission;
                     //$this->load->view('quotation/panel_account_assessment');                
                     ?>
-<!-- Account Assessment -->
-<section class="panel" id="qt_account_assessment">
-    <header class="panel-heading font-bold">
-        <ul class="nav nav-pills pull-right">
-            <li>
-                <a href="#" class="panel-toggle text-muted">
-                    <i class="icon-caret-down text-active"></i>
-                    <i class="icon-caret-up text"></i>
-                </a>
-            </li>
-        </ul>Account Assessment</header>
-    <section class="panel-body">
-        <form class="form-horizontal" method="get">
-            <div class="form-group">
-                <div class="col-sm-6">
-                    <label class="col-sm-3 control-label" for="qt_aa_commission">Commission</label>
-                    <div class="col-md-6">
-                        
-                        <select name="qt_aa_commission" id="qt_aa_commission" class="form-control m-b">
-                            <?php
-                            foreach($_commissions as $row): ?>
-                            <option value="<?php echo $row['com_sn'];?>"
-                                <?php echo $_aa_commission==$row['com_sn']?'SELECTED':'';?>>
-                                <?php echo $row['com_name'];?> (<?php echo $row['com_coy_rate'];?>%)</option>
-                                <?php
-                            endforeach;
-                            ?>
-                        </select>
-                    </div>
-                </div>
-            </div>
+                <!-- Account Assessment -->
+                <section class="panel" id="qt_account_assessment">
+                    <header class="panel-heading font-bold">
+                        <ul class="nav nav-pills pull-right">
+                            <li>
+                                <a href="#" class="panel-toggle text-muted">
+                                    <i class="icon-caret-down text-active"></i>
+                                    <i class="icon-caret-up text"></i>
+                                </a>
+                            </li>
+                        </ul>Account Assessment</header>
+                    <section class="panel-body">
+                        <form class="form-horizontal" method="get">
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <label class="col-sm-3 control-label" for="qt_aa_commission">Commission</label>
+                                    <div class="col-md-6">
 
-            <div class="line line-dashed line-lg pull-in"></div>
-        </form>
-    </section>
-</section>
-                        
-                        
-                        
+                                        <select name="qt_aa_commission" id="qt_aa_commission" class="form-control m-b">
+                                            <?php
+                                            foreach($_commissions as $row): ?>
+                                            <option value="<?php echo $row['com_sn'];?>"
+                                                <?php echo $_aa_commission==$row['com_sn']?'SELECTED':'';?>>
+                                                <?php echo $row['com_name'];?> (<?php echo $row['com_coy_rate'];?>%)</option>
+                                                <?php
+                                            endforeach;
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="line line-dashed line-lg pull-in"></div>
+                        </form>
+                    </section>
+                </section>                        
                         
                         <?php
                     
