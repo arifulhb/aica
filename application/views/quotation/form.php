@@ -1318,9 +1318,10 @@
         <div id="claim_area">
                 
         <?php         
+        if (!empty($_claim_history )){            
         $h=0;// History Counter
         foreach($_claim_history as $claim):
-            //echo 'sn: '.$claim['clh_no'].'<br>';
+            //DYNAMIC CLAIM HISTORY
         
     ?>
         <section class="panel" id="qt_claim_history_<?php echo $claim['clh_no'];?>">
@@ -1483,6 +1484,160 @@
         endforeach;        
         ?>        
         <input id="total_claim_history" type="hidden" value="<?php echo $h;?>">        
+        <?php        
+        }//isset
+        else{ 
+            //DEFAULT CLAIM HISTORY
+            ?>
+        <input id="total_claim_history" type="hidden" value="1">        
+            <section class="panel" id="qt_claim_history_1">
+            <header class="panel-heading font-bold">
+                <ul class="nav nav-pills pull-right">
+                    <li>
+                        <a href="#" class="add_claim_history text-muted" title="Add New Claim History">
+                            <i class="icon-plus"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="panel-toggle text-muted">
+                            <i class="icon-caret-down text-active"></i>
+                            <i class="icon-caret-up text"></i>
+                        </a>
+                    </li>
+                </ul>Claim History (1)</header>
+            <section class="panel-body">
+                <form class="form-horizontal" method="get">
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            <label class="col-sm-3 control-label req" for="qt_claim_1_driver_name">Driver Name</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="qt_claim_1_driver_name" maxlength="50"
+                                       name="qt_claim_1_driver_name" required placeholder="Driver Name">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="col-sm-3 control-label req" for="qt_claim_1_vehicle_no">Vehicle No.</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="qt_claim_1_vehicle_no"
+                                       name="qt_claim_1_vehicle_no" required placeholder="Vehicle No.">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line line-dashed line-lg pull-in"></div>
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            <label class="col-sm-3 control-label req" for="qt_claim_1_accident_date">Accident Date</label>
+                            <div class="col-md-9">
+                                <input class="input-sm datepicker-input form-control" id="qt_claim_1_accident_date" 
+                                   size="16" type="text" name="qt_claim_1_accident_date" maxlength="12" 
+                                   parsley-maxlength="12" parsley-trigger="focusout" 
+                                   data-date-format="dd-mm-yyyy" placeholder="Accident Date">   
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="col-sm-3 control-label req" for="qt_claim_1_reporting_date">Reporting Date</label>
+                            <div class="col-md-9">
+                                <input class="input-sm datepicker-input form-control" id="qt_claim_1_reporting_date" 
+                                   size="16" type="text" name="qt_claim_1_reporting_date" maxlength="12" 
+                                   parsley-maxlength="12" parsley-trigger="focusout" 
+                                   data-date-format="dd-mm-yyyy" placeholder="Reporting Date">  
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line line-dashed line-lg pull-in"></div>
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            <label class="col-sm-3 control-label" for="qt_claim_1_claims_paid_od">Claims Paid (OD)</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="qt_claim_1_claims_paid_od" 
+                                       name="qt_claim_1_claims_paid_od" placeholder="Claims Paid (OD)">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="col-sm-3 control-label" for="qt_claim_1_claims_paid_tppd">Claims Paid (TPPD)</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="qt_claim_1_claims_paid_tppd"
+                                       name="qt_claim_1_claims_paid_tppd" placeholder="Claims Paid (TPPD)">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line line-dashed line-lg pull-in"></div>
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            <label class="col-sm-3 control-label" for="qt_claim_1_claims_paid_tpbi">Claims Paid (TPBI)</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="qt_claim_1_claims_paid_tpbi"
+                                       name="qt_claim_1_claims_paid_tpbi" placeholder="Claims Paid (TPBI)">
+                            </div>
+                        </div>
+                    </div>	
+                    <div class="line line-dashed line-lg pull-in"></div>
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            <label class="col-sm-3 control-label" for="qt_claim_1_claims_reserved_tppd">Claims Reserved (TPPD)</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="qt_claim_1_claims_reserved_tppd"
+                                       name="qt_claim_1_claims_reserved_tppd" placeholder="Claims Reserved (TPPD)">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="col-sm-3 control-label" for="qt_claim_1_claims_reserved_tpbi">Claims Reserved (TPBI)</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="qt_claim_1_claims_reserved_tpbi"
+                                       name="qt_claim_1_claims_reserved_tpbi" placeholder="Claims Reserved (TPBI)">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line line-dashed line-lg pull-in"></div>
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            <label class="col-sm-3 control-label" for="qt_claim_1_windscreen">Windscreen</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="qt_claim_1_windscreen"
+                                       name="qt_claim_1_windscreen" placeholder="Windscreen">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="col-sm-3 control-label" for="qt_claim_1_reporting_only">Reporting Only</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="qt_claim_1_reporting_only"
+                                       name="qt_claim_1_reporting_only" placeholder="Reporting Only">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line line-dashed line-lg pull-in"></div>
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            <label class="col-sm-3 control-label" for="qt_claim_1_private_sattlement">Private Settlement</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="qt_claim_1_private_sattlement" 
+                                       name="qt_claim_1_private_sattlement" placeholder="Private Settlement">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="col-sm-3 control-label req" for="qt_claim_1_referred">Referred to Partner Workshop</label>
+                            <div class="col-md-9">
+                                <select id="qt_claim_1_referred" class="form-control">
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </select>                                
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                 <div class="line line-dashed line-lg pull-in"></div>
+                    <div class="form-group">
+                        <div class="col-sm-10"></div>
+                        <div class="col-sm-2">
+                            <button type="button" class="btn btn-primary btn-save-claim pull-right"
+                                    value="1"><i class="icon-save"></i> Save</button>                            
+                        </div>
+                    </div>
+            </section>
+        </section>
+            <?php
+        }
+        ?>
         <div id="claim_history_wrap">            
         </div>
         </div>
