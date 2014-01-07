@@ -681,22 +681,22 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
                 claim+='<div class="line line-dashed line-lg pull-in"></div>';
                 claim+='<div class="form-group"><div class="col-sm-6">';
                 claim+='<label class="col-sm-3 control-label" for="qt_claim_'+claim_history+'_claims_paid_od">Claims Paid (OD)</label><div class="col-md-9">';
-                claim+='<input type="text" class="form-control" id="qt_claim_'+claim_history+'_claims_paid_od" name="qt_claim_'+claim_history+'_claims_paid_od" placeholder="Claims Paid (OD)"></div></div>';
+                claim+='<input type="number" class="form-control" id="qt_claim_'+claim_history+'_claims_paid_od" name="qt_claim_'+claim_history+'_claims_paid_od" placeholder="Claims Paid (OD)"></div></div>';
                 claim+='<div class="col-sm-6"><label class="col-sm-3 control-'+claim_history+'abel" for="qt_claim_'+claim_history+'_claims_paid_tppd">Claims Paid (TPPD)</label><div class="col-md-9">';
-                claim+='<input type="text" class="form-control" id="qt_claim_'+claim_history+'_claims_paid_tppd" name="qt_claim_'+claim_history+'_claims_paid_tppd" placeholder="Claims Paid (TPPD)">';
+                claim+='<input type="number" class="form-control" id="qt_claim_'+claim_history+'_claims_paid_tppd" name="qt_claim_'+claim_history+'_claims_paid_tppd" placeholder="Claims Paid (TPPD)">';
                 claim+='</div></div></div>'; 
                 claim+='<div class="line line-dashed line-lg pull-in"></div>';
                 claim+='<div class="form-group"><div class="col-sm-6">';
                 claim+='<label class="col-sm-3 control-label" for="qt_claim_'+claim_history+'_claims_paid_tpbi">Claims Paid (TPBI)</label><div class="col-md-9">';
-                claim+='<input type="text" class="form-control" id="qt_claim_'+claim_history+'_claims_paid_tpbi" name="qt_claim_'+claim_history+'_claims_paid_tpbi" placeholder="Claims Paid (TPBI)">';
+                claim+='<input type="number" class="form-control" id="qt_claim_'+claim_history+'_claims_paid_tpbi" name="qt_claim_'+claim_history+'_claims_paid_tpbi" placeholder="Claims Paid (TPBI)">';
                 claim+='</div></div></div>';
                 claim+='<div class="line line-dashed line-lg pull-in"></div>';
                 
                 claim+='<div class="form-group"><div class="col-sm-6">';
                 claim+='<label class="col-sm-3 control-label" for="qt_claim_'+claim_history+'_claims_reserved_tppd">Claims Reserved (TPPD)</label><div class="col-md-9">';
-                claim+='<input type="text" class="form-control" id="qt_claim_'+claim_history+'_claims_reserved_tppd" name="qt_claim_'+claim_history+'_claims_reserved_tppd" placeholder="Claims Reserved (TPPD)"></div></div>';
+                claim+='<input type="number" class="form-control" id="qt_claim_'+claim_history+'_claims_reserved_tppd" name="qt_claim_'+claim_history+'_claims_reserved_tppd" placeholder="Claims Reserved (TPPD)"></div></div>';
                 claim+='<div class="col-sm-6"><label class="col-sm-3 control-label" for="qt_claim_'+claim_history+'_claims_reserved_tpbi">Claims Reserved (TPBI)</label>';
-                claim+='<div class="col-md-9"><input type="text" class="form-control" id="qt_claim_'+claim_history+'_claims_reserved_tpbi" name="qt_claim_'+claim_history+'_claims_reserved_tpbi" placeholder="Claims Reserved (TPBI)">';
+                claim+='<div class="col-md-9"><input type="number" class="form-control" id="qt_claim_'+claim_history+'_claims_reserved_tpbi" name="qt_claim_'+claim_history+'_claims_reserved_tpbi" placeholder="Claims Reserved (TPBI)">';
                 claim+='</div></div></div>';                
                 claim+='<div class="line line-dashed line-lg pull-in"></div>';
                 

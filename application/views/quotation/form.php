@@ -1385,7 +1385,7 @@
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label" for="qt_claim_<?php echo $claim['clh_no'];?>_claims_paid_od">Claims Paid (OD)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="qt_claim_<?php echo $claim['clh_no'];?>_claims_paid_od" 
+                                <input type="number" class="form-control" id="qt_claim_<?php echo $claim['clh_no'];?>_claims_paid_od" 
                                        name="qt_claim_<?php echo $claim['clh_no'];?>_claims_paid_od" 
                                        value="<?php echo $claim['clh_paid_od'];?>" placeholder="Claims Paid (OD)">
                             </div>
@@ -1393,7 +1393,7 @@
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label" for="qt_claim_<?php echo $claim['clh_no'];?>_claims_paid_tppd">Claims Paid (TPPD)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="qt_claim_<?php echo $claim['clh_no'];?>_claims_paid_tppd"
+                                <input type="number" class="form-control" id="qt_claim_<?php echo $claim['clh_no'];?>_claims_paid_tppd"
                                        name="qt_claim_<?php echo $claim['clh_no'];?>_claims_paid_tppd" 
                                        value="<?php echo $claim['clh_paid_tppd'];?>" placeholder="Claims Paid (TPPD)">
                             </div>
@@ -1404,7 +1404,7 @@
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label" for="qt_claim_1_claims_paid_tpbi">Claims Paid (TPBI)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="qt_claim_<?php echo $claim['clh_no'];?>_claims_paid_tpbi"
+                                <input type="number" class="form-control" id="qt_claim_<?php echo $claim['clh_no'];?>_claims_paid_tpbi"
                                        name="qt_claim_<?php echo $claim['clh_no'];?>_claims_paid_tpbi" 
                                        value="<?php echo $claim['clh_paid_tpbi'];?>" placeholder="Claims Paid (TPBI)">
                             </div>
@@ -1415,7 +1415,7 @@
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label" for="qt_claim_<?php echo $claim['clh_no'];?>_claims_reserved_tppd">Claims Reserved (TPPD)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="qt_claim_<?php echo $claim['clh_no'];?>_claims_reserved_tppd"
+                                <input type="number" class="form-control" id="qt_claim_<?php echo $claim['clh_no'];?>_claims_reserved_tppd"
                                        name="qt_claim_<?php echo $claim['clh_no'];?>_claims_reserved_tppd" 
                                        value="<?php echo $claim['clh_reserved_tppd'];?>" placeholder="Claims Reserved (TPPD)">
                             </div>
@@ -1423,7 +1423,7 @@
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label" for="qt_claim_<?php echo $claim['clh_no'];?>_claims_reserved_tpbi">Claims Reserved (TPBI)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="qt_claim_<?php echo $claim['clh_no'];?>_claims_reserved_tpbi"
+                                <input type="number" class="form-control" id="qt_claim_<?php echo $claim['clh_no'];?>_claims_reserved_tpbi"
                                        name="qt_claim_<?php echo $claim['clh_no'];?>_claims_reserved_tpbi" 
                                        value="<?php echo $claim['clh_reserved_tpbi'];?>" placeholder="Claims Reserved (TPBI)">
                             </div>
@@ -1549,14 +1549,14 @@
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label" for="qt_claim_1_claims_paid_od">Claims Paid (OD)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="qt_claim_1_claims_paid_od" 
+                                <input type="number" class="form-control" id="qt_claim_1_claims_paid_od" 
                                        name="qt_claim_1_claims_paid_od" placeholder="Claims Paid (OD)">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label" for="qt_claim_1_claims_paid_tppd">Claims Paid (TPPD)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="qt_claim_1_claims_paid_tppd"
+                                <input type="number" class="form-control" id="qt_claim_1_claims_paid_tppd"
                                        name="qt_claim_1_claims_paid_tppd" placeholder="Claims Paid (TPPD)">
                             </div>
                         </div>
@@ -1566,7 +1566,7 @@
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label" for="qt_claim_1_claims_paid_tpbi">Claims Paid (TPBI)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="qt_claim_1_claims_paid_tpbi"
+                                <input type="number" class="form-control" id="qt_claim_1_claims_paid_tpbi"
                                        name="qt_claim_1_claims_paid_tpbi" placeholder="Claims Paid (TPBI)">
                             </div>
                         </div>
@@ -1576,14 +1576,14 @@
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label" for="qt_claim_1_claims_reserved_tppd">Claims Reserved (TPPD)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="qt_claim_1_claims_reserved_tppd"
+                                <input type="number" class="form-control" id="qt_claim_1_claims_reserved_tppd"
                                        name="qt_claim_1_claims_reserved_tppd" placeholder="Claims Reserved (TPPD)">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label" for="qt_claim_1_claims_reserved_tpbi">Claims Reserved (TPBI)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="qt_claim_1_claims_reserved_tpbi"
+                                <input type="number" class="form-control" id="qt_claim_1_claims_reserved_tpbi"
                                        name="qt_claim_1_claims_reserved_tpbi" placeholder="Claims Reserved (TPBI)">
                             </div>
                         </div>
