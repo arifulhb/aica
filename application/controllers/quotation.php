@@ -479,7 +479,7 @@ class Quotation extends CI_Controller {
     public function removeQuotationItem(){
         
         $qt_ref_no      = $this->input->post('_qt_ref_no');
-        $ql_sn          = $this->input->post('_ql_sn');
+        $ql_sn          = $this->input->post('_ql_sn');//quotation sn
         
         $this->load->model('quotation_model');        
         $res=$this->quotation_model->remove_quotation_item($qt_ref_no,$ql_sn);
@@ -487,6 +487,18 @@ class Quotation extends CI_Controller {
         echo $res;
         
     }//end function
+    
+    public function removeClaimHistory(){
+        
+        $qt_ref_no      = $this->input->post('_qt_ref_no');
+        $chn          = $this->input->post('_chn');//claim history no
+        
+        $this->load->model('quotation_model');        
+        $res=$this->quotation_model->remove_claim_history($qt_ref_no,$chn);
+        
+        echo $res;
+        
+    }//end function removeClaimHistory
 
 }//end class
 ?>

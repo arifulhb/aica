@@ -283,7 +283,15 @@ class Quotation_model extends CI_Model
         $res=$this->db->delete('tbl_quotations_list');                
         
         return $res;
-
     }//end function
+    
+    public function remove_claim_history($qt_ref_no, $chn){
+        
+        $this->db->where('qt_ref_no',$qt_ref_no);
+        $this->db->where('clh_no',$chn);
+        $res=$this->db->delete('aica_claim_history');                
+        
+        return $res;
+    }//end function    
     
 }//end class

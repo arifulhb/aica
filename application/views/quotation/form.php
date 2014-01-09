@@ -1319,7 +1319,8 @@
                 
         <?php         
         if (!empty($_claim_history )){            
-        $h=0;// History Counter
+       // $h=0;// History Counter
+        $maxchn=array(0);
         foreach($_claim_history as $claim):
             //DYNAMIC CLAIM HISTORY
         
@@ -1478,10 +1479,11 @@
             </section>
         </section>
             <?php
-            $h++;
+            array_push($maxchn,$claim['clh_no']);
+            //$h++;
         endforeach;        
         ?>        
-        <input id="total_claim_history" type="hidden" value="<?php echo $h;?>">        
+        <input id="total_claim_history" type="hidden" value="<?php echo max($maxchn);?>">        
         <?php        
         }//isset
         else{ 
@@ -1490,10 +1492,7 @@
         <input id="total_claim_history" type="hidden" value="1">        
             <section class="panel" id="qt_claim_history_1">
             <header class="panel-heading font-bold">
-                <ul class="nav nav-pills pull-right">    
-                    <li>
-                        <button class="btn btn-xs btn-link remove_dynamic remove_claim" value="1" title="Remove"><i class="icon-trash"></i></button>
-                    </li>
+                <ul class="nav nav-pills pull-right">                        
                     <li>
                         <a href="#" class="panel-toggle text-muted">
                             <i class="icon-caret-down text-active"></i>
@@ -2262,6 +2261,26 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <button type="button" id="remove_quot_item" class="btn btn-danger"><i class="icon-trash"></i> Remove</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- Modal -->
+<div class="modal fade" id="remove_claim_history" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Remove Claim History</h4>
+      </div>
+      <div class="modal-body">
+          <p>Are you sure to delete <strong><span id="remove_ch_name"></span></strong> ?</p>
+          <input type="hidden" id="remove_chn_sn" value="">
+          <input type="hidden" id="remove_ch_ref_no" value="">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" id="remove_ch_item" class="btn btn-danger"><i class="icon-trash"></i> Remove</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

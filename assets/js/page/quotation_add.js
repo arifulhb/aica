@@ -917,6 +917,42 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
             }
        });
                
-   });
+   });// remove quot_item
+   
+   //REMOVE DYNAMIC CLAIM
+   $('#claim_area').on('click','.remove_dynamic',function(){
+       var chn=$(this).val();
+       var _qt_ref_no=$('#qt_ref_no').val();
+        $('#remove_chn_sn').val(chn);
+        $('#remove_ch_ref_no').val(_qt_ref_no);
+        $('#remove_ch_name').text('Claim History ('+chn+')');//remove the row
+        $('#remove_claim_history').modal('show');//remove the modal
+       
+       
+   });//end remove_dynamic
+   
+   $('#remove_ch_item').click(function(){
+       
+       var _chn_sn=$('#remove_chn_sn').val();
+       var _qt_ref_no=$('#remove_ch_ref_no').val();
+       var _data='_chn='+_chn_sn+'&_qt_ref_no='+_qt_ref_no;
+       $.ajax({
+            type:"POST",
+            data:_data,
+            url:apppath+'/quotation/removeClaimHistory',
+            success:function(res){
+                if(res==1){
+                    //Success
+                    $('#qt_claim_history_'+_chn_sn).remove();//remove the claim history panel
+                    $('#remove_claim_history').modal('hide');//hide the modal
+                    
+                }//end if
+            },//end sucess
+            error:function(error){
+                console.log('ERROR: '+error);
+            }
+       });
+       
+   });//end function
         
 });

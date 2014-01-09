@@ -982,10 +982,38 @@
 
                         </a>
                     </li>
-                </ul>Quotation (Private)
+                </ul>Quotation (<?php echo $_record[0]['qt_insurance_type']?>)
             </header>
             <section class="panel-body">
-                
+                <table class="table table-bordered table-striped table-responsive">
+                    <thead>
+                        <tr>
+                             <th>Insurer</th>
+                            <th>Workshop</th>
+                            <th>Premium</th>
+                            <th>Excess</th>
+                            <th>Remark</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                         if(isset($_quot_list)){ 
+                                foreach ($_quot_list as $item): ?>
+                                    <tr id="ql_<?php echo $item['ql_sn'];?>">
+                                    <td><?php echo $item['ql_insurer'];?></td>
+                                    <td><?php echo $item['ql_workshop'];?></td>
+                                    <td><?php echo $item['ql_premium'];?></td>
+                                    <td><?php echo $item['ql_excess'];?></td>
+                                    <td><?php echo $item['ql_remark'];;?></td>                                    
+                                </tr>
+
+                                    <?php                                        
+                                    //array_push($max_ql_sn,$item['ql_sn']);
+                                endforeach;
+                            }//end if
+                        ?>
+                    </tbody>
+                </table>
             </section>
         </section>
         <!-- Selected Insurance Detail -->
