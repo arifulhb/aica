@@ -467,11 +467,11 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
             data+='&_qt_ci_road_tax_date='+_qt_ci_road_tax_date;
             data+='&_qt_ci_ncd_protection='+_qt_ci_ncd_protection;
             data+='&_qt_ci_claim_in_3_years='+_qt_ci_claim_in_3_years;
-            data+='&_qt_quot_insurer='+_qt_quot_insurer;
-            data+='&_qt_quot_worksop='+_qt_quot_workshop;
-            data+='&_qt_quot_premium='+_qt_quot_premium;
-            data+='&_qt_quot_excess='+_qt_quot_excess;
-            data+='&_qt_quot_remark='+_qt_quot_remark;
+            //data+='&_qt_quot_insurer='+_qt_quot_insurer;
+            //data+='&_qt_quot_worksop='+_qt_quot_workshop;
+            //data+='&_qt_quot_premium='+_qt_quot_premium;
+            //data+='&_qt_quot_excess='+_qt_quot_excess;
+            //data+='&_qt_quot_remark='+_qt_quot_remark;
             data+='&_qt_sid_company='+_qt_sid_company;
             data+='&_qt_sid_policy_no='+_qt_sid_policy;
             data+='&_qt_sid_coverage_type='+_qt_sid_coverage_type;

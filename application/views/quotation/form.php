@@ -1326,11 +1326,9 @@
     ?>
         <section class="panel" id="qt_claim_history_<?php echo $claim['clh_no'];?>">
             <header class="panel-heading font-bold">
-                <ul class="nav nav-pills pull-right">
+                <ul class="nav nav-pills pull-right">   
                     <li>
-                        <a href="#" class="add_claim_history text-muted" title="Add New Claim History">
-                            <i class="icon-plus"></i>
-                        </a>
+                        <button class="btn btn-xs btn-link remove_dynamic remove_claim" value="<?php echo $claim['clh_no'];?>" title="Remove"><i class="icon-trash"></i></button>
                     </li>
                     <li>
                         <a href="#" class="panel-toggle text-muted">
@@ -1492,11 +1490,9 @@
         <input id="total_claim_history" type="hidden" value="1">        
             <section class="panel" id="qt_claim_history_1">
             <header class="panel-heading font-bold">
-                <ul class="nav nav-pills pull-right">
+                <ul class="nav nav-pills pull-right">    
                     <li>
-                        <a href="#" class="add_claim_history text-muted" title="Add New Claim History">
-                            <i class="icon-plus"></i>
-                        </a>
+                        <button class="btn btn-xs btn-link remove_dynamic remove_claim" value="1" title="Remove"><i class="icon-trash"></i></button>
                     </li>
                     <li>
                         <a href="#" class="panel-toggle text-muted">
@@ -1639,8 +1635,15 @@
         }
         ?>
         <div id="claim_history_wrap">            
+        </div><!--claim history wrap-->      
+        <div class="row">
+            <div class="col-sm-12 text-right">
+                <a href="#" class="add_claim_history btn btn-info m-b" title="Add New Claim History">
+                    <i class="icon-plus"> Add New Claim History</i>
+                </a>
+          </div>
         </div>
-        </div>
+        </div><!--claim area-->
         <!-- Named Driver 1 & 2 -->
 
         <section class="panel" id="qt_driver_1">

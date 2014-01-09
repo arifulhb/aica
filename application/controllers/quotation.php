@@ -321,11 +321,11 @@ class Quotation extends CI_Controller {
         $data['ci_road_tax_due_date']=date('Y-m-d',strtotime($this->input->post('_qt_ci_road_tax_date',TRUE)));                 
         $data['ci_ncd_protection']=$this->input->post('_qt_ci_ncd_protection');
         $data['ci_claims_in_last3_year']=$this->input->post('_qt_ci_claim_in_3_years');
-        $data['quot_insurer']=$this->input->post('_qt_quot_insurer');
-        $data['quot_workshop']=$this->input->post('_qt_quot_worksop');
-        $data['quot_premium']=$this->input->post('_qt_quot_premium');
-        $data['quot_excess']=$this->input->post('_qt_quot_excess');
-        $data['quot_remark']=$this->input->post('_qt_quot_remark');
+        //$data['quot_insurer']=$this->input->post('_qt_quot_insurer');
+        //$data['quot_workshop']=$this->input->post('_qt_quot_worksop');
+        //$data['quot_premium']=$this->input->post('_qt_quot_premium');
+        //$data['quot_excess']=$this->input->post('_qt_quot_excess');
+        //$data['quot_remark']=$this->input->post('_qt_quot_remark');
         $data['si_company']=$this->input->post('_qt_sid_company');
         $data['si_policy_no']=$this->input->post('_qt_sid_policy_no');
         $data['si_coverage']=$this->input->post('_qt_sid_coverage_type');
