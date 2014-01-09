@@ -57,6 +57,7 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
          
     });
     
+    //NRIC Auto Complete
     $('#cust_nric').autocomplete({
         source:function(request, response){
                $('#qt_customer_sn').val('');
@@ -396,11 +397,11 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
         var _qt_ci_ncd_protection=$('#qt_ci_ncd_protection option:selected').val();
         var _qt_ci_claim_in_3_years=$('input[name=qt_ci_claim_in_3_years]:checked').val();
         //Quotation
-        var _qt_quot_insurer=$('#qt_quot_insurer option:selected').text();
-        var _qt_quot_workshop=$('#qt_quot_workshop option:selected').text();
-        var _qt_quot_premium=$('#qt_quot_premium').val();
-        var _qt_quot_excess=$('#qt_quot_excess').val();
-        var _qt_quot_remark=$('#qt_quot_remark').val();
+        //var _qt_quot_insurer=$('#qt_quot_insurer option:selected').text();
+        //var _qt_quot_workshop=$('#qt_quot_workshop option:selected').text();
+        //var _qt_quot_premium=$('#qt_quot_premium').val();
+        //var _qt_quot_excess=$('#qt_quot_excess').val();
+        //var _qt_quot_remark=$('#qt_quot_remark').val();
         //Selected Insurance
         var _qt_sid_company=$('#qt_sid_company').val();
         var _qt_sid_policy=$('#qt_sid_policy_no').val();
@@ -779,17 +780,143 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
                             $(this).hide('fast'); n();
                         });  
                }
-               console.log(res);
-               
+               //console.log(res);               
            },
            error:function(error){
                 console.log('ERROR: '+error);
            }
        });
-       
-       //update saved or unsaved variable
-       //alert('_referred: '+_referred);
+              
        NProgress.done();
-    });
+    });//end save claim history
     
+    $('#ql_add').click(function(){
+        //Get current total QL
+        var _sn=$('#total_ql').val();
+            _sn++;
+        //get quotation type
+        var _qt_insurance_type=$('input[name=qt_details_insurance_type]:checked').val();
+        var _options='<option selected="" disabled="">Select an Insurer</option>';
+        if (_qt_insurance_type=='Private'){
+            _options+='<option value="AIG (All Age)">AIG (All Age)</option>';
+            _options+='<option value="AIG (All Age NCD P)">AIG (All Age NCD P)</option>';
+            _options+='<option value="AIG (Restricted Age)">AIG (Restricted Age)</option>';
+            _options+='<option value="AIG (Restricted NCD P)">AIG (Restricted NCD P)</option>';
+            _options+='<option value="AXA">AXA</option>';
+            _options+='<option value="AXA (NCD P)">AXA (NCD P)</option>';
+            _options+='<option value="China Taiping">China Taiping</option>';
+            _options+='<option value="Liberty">Liberty</option>';
+            _options+='<option value="Liberty (NCD P)">Liberty (NCD P)</option>';
+            _options+='<option value="MSIG">MSIG</option>';
+            _options+='<option value="MSIG (NCD P)">MSIG (NCD P)</option>';
+            _options+='<option value="NTUC">NTUC</option>';
+            _options+='<option value="NTUC (NCD P)">NTUC (NCD P)</option>';
+        }else{
+            _options+='<option value="AIG">AIG</option>';
+            _options+='<option value="AXA">AXA</option>';
+            _options+='<option value="China Taiping">China Taiping</option>';
+            _options+='<option value="MSIG">MSIG</option>';
+            _options+='<option value="NTUC">NTUC</option>';                                    
+        }
+        
+        var _insurer='<select id="qt_quot_insurer_'+_sn+'" name="qt_quot_insurer_'+_sn+'" class="form-control">';
+            _insurer+=_options;
+            _insurer+='</select>';           
+        
+        var _workshop='<select id="qt_quot_workshop_'+_sn+'" name="qt_quot_workshop_'+_sn+'" class="form-control">';
+            _workshop+='<option selected disabled>Select a Workshop</option>';
+            _workshop+='<option value="Any">Any</option>>';
+            _workshop+='<option value="Authorised">Authorised</option>';
+            _workshop+='</select>';           
+            
+        var row='<tr id="ql_'+_sn+'">';
+            row+='<td>'+_insurer+'</td>';
+            row+='<td>'+_workshop+'</td>';
+            row+='<td><input type="number" id="qt_quot_premium_'+_sn+'" name="qt_quot_premium_'+_sn+'" class="form-control m-b" required></td>';
+            row+='<td><input type="number" id="qt_quot_excess_'+_sn+'" name="qt_quot_excess_'+_sn+'" class="form-control m-b" required></td>';            
+            row+='<td><input type="text" id="qt_quot_remark_'+_sn+'" name="qt_quot_remark_'+_sn+'" class="form-control m-b" required></td>';            
+            row+='<td class="action"><button id="ql_save_'+_sn+'" class="btn btn-link btn-warning btn-sm ql_save" title="Save" value="'+_sn+'"><i class="icon-save"></i> </button> ';
+            row+='<button id="ql_remove_'+_sn+'" disabled class="btn btn-link btn-sm ql_remove" value="'+_sn+'" title="Remove"><i class="icon-trash"></i></button></td>';
+            row+='</tr>';
+        $('#quotation_list').append(row);
+        
+        //Update total QL
+        $('#total_ql').val(_sn);
+    });// add button end
+    
+    $('#quotation_list').on('click','.ql_save',function(){
+        NProgress.start();
+        var _ql_sn=$(this).val();
+        var _qt_ref_no=$('#qt_ref_no').val();
+        var _insurer=$('#qt_quot_insurer_'+_ql_sn+' option:selected').val();
+        var _workstation=$('#qt_quot_workshop_'+_ql_sn+' option:selected').val();
+        var _premium=$('#qt_quot_premium_'+_ql_sn).val();
+        var _excess=$('#qt_quot_excess_'+_ql_sn).val();
+        var _remark=$('#qt_quot_remark_'+_ql_sn).val();
+        
+        var _data='_qt_ref_no='+_qt_ref_no;
+            _data+='&_ql_sn='+_ql_sn;
+            _data+='&_insurer='+_insurer;
+            _data+='&_workstation='+_workstation;
+            _data+='&_premium='+_premium;
+            _data+='&_excess='+_excess;
+            _data+='&_remark='+_remark;
+                        
+            $.ajax({
+                type:"POST",
+                data:_data,
+                url:apppath+'/quotation/updateQuotationItem',
+                success:function(res){
+                    if(res==1){
+                        $('#ql_remove_'+_ql_sn).removeAttr('disabled');
+                        $('#ql_save_'+_ql_sn).removeClass('btn-warning');
+                        $('#ql_save_'+_ql_sn).addClass('btn-primary');
+                        $('#ql_remove_'+_ql_sn).addClass('btn-danger');
+                        $("#save_message").show().delay(5000).queue(function(n) {
+                            $(this).hide('fast'); n();
+                        });  
+                    }//end if
+                },
+                error:function(error){            
+                    console.log('ERROR: '+error);
+                }
+            }); //end ajax      
+            NProgress.done();
+    });//ql_save save
+   
+   //Remove Quotation list Item
+   $('#quotation_list').on('click','.ql_remove',function(){
+       var _ql_sn=$(this).val();
+        var _qt_ref_no=$('#qt_ref_no').val();
+        $('#remove_ql_sn').val(_ql_sn);
+        $('#remove_qt_ref_no').val(_qt_ref_no);
+        $('#remove_item_name').text($('#qt_quot_insurer_'+_ql_sn+' option:SELECTED').val());
+        $('#remove_ql_item').modal('show');
+                
+   });//end removequotation item
+   
+   //Delete a Quotation list item
+   $('#remove_quot_item').click(function(){
+       var _ql_sn=$('#remove_ql_sn').val();
+       var _qt_ref_no=$('#remove_qt_ref_no').val();
+       var _data='_ql_sn='+_ql_sn+'&_qt_ref_no='+_qt_ref_no;
+       $.ajax({
+            type:"POST",
+            data:_data,
+            url:apppath+'/quotation/removeQuotationItem',
+            success:function(res){
+                if(res==1){
+                    //Success
+                    $('#ql_'+_ql_sn).remove();
+                    $('#remove_ql_item').modal('hide');
+                    
+                }//end if
+            },//end sucess
+            error:function(error){
+            console.log('ERROR: '+error);
+            }
+       });
+               
+   });
+        
 });

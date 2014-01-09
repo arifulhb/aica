@@ -1783,91 +1783,162 @@
             </header>
             <section class="panel-body">
                 <div class="form-group">
-
-                    <div class="col-sm-6">
-                        <label class="col-sm-3 control-label req" for="qt_quot_insurer">Insurer</label>
-                        <div class="col-md-6">                            
-                            <select id="qt_quot_insurer" name="qt_quot_insurer" class="form-control  m-b">                                
-                                <option selected disabled>Select an Option</option>   
+                    <div class="col-sm-12">
+                        <table class="table table-condensed table-bordered table-striped table-responsive table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Insurer</th>
+                                    <th>Workshop</th>
+                                    <th>Premium</th>
+                                    <th>Excess</th>
+                                    <th>Remark</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="quotation_list">
                                 <?php
-                                if(isset($qt_insurance_type)){
-                                    //isset
-                                    if($qt_insurance_type=='Private'){ ?>
-                                        <option selected="" disabled="">Select an Option</option>
-                                        <option <?php echo $_quot_insurer=='AIG (All Age)'?'SELECTED':'';?> value="AIG (All Age)">AIG (All Age)</option>
-                                        <option <?php echo $_quot_insurer=='AIG (All Age NCD P)'?'SELECTED':'';?>  value="AIG (All Age NCD P)">AIG (All Age NCD P)</option>
-                                        <option <?php echo $_quot_insurer=='AIG (Restricted Age)'?'SELECTED':'';?>  value="AIG (Restricted Age)">AIG (Restricted Age)</option>
-                                        <option <?php echo $_quot_insurer=='AIG (Restricted NCD P)'?'SELECTED':'';?>  value="AIG (Restricted NCD P)">AIG (Restricted NCD P)</option>
-                                        <option <?php echo $_quot_insurer=='AXA'?'SELECTED':'';?>  value="AXA">AXA</option>
-                                        <option <?php echo $_quot_insurer=='AXA (NCD P)'?'SELECTED':'';?>  value="AXA (NCD P)">AXA (NCD P)</option>
-                                        <option <?php echo $_quot_insurer=='China Taiping'?'SELECTED':'';?>  value="China Taiping">China Taiping</option>
-                                        <option <?php echo $_quot_insurer=='Liberty'?'SELECTED':'';?>  value="Liberty">Liberty</option>
-                                        <option <?php echo $_quot_insurer=='Liberty (NCD P)'?'SELECTED':'';?>  value="Liberty (NCD P)">Liberty (NCD P)</option>
-                                        <option <?php echo $_quot_insurer=='MSIG'?'SELECTED':'';?>  value="MSIG">MSIG</option>
-                                        <option <?php echo $_quot_insurer=='MSIG (NCD P)'?'SELECTED':'';?>  value="MSIG (NCD P)">MSIG (NCD P)</option>
-                                        <option <?php echo $_quot_insurer=='NTUC'?'SELECTED':'';?>  value="NTUC">NTUC</option>
-                                        <option <?php echo $_quot_insurer=='NTUC (NCD P)'?'SELECTED':'';?>  value="NTUC (NCD P)">NTUC (NCD P)</option>
+                                $max_ql_sn=array(1);
+                                if(isset($_quot_list)){ 
+                                    foreach ($_quot_list as $item): ?>
+                                        <tr id="ql_<?php echo $item['ql_sn'];?>">
+                                        <td>
+                                              <select id="qt_quot_insurer_<?php echo $item['ql_sn'];?>" name="qt_quot_insurer_<?php echo $item['ql_sn'];?>" class="form-control">                                
+                                                <option selected disabled>Select an Insurer</option>   
+                                                <?php
+                                                if(isset($qt_insurance_type)){ 
+                                                    //isset                                                
+                                                    if($qt_insurance_type=='Private'){ ?>
+
+                                                        <option <?php echo $item['ql_insurer']=='AIG (All Age)'?'SELECTED':'';?> value="AIG (All Age)">AIG (All Age)</option>
+                                                        <option <?php echo $item['ql_insurer']=='AIG (All Age NCD P)'?'SELECTED':'';?>  value="AIG (All Age NCD P)">AIG (All Age NCD P)</option>
+                                                        <option <?php echo $item['ql_insurer']=='AIG (Restricted Age)'?'SELECTED':'';?>  value="AIG (Restricted Age)">AIG (Restricted Age)</option>
+                                                        <option <?php echo $item['ql_insurer']=='AIG (Restricted NCD P)'?'SELECTED':'';?>  value="AIG (Restricted NCD P)">AIG (Restricted NCD P)</option>
+                                                        <option <?php echo $item['ql_insurer']=='AXA'?'SELECTED':'';?>  value="AXA">AXA</option>
+                                                        <option <?php echo $item['ql_insurer']=='AXA (NCD P)'?'SELECTED':'';?>  value="AXA (NCD P)">AXA (NCD P)</option>
+                                                        <option <?php echo $item['ql_insurer']=='China Taiping'?'SELECTED':'';?>  value="China Taiping">China Taiping</option>
+                                                        <option <?php echo $item['ql_insurer']=='Liberty'?'SELECTED':'';?>  value="Liberty">Liberty</option>
+                                                        <option <?php echo $item['ql_insurer']=='Liberty (NCD P)'?'SELECTED':'';?>  value="Liberty (NCD P)">Liberty (NCD P)</option>
+                                                        <option <?php echo $item['ql_insurer']=='MSIG'?'SELECTED':'';?>  value="MSIG">MSIG</option>
+                                                        <option <?php echo $item['ql_insurer']=='MSIG (NCD P)'?'SELECTED':'';?>  value="MSIG (NCD P)">MSIG (NCD P)</option>
+                                                        <option <?php echo $item['ql_insurer']=='NTUC'?'SELECTED':'';?>  value="NTUC">NTUC</option>
+                                                        <option <?php echo $item['ql_insurer']=='NTUC (NCD P)'?'SELECTED':'';?>  value="NTUC (NCD P)">NTUC (NCD P)</option>
+                                                        <?php                                        
+                                                    }elseif($qt_insurance_type=='Commercial'){?>                                                    
+                                                        <option <?php echo $item['ql_insurer']=='AIG'?'SELECTED':'';?> value="AIG">AIG</option>
+                                                        <option <?php echo $item['ql_insurer']=='AXA'?'SELECTED':'';?> value="AXA">AXA</option>
+                                                        <option <?php echo $item['ql_insurer']=='China Taiping'?'SELECTED':'';?> value="China Taiping">China Taiping</option>
+                                                        <option <?php echo $item['ql_insurer']=='MSIG'?'SELECTED':'';?> value="MSIG">MSIG</option>
+                                                        <option <?php echo $item['ql_insurer']=='NTUC'?'SELECTED':'';?> value="NTUC">NTUC</option>
+                                                        <?php 
+                                                    }
+                                                }//end if
+                                                ?>
+                                            </select>
+                                        </td>
+                                        <td>  <select id="qt_quot_workshop_<?php echo $item['ql_sn'];?>" name="qt_quot_workshop_<?php echo $item['ql_sn'];?>"
+                                                    class="form-control">
+                                                <option selected disabled>Select a Workshop</option>
+                                                <option  <?php echo $item['ql_workshop']=='Any'?'SELECTED':'';?> value="Any">Any</option>
+                                                <option  <?php echo $item['ql_workshop']=='Authorised'?'SELECTED':'';?> value="Authorised">Authorised</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="number" id="qt_quot_premium_<?php echo $item['ql_sn'];?>" name="qt_quot_premium_<?php echo $item['ql_sn'];?>" class="form-control m-b"
+                                       value="<?php echo $item['ql_premium'];?>" required>
+                                        </td>
+                                        <td>
+                                            <input type="number" id="qt_quot_excess_<?php echo $item['ql_sn'];?>" name="qt_quot_excess_<?php echo $item['ql_sn'];?>" class="form-control m-b"
+                                       value="<?php echo $item['ql_excess'];?>" required>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="qt_quot_remark_<?php echo $item['ql_sn'];?>" name="qt_quot_remark_<?php echo $item['ql_sn'];?>" class="form-control m-b"
+                                       value="<?php echo $item['ql_remark'];;?>" required>
+                                        </td>
+                                        <td class="action">
+                                            <button id="ql_save_<?php echo $item['ql_sn'];?>" class="btn btn-link btn-primary btn-sm ql_save" title="Save" value="<?php echo $item['ql_sn'];?>"><i class="icon-save"></i> </button>
+                                            <button id="ql_remove_<?php echo $item['ql_sn'];?>" class="btn btn-link btn-danger btn-sm ql_remove" value="<?php echo $item['ql_sn'];?>" title="Remove"><i class="icon-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                        
                                         <?php                                        
-                                    }elseif($qt_insurance_type=='Commercial'){?>
-                                        <option selected="" disabled="">Select an Option</option>
-                                        <option <?php echo $_quot_insurer=='AIG'?'SELECTED':'';?> value="AIG">AIG</option>
-                                        <option <?php echo $_quot_insurer=='AXA'?'SELECTED':'';?> value="AXA">AXA</option>
-                                        <option <?php echo $_quot_insurer=='China Taiping'?'SELECTED':'';?> value="China Taiping">China Taiping</option>
-                                        <option <?php echo $_quot_insurer=='MSIG'?'SELECTED':'';?> value="MSIG">MSIG</option>
-                                        <option <?php echo $_quot_insurer=='NTUC'?'SELECTED':'';?> value="NTUC">NTUC</option>
-                                        <?php 
-                                    }
+                                        array_push($max_ql_sn,$item['ql_sn']);
+                                    endforeach;
                                 }//end if
-                                ?>
-                            </select>
-                        </div>
-                    </div>
-                     <div class="col-sm-6">
-
-                        <label class="col-sm-3 control-label req" for="qt_quot_workshop">Workshop</label>
-
-                        <div class="col-md-6">
-                            <select id="qt_quot_workshop" name="qt_quot_workshop"
-                                    class="form-control  m-b">
-                                <option selected disabled>Select an Option</option>
-                                <option  <?php echo $_quot_workshop=='Any'?'SELECTED':'';?> value="Any">Any</option>
-                                <option  <?php echo $_quot_workshop=='Authorised'?'SELECTED':'';?> value="Authorised">Authorised</option>
-                            </select>
-                        </div>
-
-                    </div>
-
-                </div>
-                <div class="line line-dashed line-lg pull-in"></div>
-                <div class="form-group">
-
-                    <div class="col-sm-6">
-                        <label class="col-sm-3 control-label req" for="qt_quot_premium">Premium</label>
-                        <div class="col-md-6">                            
-                            <input type="number" id="qt_quot_premium" name="qt_quot_premium" class="form-control m-b"
+                                else{ /* ?>
+                               
+                                <tr id="ql_1">
+                                    <td>
+                                          <select id="qt_quot_insurer_1" name="qt_quot_insurer_1" class="form-control">                                
+                                            <option selected disabled>Select an Insurer</option>   
+                                            <?php
+                                            if(isset($qt_insurance_type)){ 
+                                                //isset                                                
+                                                if($qt_insurance_type=='Private'){ ?>
+                                                    
+                                                    <option <?php echo $_quot_insurer=='AIG (All Age)'?'SELECTED':'';?> value="AIG (All Age)">AIG (All Age)</option>
+                                                    <option <?php echo $_quot_insurer=='AIG (All Age NCD P)'?'SELECTED':'';?>  value="AIG (All Age NCD P)">AIG (All Age NCD P)</option>
+                                                    <option <?php echo $_quot_insurer=='AIG (Restricted Age)'?'SELECTED':'';?>  value="AIG (Restricted Age)">AIG (Restricted Age)</option>
+                                                    <option <?php echo $_quot_insurer=='AIG (Restricted NCD P)'?'SELECTED':'';?>  value="AIG (Restricted NCD P)">AIG (Restricted NCD P)</option>
+                                                    <option <?php echo $_quot_insurer=='AXA'?'SELECTED':'';?>  value="AXA">AXA</option>
+                                                    <option <?php echo $_quot_insurer=='AXA (NCD P)'?'SELECTED':'';?>  value="AXA (NCD P)">AXA (NCD P)</option>
+                                                    <option <?php echo $_quot_insurer=='China Taiping'?'SELECTED':'';?>  value="China Taiping">China Taiping</option>
+                                                    <option <?php echo $_quot_insurer=='Liberty'?'SELECTED':'';?>  value="Liberty">Liberty</option>
+                                                    <option <?php echo $_quot_insurer=='Liberty (NCD P)'?'SELECTED':'';?>  value="Liberty (NCD P)">Liberty (NCD P)</option>
+                                                    <option <?php echo $_quot_insurer=='MSIG'?'SELECTED':'';?>  value="MSIG">MSIG</option>
+                                                    <option <?php echo $_quot_insurer=='MSIG (NCD P)'?'SELECTED':'';?>  value="MSIG (NCD P)">MSIG (NCD P)</option>
+                                                    <option <?php echo $_quot_insurer=='NTUC'?'SELECTED':'';?>  value="NTUC">NTUC</option>
+                                                    <option <?php echo $_quot_insurer=='NTUC (NCD P)'?'SELECTED':'';?>  value="NTUC (NCD P)">NTUC (NCD P)</option>
+                                                    <?php                                        
+                                                }elseif($qt_insurance_type=='Commercial'){?>                                                    
+                                                    <option <?php echo $_quot_insurer=='AIG'?'SELECTED':'';?> value="AIG">AIG</option>
+                                                    <option <?php echo $_quot_insurer=='AXA'?'SELECTED':'';?> value="AXA">AXA</option>
+                                                    <option <?php echo $_quot_insurer=='China Taiping'?'SELECTED':'';?> value="China Taiping">China Taiping</option>
+                                                    <option <?php echo $_quot_insurer=='MSIG'?'SELECTED':'';?> value="MSIG">MSIG</option>
+                                                    <option <?php echo $_quot_insurer=='NTUC'?'SELECTED':'';?> value="NTUC">NTUC</option>
+                                                    <?php 
+                                                }
+                                            }//end if
+                                            ?>
+                                        </select>
+                                    </td>
+                                    <td>  <select id="qt_quot_workshop_1" name="qt_quot_workshop_1"
+                                                class="form-control">
+                                            <option selected disabled>Select a Workshop</option>
+                                            <option  <?php echo $_quot_workshop=='Any'?'SELECTED':'';?> value="Any">Any</option>
+                                            <option  <?php echo $_quot_workshop=='Authorised'?'SELECTED':'';?> value="Authorised">Authorised</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input type="number" id="qt_quot_premium_1" name="qt_quot_premium_1" class="form-control m-b"
                                    value="<?php echo $_quot_premium;?>" required>
-                        </div>
-                    </div>
-                     <div class="col-sm-6">
-                        <label class="col-sm-3 control-label req" for="qt_quot_excess">Excess</label>
-                        <div class="col-md-6">
-                            <input type="number" id="qt_quot_excess" name="qt_quot_excess" class="form-control m-b"
+                                    </td>
+                                    <td>
+                                        <input type="number" id="qt_quot_excess_1" name="qt_quot_excess_1" class="form-control m-b"
                                    value="<?php echo $_quot_excess;?>" required>
-                        </div>
+                                    </td>
+                                    <td>
+                                        <input type="text" id="qt_quot_remark_1" name="qt_quot_remark_1" class="form-control m-b"
+                                   value="<?php echo '';?>" required>
+                                    </td>
+                                    <td class="action">
+                                        <button id="ql_save_1" class="btn btn-link btn-info btn-sm ql_save" title="Save" value="1"><i class="icon-save"></i> </button>
+                                        <button id="ql_remove_1" class="btn btn-link btn-danger btn-sm ql_save" value="1" title="Remove"><i class="icon-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <?php
+                                */
+                                }//end else
+                                ?>
+                            </tbody>
+                            <input type="hidden" id="total_ql" value="<?php echo max($max_ql_sn);?>">
+                            <tfoot>
+                                <td colspan="5"></td>
+                                <td><button id="ql_add" class="btn btn-sm btn-info"><i class="icon-plus"></i> Add New</button></td>
+                            </tfoot>
+                        </table>
                     </div>
                 </div>
-                <div class="line line-dashed line-lg pull-in"></div>
-                <div class="form-group">
-                        <div class="col-sm-12">
-                            <label class="col-sm-3 control-label">Remark</label>
-                            <div class="col-sm-7">
-                                <input type="hidden" id="qt_quot_remark" name="qt_quot_remark" value="<?php echo $_quot_remarkr;?>" >
-                                <div id="qt_quot_remark_wrap" class="form-control" 
-                                     style="overflow:scroll;height:150px;max-height:150px" 
-                                     contenteditable="true"><?php echo $_quot_remarkr!=''?$_quot_remarkr:'Remark Text';;?></div>
-                            </div>
-                        </div>
-                    </div>
+                
             </section>
         </section>      
         <!-- Selected Insurance Detail -->
@@ -2172,4 +2243,25 @@
         </div>
     </section>
 </section>
+<!-- Modal -->
+<div class="modal fade" id="remove_ql_item" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Remove Quotation Item</h4>
+      </div>
+      <div class="modal-body">
+          <p>Are you sure to remove <strong><span id="remove_item_name"></span></strong>?</p>
+          <input type="hidden" id="remove_ql_sn" value="">
+          <input type="hidden" id="remove_qt_ref_no" value="">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" id="remove_quot_item" class="btn btn-danger"><i class="icon-trash"></i> Remove</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 <script>require(['page/quotation_add']);</script>

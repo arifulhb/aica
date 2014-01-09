@@ -84,6 +84,7 @@ class Quotation extends CI_Controller {
                 $data['_record'] = $this->quotation_model->getRecord($ref_no);
                 $data['_claim_history']=$this->quotation_model->getClaimHistoryList($ref_no);
                 $data['_history']=$this->quotation_model->getHistory($ref_no);
+                $data['_quot_list']=$this->quotation_model->update_quotation_item_list($ref_no);
                 $data['_page_title']="Quotation View";
                 $data['_page_caption']="Quotation View";
                 $data['_page_description']="Quotation View";
@@ -100,8 +101,8 @@ class Quotation extends CI_Controller {
                     $this->template->quotation_view($data);  
                 }else{
                     $this->template->access_denied($data);   
-                }
-            }
+                }//end local else                
+            }//end else
             
             
         }else{
@@ -120,7 +121,7 @@ class Quotation extends CI_Controller {
             $this->load->model('quotation_model');
             $data['_record'] = $this->quotation_model->getRecord($ref_no);
             $data['_claim_history']=$this->quotation_model->getClaimHistoryList($ref_no);
-            
+            $data['_quot_list']=$this->quotation_model->update_quotation_item_list($ref_no);
             if(in_array('quotation_all',$this->session->userdata('user_access'))){
                 $data['_history']=$this->quotation_model->getHistory($ref_no);
 
@@ -456,6 +457,35 @@ class Quotation extends CI_Controller {
             echo 'fail';
         }
                 
+    }//end function
+    
+    public function updateQuotationItem(){
+        
+        $qt_ref_no      = $this->input->post('_qt_ref_no');
+        $ql_sn          = $this->input->post('_ql_sn');
+        $data['ql_insurer']= $this->input->post('_insurer');
+        $data['ql_workshop']= $this->input->post('_workstation');
+        $data['ql_premium']= $this->input->post('_premium');
+        $data['ql_excess']= $this->input->post('_excess');
+        $data['ql_remark']= $this->input->post('_remark');
+        
+        $this->load->model('quotation_model');        
+        $res=$this->quotation_model->update_quotation_item($qt_ref_no,$ql_sn,$data);
+        
+        echo $res;
+        
+    }//end function
+    
+    public function removeQuotationItem(){
+        
+        $qt_ref_no      = $this->input->post('_qt_ref_no');
+        $ql_sn          = $this->input->post('_ql_sn');
+        
+        $this->load->model('quotation_model');        
+        $res=$this->quotation_model->remove_quotation_item($qt_ref_no,$ql_sn);
+        
+        echo $res;
+        
     }//end function
 
 }//end class

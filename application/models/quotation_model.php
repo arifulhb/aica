@@ -239,4 +239,51 @@ class Quotation_model extends CI_Model
         
     }//end function
     
+    public function update_quotation_item_list($qt_ref_no){
+        
+        $this->db->select('*');
+        $this->db->from('tbl_quotations_list');
+        $this->db->where('qt_ref_no',$qt_ref_no);        
+        $res=$this->db->get();
+        
+        return $res->result_array();
+        
+    }//end function
+    
+    public function update_quotation_item($qt_ref_no, $ql_sn,$data){
+        
+        $this->db->select('qt_ref_no, ql_sn');
+        $this->db->from('tbl_quotations_list');
+        $this->db->where('qt_ref_no',$qt_ref_no);
+        $this->db->where('ql_sn',$ql_sn);
+        $res=$this->db->get();
+        
+        $in_res='';
+        if($res->num_rows()==0){
+            //Add
+            $this->db->set($data);
+            $this->db->set('qt_ref_no',$qt_ref_no);
+            $this->db->set('ql_sn',$ql_sn);
+            $in_res=$this->db->insert('tbl_quotations_list');
+        }else{
+            //Update
+            $this->db->where('qt_ref_no',$qt_ref_no);
+            $this->db->where('ql_sn',$ql_sn);
+            $in_res=$this->db->update('tbl_quotations_list',$data);                
+            
+        }//end else
+        
+        return $in_res;
+    }//end function
+    
+    public function remove_quotation_item($qt_ref_no, $ql_sn){
+        
+        $this->db->where('qt_ref_no',$qt_ref_no);
+        $this->db->where('ql_sn',$ql_sn);
+        $res=$this->db->delete('tbl_quotations_list');                
+        
+        return $res;
+
+    }//end function
+    
 }//end class
