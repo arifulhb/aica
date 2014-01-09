@@ -83,8 +83,9 @@ class Quotation extends CI_Controller {
             if(in_array('quotation_all',$this->session->userdata('user_access'))){
                 $data['_record'] = $this->quotation_model->getRecord($ref_no);
                 $data['_claim_history']=$this->quotation_model->getClaimHistoryList($ref_no);
+                $data['_driver_list']=$this->quotation_model->getNameDriverList($ref_no);
                 $data['_history']=$this->quotation_model->getHistory($ref_no);
-                $data['_quot_list']=$this->quotation_model->update_quotation_item_list($ref_no);
+                $data['_quot_list']=$this->quotation_model->get_quotation_item_list($ref_no);
                 $data['_page_title']="Quotation View";
                 $data['_page_caption']="Quotation View";
                 $data['_page_description']="Quotation View";
@@ -121,7 +122,9 @@ class Quotation extends CI_Controller {
             $this->load->model('quotation_model');
             $data['_record'] = $this->quotation_model->getRecord($ref_no);
             $data['_claim_history']=$this->quotation_model->getClaimHistoryList($ref_no);
-            $data['_quot_list']=$this->quotation_model->update_quotation_item_list($ref_no);
+            $data['_driver_list']=$this->quotation_model->getNameDriverList($ref_no);
+            $data['_quot_list']=$this->quotation_model->get_quotation_item_list($ref_no);//???
+            
             if(in_array('quotation_all',$this->session->userdata('user_access'))){
                 $data['_history']=$this->quotation_model->getHistory($ref_no);
 
@@ -499,6 +502,46 @@ class Quotation extends CI_Controller {
         echo $res;
         
     }//end function removeClaimHistory
+    
+    public function removeNameDriver(){
+        
+        $qt_ref_no      = $this->input->post('_qt_ref_no');
+        $dsn          = $this->input->post('_dsn');//claim history no
+        
+        $this->load->model('quotation_model');        
+        $res=$this->quotation_model->remove_name_driver($qt_ref_no,$dsn);
+        
+        echo $res;
+        
+    }//end function removeClaimHistory
+    
+    public function saveNameDriver(){
+        
+        $qt_ref_no=$this->input->post('_qt_ref_no');
+        $_dsn=$this->input->post('_dsn');
+        
+        $data['nd_name']=$this->input->post('_name');
+        $data['nd_nric']=$this->input->post('_nric');
+        
+        $data['nd_dob']=date('Y-m-d', strtotime($this->input->post('_dob')));
+        $data['nd_license_pass_date']=date('Y-m-d', strtotime($this->input->post('_license_date')));
+        $data['nd_relationship']=$this->input->post('_relationsip');
+        $data['nd_gender']=$this->input->post('_gender');
+        $data['nd_mstatus']=$this->input->post('_mstatus');//
+        $data['nd_occupation']=$this->input->post('_occupation');
+        $data['nd_history']=$this->input->post('_history');
+        
+        
+        $this->load->model('quotation_model');
+        $res=$this->quotation_model->update_name_driver($data,$qt_ref_no,$_dsn);
+        
+        if($res==true){
+            echo $res;
+        }else{
+            echo 'fail';
+        }
+        
+    }//end function saveNameDriver
 
 }//end class
 ?>

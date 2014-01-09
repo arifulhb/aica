@@ -639,6 +639,10 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
     $('#qt_quot_remark_wrap').bind('change keypress focusout',function(){
         $('#qt_quot_remark').val($(this).text());
     });
+    //Quotation
+//    $('#qt_quot_remark_wrap').bind('change keypress focusout',function(){
+//        $('#qt_driver_1_history').val($(this).text());
+//    });
     
     //
     //Dynamic
@@ -646,12 +650,14 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
     //Claim History
     if($('#_action').val()!='update'){
         var claim_history=1;
+        var named_driver=1;
     }else{
         var claim_history=$('#total_claim_history').val();
+        var named_driver=$('#total_named_driver').val();
     }
     $('.add_claim_history').on('click',function(){
         claim_history++;
-        //var add='<label>Total Rows now: '+claim_history +'</label>';
+        
         var claim='<section class="panel" id="qt_claim_history_'+claim_history+'">';
             claim+='<header class="panel-heading font-bold">';
                 claim+='<ul class="nav nav-pills pull-right">';                
@@ -665,54 +671,54 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
                 claim+='<div class="form-group"><div class="col-sm-6">';
                 claim+='<label class="col-sm-3 control-label req" for="qt_claim_'+claim_history+'_driver_name">Driver Name</label>';
                 claim+='<div class="col-md-9">';
-                claim+='<input type="text" class="form-control" id="qt_claim_'+claim_history+'_driver_name" maxlength="50" name="qt_claim_'+claim_history+'_driver_name" required="" placeholder="Driver Name">';
+                claim+='<input type="text" class="form-control m-b" id="qt_claim_'+claim_history+'_driver_name" maxlength="50" name="qt_claim_'+claim_history+'_driver_name" required="" placeholder="Driver Name">';
                 claim+='</div></div><div class="col-sm-6">';
                 claim+='<label class="col-sm-3 control-label req" for="qt_claim_'+claim_history+'_vehicle_no">Vehicle No.</label>';
                 claim+='<div class="col-md-9">';
-                claim+='<input type="text" class="form-control" id="qt_claim_'+claim_history+'_vehicle_no" name="qt_claim_'+claim_history+'_vehicle_no" required="" placeholder="Vehicle No.">';
+                claim+='<input type="text" class="form-control m-b" id="qt_claim_'+claim_history+'_vehicle_no" name="qt_claim_'+claim_history+'_vehicle_no" required="" placeholder="Vehicle No.">';
                 claim+='</div></div></div>';
                 claim+='<div class="line line-dashed line-lg pull-in"></div>';
                 claim+='<div class="form-group"><div class="col-sm-6">';
                 claim+='<label class="col-sm-3 control-label req" for="qt_claim_'+claim_history+'_accident_date">Accident Date</label>';
-                claim+='<div class="col-md-9"><input class="input-sm datepicker-input form-control" id="qt_claim_'+claim_history+'_accident_date" size="16" type="text" name="qt_claim_'+claim_history+'_accident_date" maxlength="12" parsley-maxlength="12" parsley-trigger="focusout" data-date-format="dd-mm-yyyy" placeholder="Accident Date">';
+                claim+='<div class="col-md-9"><input class="input-sm datepicker-input form-control m-b" id="qt_claim_'+claim_history+'_accident_date" size="16" type="text" name="qt_claim_'+claim_history+'_accident_date" maxlength="12" parsley-maxlength="12" parsley-trigger="focusout" data-date-format="dd-mm-yyyy" placeholder="Accident Date">';
                 claim+='</div></div>';
                 claim+='<div class="col-sm-6"><label class="col-sm-3 control-label req" for="qt_claim_'+claim_history+'_reporting_date">Reporting Date</label>';
-                claim+='<div class="col-md-9"><input class="input-sm datepicker-input form-control" id="qt_claim_'+claim_history+'_reporting_date" size="16" type="text" name="qt_claim_'+claim_history+'_reporting_date" maxlength="12" parsley-maxlength="12" parsley-trigger="focusout" data-date-format="dd-mm-yyyy" placeholder="Reporting Date">';
+                claim+='<div class="col-md-9"><input class="input-sm datepicker-input form-control m-b" id="qt_claim_'+claim_history+'_reporting_date" size="16" type="text" name="qt_claim_'+claim_history+'_reporting_date" maxlength="12" parsley-maxlength="12" parsley-trigger="focusout" data-date-format="dd-mm-yyyy" placeholder="Reporting Date">';
                 claim+='</div></div></div>';                
                 claim+='<div class="line line-dashed line-lg pull-in"></div>';
                 claim+='<div class="form-group"><div class="col-sm-6">';
                 claim+='<label class="col-sm-3 control-label" for="qt_claim_'+claim_history+'_claims_paid_od">Claims Paid (OD)</label><div class="col-md-9">';
-                claim+='<input type="number" class="form-control" id="qt_claim_'+claim_history+'_claims_paid_od" name="qt_claim_'+claim_history+'_claims_paid_od" placeholder="Claims Paid (OD)"></div></div>';
+                claim+='<input type="number" class="form-control m-b" id="qt_claim_'+claim_history+'_claims_paid_od" name="qt_claim_'+claim_history+'_claims_paid_od" placeholder="Claims Paid (OD)"></div></div>';
                 claim+='<div class="col-sm-6"><label class="col-sm-3 control-'+claim_history+'abel" for="qt_claim_'+claim_history+'_claims_paid_tppd">Claims Paid (TPPD)</label><div class="col-md-9">';
-                claim+='<input type="number" class="form-control" id="qt_claim_'+claim_history+'_claims_paid_tppd" name="qt_claim_'+claim_history+'_claims_paid_tppd" placeholder="Claims Paid (TPPD)">';
+                claim+='<input type="number" class="form-control m-b" id="qt_claim_'+claim_history+'_claims_paid_tppd" name="qt_claim_'+claim_history+'_claims_paid_tppd" placeholder="Claims Paid (TPPD)">';
                 claim+='</div></div></div>'; 
                 claim+='<div class="line line-dashed line-lg pull-in"></div>';
                 claim+='<div class="form-group"><div class="col-sm-6">';
                 claim+='<label class="col-sm-3 control-label" for="qt_claim_'+claim_history+'_claims_paid_tpbi">Claims Paid (TPBI)</label><div class="col-md-9">';
-                claim+='<input type="number" class="form-control" id="qt_claim_'+claim_history+'_claims_paid_tpbi" name="qt_claim_'+claim_history+'_claims_paid_tpbi" placeholder="Claims Paid (TPBI)">';
+                claim+='<input type="number" class="form-control m-b" id="qt_claim_'+claim_history+'_claims_paid_tpbi" name="qt_claim_'+claim_history+'_claims_paid_tpbi" placeholder="Claims Paid (TPBI)">';
                 claim+='</div></div></div>';
                 claim+='<div class="line line-dashed line-lg pull-in"></div>';
                 
                 claim+='<div class="form-group"><div class="col-sm-6">';
                 claim+='<label class="col-sm-3 control-label" for="qt_claim_'+claim_history+'_claims_reserved_tppd">Claims Reserved (TPPD)</label><div class="col-md-9">';
-                claim+='<input type="number" class="form-control" id="qt_claim_'+claim_history+'_claims_reserved_tppd" name="qt_claim_'+claim_history+'_claims_reserved_tppd" placeholder="Claims Reserved (TPPD)"></div></div>';
+                claim+='<input type="number" class="form-control m-b" id="qt_claim_'+claim_history+'_claims_reserved_tppd" name="qt_claim_'+claim_history+'_claims_reserved_tppd" placeholder="Claims Reserved (TPPD)"></div></div>';
                 claim+='<div class="col-sm-6"><label class="col-sm-3 control-label" for="qt_claim_'+claim_history+'_claims_reserved_tpbi">Claims Reserved (TPBI)</label>';
-                claim+='<div class="col-md-9"><input type="number" class="form-control" id="qt_claim_'+claim_history+'_claims_reserved_tpbi" name="qt_claim_'+claim_history+'_claims_reserved_tpbi" placeholder="Claims Reserved (TPBI)">';
+                claim+='<div class="col-md-9"><input type="number" class="form-control m-b" id="qt_claim_'+claim_history+'_claims_reserved_tpbi" name="qt_claim_'+claim_history+'_claims_reserved_tpbi" placeholder="Claims Reserved (TPBI)">';
                 claim+='</div></div></div>';                
                 claim+='<div class="line line-dashed line-lg pull-in"></div>';
                 
                 claim+='<div class="form-group"><div class="col-sm-6">';
                 claim+='<label class="col-sm-3 control-label" for="qt_claim_'+claim_history+'_windscreen">Windscreen</label><div class="col-md-9">';
-                claim+='<input type="text" class="form-control" id="qt_claim_'+claim_history+'_windscreen" name="qt_claim_'+claim_history+'_windscreen" placeholder="Windscreen"></div></div>';
+                claim+='<input type="text" class="form-control m-b" id="qt_claim_'+claim_history+'_windscreen" name="qt_claim_'+claim_history+'_windscreen" placeholder="Windscreen"></div></div>';
                 claim+='<div class="col-sm-6"><label class="col-sm-3 control-label" for="qt_claim_'+claim_history+'_reporting_only">Reporting Only</label>';
-                claim+='<div class="col-md-9"><input type="text" class="form-control" id="qt_claim_'+claim_history+'_reporting_only" name="qt_claim_'+claim_history+'_reporting_only" placeholder="Reporting Only">';
+                claim+='<div class="col-md-9"><input type="text" class="form-control m-b" id="qt_claim_'+claim_history+'_reporting_only" name="qt_claim_'+claim_history+'_reporting_only" placeholder="Reporting Only">';
                 claim+='</div></div></div>';
                 
                 claim+='<div class="form-group"><div class="col-sm-6">';
                 claim+='<label class="col-sm-3 control-label" for="qt_claim_'+claim_history+'_private_sattlement">Private Settlement</label><div class="col-md-9">';
-                claim+='<input type="text" class="form-control" id="qt_claim_'+claim_history+'_private_sattlement" name="qt_claim_'+claim_history+'_private_sattlement" placeholder="Private Settlement"></div></div><div class="col-sm-6">';
+                claim+='<input type="text" class="form-control m-b" id="qt_claim_'+claim_history+'_private_sattlement" name="qt_claim_'+claim_history+'_private_sattlement" placeholder="Private Settlement"></div></div><div class="col-sm-6">';
                 claim+='<label class="col-sm-3 control-label req" for="qt_claim_'+claim_history+'_referred">Referred to Partner Workshop</label><div class="col-md-9">';
-                claim+='<select id="qt_claim_'+claim_history+'_referred" class="form-control"><option value="Yes">Yes</option><option value="No">No</option></select>';
+                claim+='<select id="qt_claim_'+claim_history+'_referred" class="form-control m-b"><option value="Yes">Yes</option><option value="No">No</option></select>';
                 claim+='</div></div></div>';                
                 
                 claim+='<div class="line line-dashed line-lg pull-in"></div>';
@@ -927,10 +933,10 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
         $('#remove_ch_ref_no').val(_qt_ref_no);
         $('#remove_ch_name').text('Claim History ('+chn+')');//remove the row
         $('#remove_claim_history').modal('show');//remove the modal
-       
-       
+              
    });//end remove_dynamic
    
+   //REMOVE CLAIM HISTORY
    $('#remove_ch_item').click(function(){
        
        var _chn_sn=$('#remove_chn_sn').val();
@@ -954,5 +960,189 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
        });
        
    });//end function
+   
+   //Add Named Driver
+   $('.add_named_driver').click(function(){
+       named_driver++;
+       var  driver='<section class="panel" id="qt_driver_'+named_driver+'">';
+            driver+='<header class="panel-heading font-bold">';
+            driver+='<ul class="nav nav-pills pull-right">';
+            driver+='<li><a href="#" class="panel-toggle text-muted">';
+            driver+='<i class="icon-caret-down text-active"></i><i class="icon-caret-up text"></i></a></li>';            
+            driver+='</ul>Named Driver ('+named_driver+')</header>';
+            driver+='<section class="panel-body">';
+            
+            driver+='<div class="form-group"><div class="col-sm-6">';//begaining
+            driver+='<label class="col-sm-3 control-label req" for="qt_driver_'+named_driver+'_name">Name</label>';
+            driver+='<div class="col-md-6">';
+            driver+='<input type="text" class="form-control m-b" id="qt_driver_'+named_driver+'_name" required name="qt_driver_'+named_driver+'_name" placeholder="Name" maxlength="50">';
+            driver+='</div></div></div>';//closing
+            
+            driver+='<div class="line line-dashed line-lg pull-in"></div>';//devider
+            
+            driver+='<div class="form-group"><div class="col-sm-6">';//begaining
+            driver+='<label class="col-sm-3 control-label req" for="qt_driver_'+named_driver+'_nric">NRIC/FIN</label>';
+            driver+='<div class="col-md-6">';
+            driver+='<input type="text" class="form-control m-b" id="qt_driver_'+named_driver+'_nric" required name="qt_driver_'+named_driver+'_nric" placeholder="NRIC/FIN" maxlength="50">';
+            driver+='</div></div><div class="col-sm-6">';
+            driver+='<label class="col-sm-3 control-label req" for="qt_driver_'+named_driver+'_relationship">Relationship</label>';
+            driver+='<div class="col-md-6">';
+            driver+='<input type="text" class="form-control m-b" id="qt_driver_'+named_driver+'_relationship"  required name="qt_driver_'+named_driver+'_relationship" placeholder="Relationship" maxlength="50">';            
+            driver+='</div></div></div>';//closing
+            
+            driver+='<div class="line line-dashed line-lg pull-in"></div>';//devider
+            
+            driver+='<div class="form-group"><div class="col-sm-6">';//begaining
+            driver+='<label class="col-sm-3 control-label req" for="qt_driver_'+named_driver+'_dob">Date of Birth</label>';
+            driver+='<div class="col-md-6">';
+            driver+='<input class="input-sm datepicker-input form-control m-b" id="qt_driver_'+named_driver+'_dob" size="16" type="text" name="qt_driver_'+named_driver+'_dob" maxlength="12" required ';
+            driver+='parsley-maxlength="12" parsley-trigger="focusout" data-date-format="dd-mm-yyyy" placeholder="Date of Birth"> </div></div>';
+            driver+='<div class="col-sm-6">';
+            driver+='<label class="col-sm-3 control-label" >Age</label>';            
+            driver+='<div class="col-md-6"><label class="col-sm-3 control-label"><span id="qt_driver_'+named_driver+'_age">[Equation]</span></label>';            
+            driver+='</div></div></div>';//closing
+            
+            driver+='<div class="line line-dashed line-lg pull-in"></div>';//devider
+            
+            driver+='<div class="form-group"><div class="col-sm-6">';//begaining
+            driver+='<label class="col-sm-3 control-label req" for="qt_driver_'+named_driver+'_gender">Gender</label>';
+            driver+='<div class="col-md-6">';
+            driver+='<select name="qt_driver_'+named_driver+'_gender" id="qt_driver_'+named_driver+'_gender" class="form-control m-b">';
+            driver+='<option value="Male">Male</option><option value="Female">Female</option>';
+            driver+='</select></div></div>';
+            driver+='<div class="col-sm-6"><label class="col-sm-3 control-label req" for="qt_driver_'+named_driver+'_marital_status">Marital Status</label>';
+            driver+='<div class="col-md-6"> <select name="qt_driver_'+named_driver+'_marital_status" id="qt_driver_'+named_driver+'_marital_status" class="form-control m-b">';
+            driver+='<option value="Single">Single</option><option value="Married">Married</option>';            
+            driver+='</select></div></div></div>';//closing
+            
+            driver+='<div class="line line-dashed line-lg pull-in"></div>';//devider
+            
+            driver+='<div class="form-group"><div class="col-sm-6">';//begaining
+            driver+='<label class="col-sm-3 control-label req" for="qt_driver_'+named_driver+'_occupation">Occupation</label>';
+            driver+='<div class="col-md-6">';
+            driver+='<input type="text" class="form-control m-b" id="qt_driver_'+named_driver+'_occupation" placeholder="Occupation" maxlength="50"  required>';            
+            driver+='</div></div></div>';//closing
+            
+            driver+='<div class="line line-dashed line-lg pull-in"></div>';//devider
+            
+            driver+='<div class="form-group"><div class="col-sm-6">';//begaining
+            driver+='<label class="col-sm-3 control-label req" for="qt_driver_'+named_driver+'_license_date">Driving License Pass Date</label>';
+            driver+='<div class="col-md-6">';
+            driver+='<input class="input-sm datepicker-input form-control" id="qt_driver_'+named_driver+'_license_date" ';
+            driver+=' size="16" type="text" name="qt_driver_'+named_driver+'_license_date" maxlength="12" ';
+            driver+='parsley-maxlength="12" parsley-trigger="focusout"  required ';
+            driver+='data-date-format="dd-mm-yyyy" placeholder="Driving License Pass Date">  </div></div>';
+            driver+='<div class="col-sm-6">';
+            driver+='<label class="col-sm-3 control-label" >Driving Experience</label>';
+            driver+='<div class="col-md-6"><label class="control-label"><span id="qt_driver_'+named_driver+'_experience"></span></label>';//Calculated field            
+            driver+='</div></div></div>';//closing
+            
+            driver+='<div class="line line-dashed line-lg pull-in"></div>';//devider
+            
+            driver+='<div class="form-group"><div class="col-sm-12">';//begaining
+            driver+='<label class="col-sm-3 control-label">Claim History (3 Years)</label>';
+            driver+='<div class="col-sm-7"><input type="hidden" id="qt_driver_'+named_driver+'_history" name="qt_driver_'+named_driver+'_history">';
+            driver+='<div id="qt_driver_'+named_driver+'_history_wrap" class="form-control m-b" ';
+            driver+='style="overflow:scroll;height:150px;max-height:150px" contenteditable="true"></div>';            
+            driver+='</div></div></div>';//closing
+            
+            driver+='<div class="line line-dashed line-lg pull-in"></div>';//devider
+            driver+='<div class="form-group"><div class="col-sm-10"></div><div class="col-sm-2">';
+            driver+='<button type="button" class="btn btn-primary btn-save-driver pull-right" value="'+named_driver+'"><i class="icon-save"></i> Save</button>';
+            driver+='</div></div>';
+            driver+='</section></section>';
+            
+            
+       $('#named_driver_wrap').append(driver);
+   });//end add named driver
+    
+    //Save Named driver
+    $('#driver_area').on('click','.btn-save-driver',function(){
+        NProgress.start();
         
+        var _dsn=$(this).val();
+        var _qt_ref_no=$('#qt_ref_no').val();
+        
+        //fill variable
+        var _name=$('#qt_driver_'+_dsn+'_name').val();
+        var _nric=$('#qt_driver_'+_dsn+'_nric').val();
+        var _relationsip=$('#qt_driver_'+_dsn+'_relationship').val();
+        var _dob=$('#qt_driver_'+_dsn+'_dob').val();
+        var _gender=$('#qt_driver_'+_dsn+'_gender option:selected').val();
+        var _mstatus=$('#qt_driver_'+_dsn+'_marital_status option:selected').val();
+        var _occupation=$('#qt_driver_'+_dsn+'_occupation').val();
+        var _license_date=$('#qt_driver_'+_dsn+'_license_date').val();
+        var _history=$('#qt_driver_'+_dsn+'_history_wrap').text();
+        
+        //console.log(_history);
+        //return 0;
+        //set at _data
+        var  _data='_qt_ref_no='+_qt_ref_no;
+            _data+='&_dsn='+_dsn;
+            _data+='&_name='+_name;
+            _data+='&_nric='+_nric;
+            _data+='&_relationsip='+_relationsip;
+            _data+='&_dob='+_dob;
+            _data+='&_gender='+_gender;
+            _data+='&_mstatus='+_mstatus;
+            _data+='&_occupation='+_occupation;
+            _data+='&_license_date='+_license_date;
+            _data+='&_history='+_history;            
+            
+        //ajax save
+        $.ajax({
+            type:"POST",
+            data:_data,
+            url:apppath+'/quotation/saveNameDriver',
+            success:function(res){
+                if(res==1){
+                    //Success
+                    $("#save_message").show().delay(5000).queue(function(n) {
+                            $(this).hide('fast'); n();
+                        });  
+                    
+                }//end if
+            },//end sucess
+            error:function(error){
+                console.log('ERROR: '+error);
+            }
+        });
+        NProgress.done();
+    });//end saved driver
+    
+    //SHOW REMOVE DRIVER MODAL
+    $('.remove_driver').click(function(){
+        var dsn=$(this).val();
+         var _qt_ref_no=$('#qt_ref_no').val();
+        $('#remove_dsn_sn').val(dsn);
+        $('#remove_dsn_ref_no').val(_qt_ref_no);
+        $('#remove_n_driver').text('Name Driver ('+dsn+')');//remove the row
+        $('#remove_name_driver').modal('show');//remove the modal
+        
+    });//end show remove driver
+    
+    //REMOVE DRIVER
+    $('#remove_dsn_item').click(function(){
+       
+        var _dsn=$('#remove_dsn_sn').val();
+       var _qt_ref_no=$('#remove_dsn_ref_no').val();
+       var _data='_dsn='+_dsn+'&_qt_ref_no='+_qt_ref_no;
+       $.ajax({
+            type:"POST",
+            data:_data,
+            url:apppath+'/quotation/removeNameDriver',
+            success:function(res){
+                if(res==1){
+                    //Success
+                    $('#qt_driver_'+_dsn).remove();//remove the claim history panel
+                    $('#remove_name_driver').modal('hide');//hide the modal
+                    
+                }//end if
+            },//end sucess
+            error:function(error){
+                console.log('ERROR: '+error);
+            }
+       });
+    });//end remove driver
+    
 });

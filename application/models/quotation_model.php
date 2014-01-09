@@ -8,6 +8,10 @@ class Quotation_model extends CI_Model
         parent::__construct();
     }//end constract
     
+    /**
+     * 
+     * @return type
+     */
     public function getNewQuotationNo(){
         
         $this->db->select('qt_ref_no');
@@ -18,6 +22,11 @@ class Quotation_model extends CI_Model
         return $res->result_array();
     }//end function
     
+    /**
+     * 
+     * @param type $data
+     * @return boolean
+     */
     public function insert_quotation($data)
     {
         
@@ -36,6 +45,12 @@ class Quotation_model extends CI_Model
                         
     }//end function
     
+    /**
+     * 
+     * @param type $id
+     * @param type $table
+     */
+    
     private function create_record($id,$table)
     {
         $this->db->set('qt_ref_no',$id);
@@ -47,6 +62,12 @@ class Quotation_model extends CI_Model
         }
     }//end function
 
+    /**
+     * UPDATE FULL Quotation
+     * @param type $data
+     * @param type $ref_no
+     * @return type
+     */
     public function update_full($data,$ref_no)
     {
         
@@ -58,6 +79,12 @@ class Quotation_model extends CI_Model
         
     }//end function
     
+    /**
+     * UPDATE Vehicle private
+     * @param type $data
+     * @param type $ref_no
+     * @return type
+     */
     public function update_vehicle_private($data,$ref_no)
     {
         $this->db->where('qt_ref_no',$ref_no);        
@@ -67,6 +94,14 @@ class Quotation_model extends CI_Model
         
     }//end function
     
+    /**
+     * GET Quotation list with pagination 
+     * 
+     * @param type $per_page
+     * @param int $offset
+     * @param type $user_sn
+     * @return type
+     */
     public function getList($per_page,$offset,$user_sn=NULL){
          if($offset==''){
             $offset=0;
@@ -94,6 +129,12 @@ class Quotation_model extends CI_Model
         
     }//end function
 
+    /**
+     * GET Quotation record
+     * 
+     * @param type $ref_no
+     * @return type
+     */
     public function getRecord($ref_no){
         
         $this->db->select('q.qt_ref_no, UNIX_TIMESTAMP(q.qt_date) as qt_date, q.qt_renewal,q.qt_state,q.qt_insurance_type,q.qt_reasons_lost,q.qt_remarks,q.add_by');        
@@ -125,6 +166,12 @@ class Quotation_model extends CI_Model
         
     }//end function
 
+    /**
+     * Get total record number
+     * 
+     * @param type $user_sn
+     * @return type
+     */
     public function getTotalNum($user_sn=NULL){
         $this->db->select('qt_ref_no');
         $this->db->from('aica_quotation');
@@ -136,6 +183,12 @@ class Quotation_model extends CI_Model
         
     }//end function
 
+    /**
+     * UPDATE vehicle commercial part
+     * @param type $data
+     * @param type $ref_no
+     * @return type
+     */
     public function update_vehicle_commercial($data,$ref_no)
     {
         $this->db->where('qt_ref_no',$ref_no);        
@@ -144,6 +197,12 @@ class Quotation_model extends CI_Model
         return $res;
     }//end function
 
+    /**
+     * UPDATE a quotation
+     * 
+     * @param type $data
+     * @return type
+     */
     public function update_quotation($data){        
         
         $this->db->where('qt_ref_no',$data['qt_ref_no']);
@@ -155,7 +214,8 @@ class Quotation_model extends CI_Model
     }//end function update quotatioin
     
     /**
-     * Update history on each update
+     * Update Quotation update history on each update
+     * 
      * @param type $data
      */
     public function updateHistory($data){
@@ -166,6 +226,12 @@ class Quotation_model extends CI_Model
         
     }//end function 
 
+    /**
+     * GET Quotation Update History
+     * 
+     * @param type $qt_ref_no
+     * @return type
+     */
     public function getHistory($qt_ref_no){
         
         $this->db->select('q.qt_ref_no, q.add_by, uq.user_name as add_by_name, q.add_date, h.update_by, uh.user_name as update_by_name, h.update_date, h.update_from, h.update_to');
@@ -182,6 +248,12 @@ class Quotation_model extends CI_Model
         
     }//end function
     
+    /**
+     * DELETE A Quotation
+     * 
+     * @param type $qt_sn
+     * @return boolean
+     */
     public function deleteRecord($qt_sn){
         
         $this->db->trans_strict(FALSE);
@@ -199,6 +271,11 @@ class Quotation_model extends CI_Model
         }
     }//end function
     
+    /**
+     * GET Claim History List
+     * @param type $qt_ref_no
+     * @return type
+     */
     public function getClaimHistoryList($qt_ref_no){
         
         $this->db->select('qt_ref_no, clh_no, clh_driver_name, clh_vehicle_no, UNIX_TIMESTAMP(clh_accident_date) as clh_accident_date, UNIX_TIMESTAMP(clh_reporting_date) as clh_reporting_date, ');
@@ -211,9 +288,31 @@ class Quotation_model extends CI_Model
         
     }//end function
     
-    public function update_claim_history($data,$qt_ref_no, $clh_no){
+    /**
+     * GET Name driver list
+     * @param type $qt_ref_no
+     * @return type
+     */
+    public function getNameDriverList($qt_ref_no){
         
+        $this->db->select('qt_ref_no, nd_sn, nd_name, nd_nric, UNIX_TIMESTAMP(nd_dob) as nd_dob, UNIX_TIMESTAMP(nd_license_pass_date) as nd_license_pass_date, ');
+        $this->db->select('nd_relationship, nd_gender, nd_mstatus, nd_occupation, nd_history');
+        $this->db->from('aica_named_driver');
+        $this->db->where('qt_ref_no',$qt_ref_no);
+        $res=$this->db->get();
         
+        return $res->result_array();
+        
+    }//end function
+    
+    /**
+     * INSERT/Update Claim HISTORY
+     * @param type $data
+     * @param type $qt_ref_no
+     * @param type $clh_no
+     * @return type
+     */
+    public function upate_claim_history($data,$qt_ref_no, $clh_no){                
         
         $this->db->select('qt_ref_no, clh_no');
         $this->db->from('aica_claim_history');
@@ -224,22 +323,24 @@ class Quotation_model extends CI_Model
         if($res->num_rows()>0){            
             $this->db->where('qt_ref_no',$qt_ref_no);
             $this->db->where('clh_no',$clh_no);
-            $new_res=$this->db->update('aica_claim_history', $data); 
-            
+            $new_res=$this->db->update('aica_claim_history', $data);             
         }else{
             //insert
             $this->db->set($data);
             $this->db->set('qt_ref_no', $qt_ref_no);
             $this->db->set('clh_no', $clh_no);
             $new_res=$this->db->insert('aica_claim_history');
-        }
-        
-        
+        }//end else                
         return $new_res;
         
     }//end function
     
-    public function update_quotation_item_list($qt_ref_no){
+    /**
+     * GET Quotatioin Item List
+     * @param type $qt_ref_no
+     * @return type
+     */
+    public function get_quotation_item_list($qt_ref_no){
         
         $this->db->select('*');
         $this->db->from('tbl_quotations_list');
@@ -250,6 +351,13 @@ class Quotation_model extends CI_Model
         
     }//end function
     
+    /**
+     * INSERT/UPDATE Quotation item list
+     * @param type $qt_ref_no
+     * @param type $ql_sn
+     * @param type $data
+     * @return type
+     */
     public function update_quotation_item($qt_ref_no, $ql_sn,$data){
         
         $this->db->select('qt_ref_no, ql_sn');
@@ -276,6 +384,12 @@ class Quotation_model extends CI_Model
         return $in_res;
     }//end function
     
+    /**
+     * REMOVE Quotation item
+     * @param type $qt_ref_no
+     * @param type $ql_sn
+     * @return type
+     */
     public function remove_quotation_item($qt_ref_no, $ql_sn){
         
         $this->db->where('qt_ref_no',$qt_ref_no);
@@ -285,6 +399,12 @@ class Quotation_model extends CI_Model
         return $res;
     }//end function
     
+    /**
+     * Remove Claim History
+     * @param type $qt_ref_no
+     * @param type $chn
+     * @return type
+     */
     public function remove_claim_history($qt_ref_no, $chn){
         
         $this->db->where('qt_ref_no',$qt_ref_no);
@@ -293,5 +413,51 @@ class Quotation_model extends CI_Model
         
         return $res;
     }//end function    
+    
+    /**
+     * REMOVE NAME Driver 
+     * 
+     * @param type $qt_ref_no
+     * @param type $dsn
+     * @return type
+     */
+    public function remove_name_driver($qt_ref_no, $dsn){
+        
+        $this->db->where('qt_ref_no',$qt_ref_no);
+        $this->db->where('nd_sn',$dsn);
+        $res=$this->db->delete('aica_named_driver');                
+        
+        return $res;
+    }//end function    
+    
+    /**
+     * INSERT/UPDATE Name Driver
+     * @param type $data
+     * @param type $qt_ref_no
+     * @param type $_nd_sn
+     * @return type
+     */
+    public function update_name_driver($data,$qt_ref_no, $_nd_sn){                
+        
+        $this->db->select('qt_ref_no, nd_sn');
+        $this->db->from('aica_named_driver');
+        $this->db->where('qt_ref_no',$qt_ref_no);
+        $this->db->where('nd_sn',$_nd_sn);
+        $res=$this->db->get();
+        $new_res='';
+        if($res->num_rows()>0){            
+            $this->db->where('qt_ref_no',$qt_ref_no);
+            $this->db->where('nd_sn',$_nd_sn);
+            $new_res=$this->db->update('aica_named_driver', $data);             
+        }else{
+            //insert
+            $this->db->set($data);
+            $this->db->set('qt_ref_no', $qt_ref_no);
+            $this->db->set('nd_sn', $_nd_sn);
+            $new_res=$this->db->insert('aica_named_driver');
+        }//end else                
+        return $new_res;
+        
+    }//end function
     
 }//end class

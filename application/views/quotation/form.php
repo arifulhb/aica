@@ -1637,139 +1637,298 @@
         </div><!--claim history wrap-->      
         <div class="row">
             <div class="col-sm-12 text-right">
-                <a href="#" class="add_claim_history btn btn-info m-b" title="Add New Claim History">
+                <button type="button" class="add_claim_history btn btn-info m-b" title="Add New Claim History">
                     <i class="icon-plus"> Add New Claim History</i>
-                </a>
+                </button>                
           </div>
         </div>
         </div><!--claim area-->
+        
+        
         <!-- Named Driver 1 & 2 -->
+        <div id="driver_area"> 
+            <?php
+           // print_r($_driver_list);
+            
+            if(isset($_driver_list)){
+                $dsn_total=array(0);
+                foreach($_driver_list as $item): ?>
+                    <section class="panel" id="qt_driver_<?php echo $item['nd_sn'];?>">
+                    <header class="panel-heading font-bold">
+                        <ul class="nav nav-pills pull-right">    
+                            <li>
+                                <button class="btn btn-xs btn-link remove_dynamic remove_driver" value="<?php echo $item['nd_sn'];?>" title="Remove"><i class="icon-trash"></i></button>
+                            </li>
+                            <li>
+                                <a href="#" class="panel-toggle text-muted">
+                                    <i class="icon-caret-down text-active"></i>
+                                    <i class="icon-caret-up text"></i>
+                                </a>
+                            </li>
+                        </ul>Named Driver (<?php echo $item['nd_sn'];?>)</header>
+                    <section class="panel-body">
 
-        <section class="panel" id="qt_driver_1">
-            <header class="panel-heading font-bold">
-                <ul class="nav nav-pills pull-right">
-                    <li>
-                        <a href="#" class="add_named_driver text-muted" title="Add New Named Driver">
-                            <i class="icon-plus"></i>
-                        </a>
-                    </li>                    
-                    <li>
-                        <a href="#" class="panel-toggle text-muted">
-                            <i class="icon-caret-down text-active"></i>
-                            <i class="icon-caret-up text"></i>
-                        </a>
-                    </li>
-                </ul>Named Driver (1)</header>
-            <section class="panel-body">
-                
-                    <div class="form-group">
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label req" for="qt_driver_1_name">Name</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" id="qt_driver_1_name" required
-                                       name="qt_driver_1_name" placeholder="Name" maxlength="50">
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <label class="col-sm-3 control-label req" for="qt_driver_<?php echo $item['nd_sn'];?>_name">Name</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control m-b" id="qt_driver_<?php echo $item['nd_sn'];?>_name" required
+                                               name="qt_driver_<?php echo $item['nd_sn'];?>_name" value="<?php echo $item['nd_name'];?>" placeholder="Name" maxlength="50">
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="line line-dashed line-lg pull-in"></div>
-                    <div class="form-group">
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label req" for="qt_driver_1_nric">NRIC/FIN</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" id="qt_driver_1_nric" required
-                                       name="qt_driver_1_nric" placeholder="NRIC/FIN" maxlength="50">
+                            <div class="line line-dashed line-lg pull-in"></div>
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <label class="col-sm-3 control-label req" for="qt_driver_<?php echo $item['nd_sn'];?>_nric">NRIC/FIN</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control m-b" id="qt_driver_<?php echo $item['nd_sn'];?>_nric" required
+                                               name="qt_driver_<?php echo $item['nd_sn'];?>_nric"  value="<?php echo $item['nd_nric'];?>" placeholder="NRIC/FIN" maxlength="50">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="col-sm-3 control-label req" for="qt_driver_<?php echo $item['nd_sn'];?>_relationship">Relationship</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control m-b" id="qt_driver_<?php echo $item['nd_sn'];?>_relationship"  required
+                                               name="qt_driver_<?php echo $item['nd_sn'];?>_relationship"  value="<?php echo $item['nd_relationship'];?>" placeholder="Relationship" maxlength="50">
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label req" for="qt_driver_1_relationship">Relationship</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" id="qt_driver_1_relationship"  required
-                                       name="qt_driver_1_relationship" placeholder="Relationship" maxlength="50">
+                            <div class="line line-dashed line-lg pull-in"></div>
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <label class="col-sm-3 control-label req" for="qt_driver_<?php echo $item['nd_sn'];?>_dob">Date of Birth</label>
+                                    <div class="col-md-6">
+                                        <input class="input-sm datepicker-input form-control m-b" id="qt_driver_<?php echo $item['nd_sn'];?>_dob" 
+                                           size="16" type="text" name="qt_driver_<?php echo $item['nd_sn'];?>_dob" maxlength="12" required
+                                           parsley-maxlength="12" parsley-trigger="focusout"  value="<?php echo date('m-d-Y',$item['nd_dob']);?>"
+                                           data-date-format="dd-mm-yyyy" placeholder="Date of Birth">   
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="col-sm-3 control-label" >Age</label>
+                                    <div class="col-md-6">
+                                        <label class="col-sm-3 control-label"><span id="qt_driver_<?php echo $item['nd_sn'];?>_age">[Equation]</span></label>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="line line-dashed line-lg pull-in"></div>
-                    <div class="form-group">
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label req" for="qt_driver_1_dob">Date of Birth</label>
-                            <div class="col-md-6">
-                                <input class="input-sm datepicker-input form-control" id="qt_driver_1_dob" 
-                                   size="16" type="text" name="qt_driver_1_dob" maxlength="12" required
-                                   parsley-maxlength="12" parsley-trigger="focusout" 
-                                   data-date-format="dd-mm-yyyy" placeholder="Date of Birth">   
-                                
+                            <div class="line line-dashed line-lg pull-in"></div>
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <label class="col-sm-3 control-label req" for="qt_driver_<?php echo $item['nd_sn'];?>_gender">Gender</label>
+                                    <div class="col-md-6">
+                                        <select name="qt_driver_<?php echo $item['nd_sn'];?>_gender" id="qt_driver_<?php echo $item['nd_sn'];?>_gender" class="form-control m-b m-b">
+                                            <option <?php echo $item['nd_gender']=="Male"?'SELECTED':'';?> value="Male">Male</option>
+                                            <option  <?php echo $item['nd_gender']=="Female"?'SELECTED':'';?> value="Female">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="col-sm-3 control-label req" for="qt_driver_<?php echo $item['nd_sn'];?>_marital_status">Marital Status</label>
+                                    <div class="col-md-6">
+                                        <select name="qt_driver_<?php echo $item['nd_sn'];?>_marital_status" id="qt_driver_<?php echo $item['nd_sn'];?>_marital_status" class="form-control m-b m-b">
+                                            <option <?php echo $item['nd_mstatus']=="Single"?'SELECTED':'';?> value="Single">Single</option>
+                                            <option <?php echo $item['nd_mstatus']=="Married"?'SELECTED':'';?> value="Married">Married</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>  
+                            <div class="line line-dashed line-lg pull-in"></div>				  
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <label class="col-sm-3 control-label req" for="qt_driver_<?php echo $item['nd_sn'];?>_occupation">Occupation</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control m-b" id="qt_driver_<?php echo $item['nd_sn'];?>_occupation" 
+                                               value="<?php echo $item['nd_occupation'];?>" placeholder="Occupation" maxlength="50"  required>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" >Age</label>
-                            <div class="col-md-6">
-                                <label class="col-sm-3 control-label"><span id="qt_driver_1_age">[Equation]</span></label>
+                            <div class="line line-dashed line-lg pull-in"></div>
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <label class="col-sm-3 control-label req" for="qt_driver_<?php echo $item['nd_sn'];?>_license_date">Driving License Pass Date</label>
+                                    <div class="col-md-6">
+                                        <input class="input-sm datepicker-input form-control m-b" id="qt_driver_<?php echo $item['nd_sn'];?>_license_date" 
+                                           size="16" type="text" name="qt_driver_<?php echo $item['nd_sn'];?>_license_date" maxlength="12" 
+                                           parsley-maxlength="12" parsley-trigger="focusout"  required  value="<?php echo date('d-m-Y',$item['nd_license_pass_date']);?>"
+                                           data-date-format="dd-mm-yyyy" placeholder="Driving License Pass Date">                                   
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="col-sm-3 control-label" >Driving Experience</label>
+                                    <div class="col-md-6">
+                                        <label class="control-label"><span id="qt_driver_<?php echo $item['nd_sn'];?>_experience">[CALCULATED]</span></label>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="line line-dashed line-lg pull-in"></div>
-                    <div class="form-group">
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label req" for="qt_driver_1_gender">Gender</label>
-                            <div class="col-md-6">
-                                <select name="qt_driver_1_gender" id="qt_driver_1_gender" class="form-control m-b">
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                </select>
+                            <div class="line line-dashed line-lg pull-in"></div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <label class="col-sm-3 control-label">Claim History (3 Years)</label>
+                                    <div class="col-sm-7">                                        
+                                        <div id="qt_driver_<?php echo $item['nd_sn'];?>_history_wrap" class="form-control m-b" style="overflow:scroll;height:150px;max-height:150px" contenteditable="true"><?php echo $item['nd_history'];?></div>
+                                    </div>
+                                </div>
+                            </div>    
+                            <div class="line line-dashed line-lg pull-in"></div>
+                            <div class="form-group">
+                                <div class="col-sm-10"></div>
+                                <div class="col-sm-2">
+                                    <button type="button" class="btn btn-primary btn-save-driver pull-right" value="<?php echo $item['nd_sn'];?>"><i class="icon-save"></i> Save</button>                            
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label req" for="qt_driver_1_marital_status">Marital Status</label>
-                            <div class="col-md-6">
-                                <select name="qt_driver_1_marital_status" id="qt_driver_1_marital_status" class="form-control m-b">
-                                    <option value="Single">Single</option>
-                                    <option value="Married">Married</option>
-                                </select>
+                    </section>
+                </section><!--end driver <?php echo $item['nd_sn'];?>-->
+                    <?php
+                array_push($dsn_total, $item['nd_sn']);
+                endforeach; 
+                ?>
+               <input id="total_named_driver" type="hidden" value="<?php echo max($dsn_total);?>">        
+                    <?php
+            }else{ 
+                //NEW 
+                ?>
+                <section class="panel" id="qt_driver_1">
+                    <header class="panel-heading font-bold">
+                        <ul class="nav nav-pills pull-right">                    
+                            <li>
+                                <a href="#" class="panel-toggle text-muted">
+                                    <i class="icon-caret-down text-active"></i>
+                                    <i class="icon-caret-up text"></i>
+                                </a>
+                            </li>
+                        </ul>Named Driver (1)</header>
+                    <section class="panel-body">
+
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <label class="col-sm-3 control-label req" for="qt_driver_1_name">Name</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control m-b" id="qt_driver_1_name" required
+                                               name="qt_driver_1_name" placeholder="Name" maxlength="50">
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>  
-                    <div class="line line-dashed line-lg pull-in"></div>				  
-                    <div class="form-group">
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label req" for="qt_driver_1_occupation">Occupation</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" id="qt_driver_1_occupation" 
-                                       placeholder="Occupation" maxlength="50"  required>
+                            <div class="line line-dashed line-lg pull-in"></div>
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <label class="col-sm-3 control-label req" for="qt_driver_1_nric">NRIC/FIN</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control m-b" id="qt_driver_1_nric" required
+                                               name="qt_driver_1_nric" placeholder="NRIC/FIN" maxlength="50">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="col-sm-3 control-label req" for="qt_driver_1_relationship">Relationship</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control m-b" id="qt_driver_1_relationship"  required
+                                               name="qt_driver_1_relationship" placeholder="Relationship" maxlength="50">
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="line line-dashed line-lg pull-in"></div>
-                    <div class="form-group">
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label req" for="qt_driver_1_license_date">Driving License Pass Date</label>
-                            <div class="col-md-6">
-                                <input class="input-sm datepicker-input form-control" id="qt_driver_1_license_date" 
-                                   size="16" type="text" name="qt_driver_1_license_date" maxlength="12" 
-                                   parsley-maxlength="12" parsley-trigger="focusout"  required
-                                   data-date-format="dd-mm-yyyy" placeholder="Driving License Pass Date">                                   
+                            <div class="line line-dashed line-lg pull-in"></div>
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <label class="col-sm-3 control-label req" for="qt_driver_1_dob">Date of Birth</label>
+                                    <div class="col-md-6">
+                                        <input class="input-sm datepicker-input form-control m-b" id="qt_driver_1_dob" 
+                                           size="16" type="text" name="qt_driver_1_dob" maxlength="12" required
+                                           parsley-maxlength="12" parsley-trigger="focusout" 
+                                           data-date-format="dd-mm-yyyy" placeholder="Date of Birth">   
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="col-sm-3 control-label" >Age</label>
+                                    <div class="col-md-6">
+                                        <label class="col-sm-3 control-label"><span id="qt_driver_1_age">[Equation]</span></label>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" >Driving Experience</label>
-                            <div class="col-md-6">
-                                <label class="control-label"><span id="qt_driver_1_experience">[CALCULATED]</span></label>
+                            <div class="line line-dashed line-lg pull-in"></div>
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <label class="col-sm-3 control-label req" for="qt_driver_1_gender">Gender</label>
+                                    <div class="col-md-6">
+                                        <select name="qt_driver_1_gender" id="qt_driver_1_gender" class="form-control m-b m-b">
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="col-sm-3 control-label req" for="qt_driver_1_marital_status">Marital Status</label>
+                                    <div class="col-md-6">
+                                        <select name="qt_driver_1_marital_status" id="qt_driver_1_marital_status" class="form-control m-b m-b">
+                                            <option value="Single">Single</option>
+                                            <option value="Married">Married</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>  
+                            <div class="line line-dashed line-lg pull-in"></div>				  
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <label class="col-sm-3 control-label req" for="qt_driver_1_occupation">Occupation</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control m-b" id="qt_driver_1_occupation" 
+                                               placeholder="Occupation" maxlength="50"  required>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="line line-dashed line-lg pull-in"></div>
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <label class="col-sm-3 control-label">Claim History (3 Years)</label>
-                            <div class="col-sm-7">
-                                <input type="hidden" id="qt_driver_1_history" name="qt_driver_1_history">
-                                <div id="qt_driver_1_history_wrap" class="form-control" style="overflow:scroll;height:150px;max-height:150px" contenteditable="true">Multiline Text</div>
+                            <div class="line line-dashed line-lg pull-in"></div>
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <label class="col-sm-3 control-label req" for="qt_driver_1_license_date">Driving License Pass Date</label>
+                                    <div class="col-md-6">
+                                        <input class="input-sm datepicker-input form-control m-b" id="qt_driver_1_license_date" 
+                                           size="16" type="text" name="qt_driver_1_license_date" maxlength="12" 
+                                           parsley-maxlength="12" parsley-trigger="focusout"  required
+                                           data-date-format="dd-mm-yyyy" placeholder="Driving License Pass Date">                                   
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="col-sm-3 control-label" >Driving Experience</label>
+                                    <div class="col-md-6">
+                                        <label class="control-label"><span id="qt_driver_1_experience">[CALCULATED]</span></label>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>                
-            </section>
-        </section>
-        <div id="named_driver_wrap">            
-        </div>
+                            <div class="line line-dashed line-lg pull-in"></div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <label class="col-sm-3 control-label">Claim History (3 Years)</label>
+                                    <div class="col-sm-7">                                
+                                        <div id="qt_driver_1_history_wrap" class="form-control m-b" style="overflow:scroll;height:150px;max-height:150px" contenteditable="true">Multiline Text</div>
+                                    </div>
+                                </div>
+                            </div>    
+                            <div class="line line-dashed line-lg pull-in"></div>
+                            <div class="form-group">
+                                <div class="col-sm-10"></div>
+                                <div class="col-sm-2">
+                                    <button type="button" class="btn btn-primary btn-save-driver pull-right" value="1"><i class="icon-save"></i> Save</button>                            
+                                </div>
+                            </div>
+                    </section>
+                </section><!--end driver 1-->
+                <input id="total_named_driver" type="hidden" value="1">        
+                <?php                
+            }//end else
+            ?>                
+        <div id="named_driver_wrap"></div><!--end driver wrap-->
+        
+            <div class="row">
+                <div class="col-sm-12 text-right">
+                    <button type="button" class="add_named_driver btn btn-info m-b" title="Add New Named Driver">
+                        <i class="icon-plus"> Add New Named Driver</i>
+                    </button>                    
+              </div>
+            </div>
+        
+        </div><!--end driver area-->
+        
         <!-- Quotation (Private and Commercial) -->
         <!-- Private -->
         <section class="panel" id="qt_quot_pvt">
@@ -1804,7 +1963,7 @@
                                     foreach ($_quot_list as $item): ?>
                                         <tr id="ql_<?php echo $item['ql_sn'];?>">
                                         <td>
-                                              <select id="qt_quot_insurer_<?php echo $item['ql_sn'];?>" name="qt_quot_insurer_<?php echo $item['ql_sn'];?>" class="form-control">                                
+                                              <select id="qt_quot_insurer_<?php echo $item['ql_sn'];?>" name="qt_quot_insurer_<?php echo $item['ql_sn'];?>" class="form-control m-b">                                
                                                 <option selected disabled>Select an Insurer</option>   
                                                 <?php
                                                 if(isset($qt_insurance_type)){ 
@@ -2281,6 +2440,26 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <button type="button" id="remove_ch_item" class="btn btn-danger"><i class="icon-trash"></i> Remove</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!--Remove Driver model-->
+<div class="modal fade" id="remove_name_driver" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Remove Named Driver</h4>
+      </div>
+      <div class="modal-body">
+          <p>Are you sure to delete <strong><span id="remove_n_driver"></span></strong> ?</p>
+          <input type="hidden" id="remove_dsn_sn" value="">
+          <input type="hidden" id="remove_dsn_ref_no" value="">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" id="remove_dsn_item" class="btn btn-danger"><i class="icon-trash"></i> Remove</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

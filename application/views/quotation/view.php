@@ -803,8 +803,11 @@
         endforeach;
         ?>
         <!-- Named Driver 1 & 2 -->
+        
+        <?php
+        foreach($_driver_list as $item): ?>
 
-        <section class="panel">
+             <section class="panel">
             <header class="panel-heading font-bold">
                 <ul class="nav nav-pills pull-right">
                     <li>
@@ -813,31 +816,31 @@
                             <i class="icon-caret-up text"></i>
                         </a>
                     </li>
-                </ul>Named Driver (1)</header>
+                </ul>Named Driver (<?php echo $item['nd_sn'];?>)</header>
             <section class="panel-body">
                 
                     <div class="form-group">
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label" >Name</label>
-                            <div class="col-md-6">Mr ABC</div>
+                            <div class="col-md-6"><?php echo $item['nd_name'];?></div>
                         </div>
                     </div>
                     <div class="line line-dashed line-lg pull-in"></div>
                     <div class="form-group">
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label" >NRIC/FIN</label>
-                            <div class="col-md-6">S1234567B</div>
+                            <div class="col-md-6"><?php echo $item['nd_nric'];?></div>
                         </div>
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label" >Relationship</label>
-                            <div class="col-md-6">Friend</div>
+                            <div class="col-md-6"><?php echo $item['nd_relationship'];?></div>
                         </div>
                     </div>
                     <div class="line line-dashed line-lg pull-in"></div>
                     <div class="form-group">
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label" >Date of Birth</label>
-                            <div class="col-md-6">01 Jan 01</div>
+                            <div class="col-md-6"><?php echo date('d F Y',$item['nd_dob']);?></div>
                         </div>
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label" >Age</label>
@@ -848,25 +851,25 @@
                     <div class="form-group">
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label" >Gender</label>
-                            <div class="col-md-6">Male</div>
+                            <div class="col-md-6"><?php echo $item['nd_gender'];?></div>
                         </div>
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label" >Marital Status</label>
-                            <div class="col-md-6">Single</div>
+                            <div class="col-md-6"><?php echo $item['nd_mstatus'];?></div>
                         </div>
                     </div>
                     <div class="line line-dashed line-lg pull-in"></div>
                     <div class="form-group">
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label" >Occupation</label>
-                            <div class="col-md-6">Occupation A</div>
+                            <div class="col-md-6"><?php echo $item['nd_occupation'];?></div>
                         </div>
                     </div>
                     <div class="line line-dashed line-lg pull-in"></div>
                     <div class="form-group">
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label" >Driving License Pass Date</label>
-                            <div class="col-md-6">01 Jan 01</div>
+                            <div class="col-md-6"><?php echo date('d F Y',$item['nd_license_pass_date']);?></div>
                         </div>
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label" >Driving Experience</label>
@@ -878,14 +881,19 @@
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label" >Claim History (3 Years)</label>
                             <div class="col-sm-6">
-                                NA
+                                <?php echo $item['nd_history'];?>
                             </div>
                         </div>
                     </div>
                 
             </section>
         </section>
-
+        
+            <?php
+        endforeach;
+        ?>
+       
+        <?php /* NAMED DRIVER W ?>
         <section class="panel">
             <header class="panel-heading font-bold">
                 <ul class="nav nav-pills pull-right">
@@ -967,7 +975,7 @@
                 
             </section>
         </section>
-
+        <?php */?>
         <!-- Quotation (Private and Commercial) -->
         <!-- Private -->
         <section class="panel">
