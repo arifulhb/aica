@@ -104,7 +104,7 @@ class Quotation_model extends CI_Model
         $this->db->select('q.ci_company,q.ci_coverage,q.ci_current_premium,q.ci_current_excess,q.ci_finance_company, q.ci_current_ncd, q.ci_policy_no, q.si_policy_no,');
         $this->db->select('q.ci_ncd_per_renewal,q.ci_ncd_affect,q.ci_ssd,UNIX_TIMESTAMP(q.ci_ssd_date) ci_ssd_date,UNIX_TIMESTAMP(q.ci_period_start_date) as ci_period_start, UNIX_TIMESTAMP(q.ci_poi_end_date) as ci_poi_end_date, UNIX_TIMESTAMP(q.ci_road_tax_due_date) as ci_road_tax_due_date,q.ci_ncd_protection,');
         $this->db->select('q.ci_claims_in_last3_year, q.si_company,q.si_coverage,q.si_premium,q.si_excess,q.si_finance_company,q.si_ncd,q.si_ncd_per_on_renewal, ');        
-        $this->db->select('q.quot_insurer, q.quot_workshop, q.quot_premium, q.quot_excess, q.quot_remark, ');
+        //$this->db->select('q.quot_insurer, q.quot_workshop, q.quot_premium, q.quot_excess, q.quot_remark, ');
         $this->db->select('q.si_ssd,UNIX_TIMESTAMP(q.si_ssd_date_check) as si_ssd_date_check, UNIX_TIMESTAMP(q.si_start_date) as si_start_date,UNIX_TIMESTAMP(q.si_end_date) as si_end_date,UNIX_TIMESTAMP(q.si_road_tax_due) as si_road_tax_due,q.si_ncd_protection,q.com_sn, ');        
         $this->db->select('pvt.vip_scheme_type, pvt.vip_fet_sunroof , pvt.vip_fet_soft_top , pvt.vip_fet_turbo_eng , pvt.vip_fet_moonroof , pvt.vip_fet_skyroof , pvt.vip_fet_roof_pan , pvt.vip_vt_super_model , pvt.vip_vt_mpv , pvt.vip_vt_suv , pvt.vip_vt_sedan , pvt.vip_vt_couple , pvt.vip_vt_cabriolet , pvt.vip_vt_parallel_import, ');
         $this->db->select('com.vic_type, com.vic_weight_unladen, com.vic_weight_laden, ');
