@@ -1650,7 +1650,7 @@
             <?php
            // print_r($_driver_list);
             
-            if(isset($_driver_list)){
+            if (!empty($_driver_list )){
                 $dsn_total=array(0);
                 foreach($_driver_list as $item): ?>
                     <section class="panel" id="qt_driver_<?php echo $item['nd_sn'];?>">
@@ -1787,6 +1787,7 @@
                <input id="total_named_driver" type="hidden" value="<?php echo max($dsn_total);?>">        
                     <?php
             }else{ 
+                //echo 'not sate';
                 //NEW 
                 ?>
                 <section class="panel" id="qt_driver_1">
