@@ -46,15 +46,16 @@ li.current a{background-color: #e0e4e8;}
     font-size: 0.8em;
 }
 /* access */
-body.access_denied .message{
+.access_denied .message{
     padding: 50px;
     text-align: center;
     background-color: white;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-body.access_denied .message h1{
+.access_denied .message h1{
     font-weight: bold;
     color: #ea0000;   
+    text-align: center;
 }
 body.access_denied .message p{
     font-size: 1.2em;

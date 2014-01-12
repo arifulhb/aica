@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Commission extends CI_Controller {
+class Commission extends My_Controller {
 
     public function __construct()
     {
@@ -49,7 +49,7 @@ class Commission extends CI_Controller {
             $last=$this->uri->segment(3)*$config['per_page']>$config['total_rows']?$config['total_rows']:$this->uri->segment(3)*$config['per_page'];
 
             $data['_pagi_msg']=  (($this->uri->segment(3)-1)*($config['per_page']+1)).' - '.$last;                        
-            $data['_list']=$this->commission_model->getList($config['per_page'],($config['per_page']*($this->uri->segment(3)-1)+1));
+            $data['_list']=$this->commission_model->getList($config['per_page'],($config['per_page']*($this->uri->segment(3)-1)));
         }else{
             if($config['total_rows']>$config['per_page']){
                 $last=$config['per_page'];      

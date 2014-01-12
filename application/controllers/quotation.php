@@ -432,7 +432,10 @@ class Quotation extends CI_Controller {
 
     }//end function
     
-    public function update_claim_history(){
+    /**
+     * UPDATE Claim History
+     */
+    public function updateClaimHistory(){
         
         $qt_ref_no=$this->input->post('_qt_ref_no');
         $clh_no=$this->input->post('_chsn');
@@ -452,7 +455,7 @@ class Quotation extends CI_Controller {
         $data['clh_ref_to_partner']=$this->input->post('_referred');
         
         $this->load->model('quotation_model');
-        $res=$this->quotation_model->update_claim_history($data,$qt_ref_no,$clh_no);
+        $res=$this->quotation_model->upate_claim_history($data,$qt_ref_no,$clh_no);
         //$res=true;
         if($res==true){
             echo $res;

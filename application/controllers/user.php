@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class User extends CI_Controller {
+class User extends My_Controller {
 
     public function __construct()
     {
@@ -42,9 +42,8 @@ class User extends CI_Controller {
                 //if page number exisit
                 $last=$this->uri->segment(3)*$config['per_page']>$config['total_rows']?$config['total_rows']:$this->uri->segment(3)*$config['per_page'];
 
-                $data['_pagi_msg']=  (($this->uri->segment(3)-1)*($config['per_page']+1)).' - '.$last;            
-                //echo 'pagi msg: '.$data['_pagi_msg'];
-                $data['users']=$this->user_model->getList($config['per_page'],($config['per_page']*($this->uri->segment(3)-1)+1));
+                $data['_pagi_msg']=  (($this->uri->segment(3)-1)*($config['per_page']+1)).' - '.$last;                            
+                $data['users']=$this->user_model->getList($config['per_page'],($config['per_page']*($this->uri->segment(3)-1)));
             }else{
                 if($config['total_rows']>$config['per_page']){
                     $last=$config['per_page'];      
@@ -69,7 +68,7 @@ class User extends CI_Controller {
         }//end if
         else{
             //No Permission in User Management
-            echo 'Access Denied! please contact administrator!';
+             $this->template->access_denied($data);
             
         }//end else access
 
@@ -132,19 +131,22 @@ class User extends CI_Controller {
     public function add(){
         
         $data=site_data();
+        /*
+         * User Management
+         * Access Code: user_add
+         */
+        if(in_array('user_add',$this->session->userdata('user_access'))){
+            $data['_page_title']='Add User';
+            $data['_page_caption']='Add User';
+            $data['_page_description']='<i class="icon-user"></i> User Management';
+
+            $this->template->user_add($data);
+        }else{
+              //No Permission in User Management
+             $this->template->access_denied($data);
+        }
         
-        $data['_page_title']='Add User';
-        $data['_page_caption']='Add User';
-        $data['_page_description']='<i class="icon-user"></i> User Management';
                 
-        //$this->load->model('user_model');
-                        
-        //$data['rec']=$this->user_model->getRecord($user_sn);
-        //echo 'rec';
-        //print_r($data['rec']);
-                //exit();
-        //$data['action']='update';
-        $this->template->user_add($data);
         
         
     }//end function
@@ -153,38 +155,51 @@ class User extends CI_Controller {
     public function edit(){
                 
         $data=site_data();
-        
-        $data['_page_title']='Edit User';
-        $data['_page_caption']='Edit User';
-        $data['_page_description']='<i class="icon-user"></i> User Management';
-        
-        $user_sn=$this->uri->segment(3);//get custoemr sn from url        
-        $this->load->model('user_model');
-                        
-        $data['rec']=$this->user_model->getRecord($user_sn);
-        //echo 'rec';
-        //print_r($data['rec']);
-                //exit();
-        $data['action']='update';
-        $this->template->user_edit($data);
+        /*
+         * User Management
+         * Access Code: user_edit
+         */
+        if(in_array('user_edit',$this->session->userdata('user_access'))){
+           $data['_page_title']='Edit User';
+           $data['_page_caption']='Edit User';
+           $data['_page_description']='<i class="icon-user"></i> User Management';
+
+           $user_sn=$this->uri->segment(3);//get custoemr sn from url        
+           $this->load->model('user_model');
+
+           $data['rec']=$this->user_model->getRecord($user_sn);        
+           $data['action']='update';
+           $this->template->user_edit($data);   
+        }else{
+            //No Permission in User Management
+             $this->template->access_denied($data);
+        }        
         
     }//end function
 
     public function change_password(){
         
         $data=site_data();
-        
-        $data['_page_title']='Change Password';
-        $data['_page_caption']='Change Password';
-        $data['_page_description']='<i class="icon-user"></i> User Management';
-        
-        $user_sn=$this->uri->segment(3);//get custoemr sn from url        
-        $this->load->model('user_model');
-                        
-        $data['rec']=$this->user_model->getRecord($user_sn);
-        
-        //$data['action']='cp';        
-        $this->template->user_change_pass($data);
+        /*
+         * User Management
+         * Access Code: user_change_pass
+         */
+        if(in_array('user_change_pass',$this->session->userdata('user_access'))){
+             $data['_page_title']='Change Password';
+            $data['_page_caption']='Change Password';
+            $data['_page_description']='<i class="icon-user"></i> User Management';
+
+            $user_sn=$this->uri->segment(3);//get custoemr sn from url        
+            $this->load->model('user_model');
+
+            $data['rec']=$this->user_model->getRecord($user_sn);
+
+            $this->template->user_change_pass($data);
+        }else{
+             //No Permission in User Management
+             $this->template->access_denied($data);
+        }
+       
         
     }//end function
     

@@ -11,8 +11,9 @@ class Customer extends CI_Controller {
 
     public function index()
     {
-      
-        if(in_array('cust',$this->session->userdata('user_access'))){
+        //Session over and access
+        if(($this->session->userdata('user_access') !== FALSE) 
+                && in_array('cust',$this->session->userdata('user_access'))){
             
             //Load pagination library
             $this->load->library('pagination');
@@ -24,7 +25,7 @@ class Customer extends CI_Controller {
 
             $config['total_rows'] = $this->customer_model->getTotalNum();        
             $config['use_page_numbers']=true;
-            $config['per_page'] = 10;
+            $config['per_page'] = 30;//MUST BE 30
             $config['num_links'] = 5;        
             $config['uri_segment'] = 3;                        
             $this->pagination->initialize($config);
@@ -39,18 +40,18 @@ class Customer extends CI_Controller {
 
                 $data['_pagi_msg']=  (($this->uri->segment(3)-1)*($config['per_page']+1)).' - '.$last;            
                 //echo 'pagi msg: '.$data['_pagi_msg'];
-                $data['_cust_list']=$this->customer_model->getList($config['per_page'],($config['per_page']*($this->uri->segment(3)-1)+1));
-            }else{
-                if($config['total_rows']>$config['per_page']){
+                $data['_cust_list']=$this->customer_model->getList($config['per_page'],($config['per_page']*($this->uri->segment(3)-1)));
+            }else{                
+                if($config['total_rows']>$config['per_page']){                    
                     $last=$config['per_page'];      
-                }else{
+                }else{                    
                     $last=$config['total_rows'];      
                 }
 
               $data['_pagi_msg'] = '1 - '.$last;    
               //$data['_pagi_msg'] = '1 - '.$config['per_page']<$config['total_rows']?$config['total_rows']:$this->uri->segment(3)*$config['per_page'];
 
-                $data['_cust_list']=$this->customer_model->getList($config['per_page'],$this->uri->segment(3));
+              $data['_cust_list']=$this->customer_model->getList($config['per_page'],$this->uri->segment(3));
             }
             $data['_page_title']='Customer Management';
             $data['_page_caption']='Customer Management';
@@ -103,18 +104,19 @@ class Customer extends CI_Controller {
      */
     public function add(){
         /**
-         * Access Code: css_add
+         * Access Code: cust_add
          */
-        if(in_array('css_add',$this->session->userdata('user_access'))){
-            
-            $data=site_data();
+        $data=site_data();
+        if(($this->session->userdata('user_access') !== FALSE) && in_array('cust_add',$this->session->userdata('user_access'))){
+                        
             $data['_page_title']='Add New Customer';
             $data['_page_caption']='New Customer';
             $data['_page_description']='Customer Management';
             $this->template->customer_add($data);
         
         }else{
-            echo 'Access Denied! No sufficient permittion to access this page. Please contact Administrator.';
+            //echo 'Access Denied! No sufficient permittion to access this page. Please contact Administrator.';
+            $this->template->access_denied($data);
         }       
         
     }//end function add
@@ -132,7 +134,7 @@ class Customer extends CI_Controller {
         //$this->form_validation->set_rules('cust_instruction', 'Instruction', 'trim|max_length[1000]|xss_clean');
         $this->form_validation->set_rules('cust_email', 'Customer Email', 'trim|max_length[50]|valid_email|xss_clean');    
         $this->form_validation->set_rules('cust_license_date', 'Driving License Pass Date', 'trim|required|max_length[20]|xss_clean');
-  
+        $this->form_validation->set_rules('cust_address_postcode', 'POST Code', 'trim|max_length[20]|xss_clean');
         
         //exit();
         $data['cust_name'] = $this->input->post('cust_name',TRUE);
@@ -171,11 +173,7 @@ class Customer extends CI_Controller {
                 //update
                  $data['cust_sn'] = $this->input->post('customer_sn',TRUE);                             
                  $res = $this->customer_model->update($data);                                  
-                 if($res==1){
-                     //$data['success']=true;
-                    //$data = array('success' =>true);
-                    //$this->session->set_userdata($data);
-                    //redirect('customer/profile/'.$data['cust_sn'],$this->session->all_userdata());
+                 if($res==1){                     
                     $this->session->set_flashdata('success', 'true');
                     redirect('customer/profile/'.$data['cust_sn']);
                  }
@@ -202,12 +200,15 @@ class Customer extends CI_Controller {
     
     
     public function edit(){
+        
+        $data=site_data();
+        
         /**
          * Access Code: css_edit
          */
-        if(in_array('cust',$this->session->userdata('user_access'))){
+        if(($this->session->userdata('user_access') !== FALSE) && in_array('cust',$this->session->userdata('user_access'))){
          
-            $data=site_data();
+            
         
             $data['_page_title']='Edit Customer';
             $data['_page_caption']='Edit Customer';
@@ -222,20 +223,21 @@ class Customer extends CI_Controller {
             $this->template->customer_edit($data);     
 
         }else{
-            echo 'Access Denied! No sufficient permittion to access this page. Please contact Administrator.';
+            $this->template->access_denied($data);
         }           
         
     }//end function
     
     
     public function remove(){
+        $data=site_data();
         /**
          * Access Code: css_delete
          */
-        if(in_array('css_delete',$this->session->userdata('user_access'))){            
+        if(($this->session->userdata('user_access') !== FALSE) && in_array('css_delete',$this->session->userdata('user_access'))){            
             
         }else{
-            echo 'Access Denied! No sufficient permittion to access this page. Please contact Administrator.';
+            $this->template->access_denied($data);
         }
     }//end function remove
     
@@ -245,7 +247,7 @@ class Customer extends CI_Controller {
         /**
          * Access_code
          */
-        if(in_array('cust_view',$this->session->userdata('user_access'))){                               
+        if(($this->session->userdata('user_access') !== FALSE) && in_array('cust_view',$this->session->userdata('user_access'))){                               
 
             $cust_sn=$this->uri->segment(3);//get custoemr sn from url        
             $this->load->model('customer_model');
@@ -264,7 +266,8 @@ class Customer extends CI_Controller {
             $this->template->customer_profile($data);   
             
         }else{
-            echo 'Access Denied! No sufficient permittion to access this page. Please contact Administrator.';
+            $this->template->access_denied($data);
+            
         }
     }//end function
     

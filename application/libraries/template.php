@@ -21,7 +21,7 @@ class Template
         $data['_noindex_meta']=true;
 
         //Load the page
-        $this->_ci->load->view('page_template.php',$data);
+        $this->_ci->load->view('access_denied_template.php',$data);
         
         
     }//end function

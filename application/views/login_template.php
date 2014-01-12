@@ -30,8 +30,8 @@
          //LinkTag -> add CSS
         echo link_tag('assets/css/app.css');
         echo link_tag('assets/css/animate.css');
-        echo link_tag('assets/css/landing.css');
-        echo link_tag('assets/css/plugin.css');
+        echo link_tag('assets/css/landing.css');        
+        //echo link_tag('assets/css/plugin.css');
         
         //Google Font
         $open_sans=array('href'=>'http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,700,600',

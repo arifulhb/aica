@@ -2,36 +2,7 @@
 /*
  * Customer form
  */
-?>
-<section class="scrollable" id="pjax-container">
-    <header>
-        <div class="row b-b m-l-none m-r-none">
-            <div class="col-sm-11">
-                <h3 class="m-t m-b-none"><?php echo $_page_caption; ?></h3>
-                <p class="block text-muted"><?php echo $_page_description; ?></p>
-            </div>
-            <div class="col-sm-1 m-b-xs" style="padding-left:0px; padding-top:17px">
-                <?php /*
-                  <a href="<?php echo base_url() . 'customer/add'; ?>" class="btn btn-success"><i class="icon-plus"></i> Create</a>
-                 */ ?>
-            </div>
-        </div>
-    </header>
-
-    <div class="wrapper">
-        <form class="form-horizontal" action="<?php echo base_url().'customer/save';?>" method="POST" parsley-validate>
-        <?php 
-        if(isset($action)){            
-            if($action=='update'){                                
-                ?>
-            <input type="hidden" name="customer_sn" value="<?php echo $customer[0]['cust_sn'];?>">   
-            <input type="hidden" name="action" value="update">
-                 <?php
-            }//end update
-        }//end isset
-        //echo 'now: '.date('l jS \of F Y h:i:s A').'<br>';
-        //echo 'timestamp '.date('Y m d h:i:s A',strtotime("2013-12-21")).'<br>';
-        if(isset($customer)){
+ if(isset($customer)){
             //print_r($customer);
             $cust_name              = $customer[0]['cust_name'];
             $cust_nric              = $customer[0]['cust_nric'];
@@ -66,7 +37,7 @@
             $cust_dob ='';
             $cust_gender  ='';
             $cust_marital_status    = '';
-            $cust_type              = '';
+            $cust_type              = 'Individual';
             //$cust_contach_hp        = '';
             $cust_contact_hp        = '';
             $cust_contact_office    = '';            
@@ -86,7 +57,28 @@
             $cust_update_by_name    = '';
             $cust_update_date       = '';
         }
-        //echo '<br>dob: '.$cust_dob.'<br>';
+?>
+<section class="scrollable" id="pjax-container">
+    <header>
+        <div class="row b-b m-l-none m-r-none">
+            <div class="col-sm-11">
+                <h3 class="m-t m-b-none"><?php echo $_page_caption; ?></h3>
+                <p class="block text-muted"><?php echo $_page_description; ?></p>
+            </div>            
+        </div>
+    </header>
+
+    <div class="wrapper">
+        <form class="form-horizontal" action="<?php echo base_url().'customer/save';?>" method="POST" parsley-validate>
+        <?php 
+        if(isset($action)){            
+            if($action=='update'){                                
+                ?>
+            <input type="hidden" name="customer_sn" value="<?php echo $customer[0]['cust_sn'];?>">   
+            <input type="hidden" name="action" value="update">
+                 <?php
+            }//end update
+        }//end isset        
         ?>    
         
         <section class="panel">
@@ -113,12 +105,12 @@
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" for="cust_nric">NRIC</label>
+                            <label class="col-sm-3 control-label" for="cust_nric">NRIC/FIN/ACRA</label>
                             <div class="col-sm-9">
                             <input type="text" class="form-control" id="cust_nric" name="cust_nric"
                                    value="<?php echo $cust_nric;?>"
                                    parsley-required="true" required="true" max="250" parsley-maxlength="250" parsley-trigger="keypress"
-                                   placeholder="NRIC">
+                                   placeholder="NRIC/FIN/ACRA">
                             </div>
                         </div>
                     </div>
@@ -136,12 +128,9 @@
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" for="cust_gender">Gender</label>
+                            <label class="col-sm-3 control-label">Age</label>
                             <div class="col-md-6">
-                                <select name="cust_gender" id="cust_gender" class="form-control m-b">
-                                    <option value="Male" <?php echo $cust_gender=='Male'?'SELECTED':''; ?>>Male</option>
-                                    <option value="Female" <?php echo $cust_gender=='Female'?'SELECTED':''; ?>>Female</option>                                    
-                                </select>
+                                <label class="control-label"><span id="cust_age">age</span></label>
                             </div>
                         </div>
                     </div>
@@ -150,35 +139,20 @@
 
                     <div class="form-group">
                         <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" for="cust_type">Customer Type</label>
+                            <label class="col-sm-3 control-label" for="cust_gender">Gender</label>
                             <div class="col-md-6">
-                                <div class="col-md-6">
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="cust_type" id="cust_type" value="Individual" 
-                                                   <?php echo $cust_type=='Individual'?'checked="checked"':''; ?>>
-                                            Individual
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="cust_type" id="cust_type" value="Company" 
-                                                   <?php echo $cust_type=='Company'?'checked="checked"':''; ?>>
-                                            Company
-                                        </label>
-                                    </div>
-                                </div>
+                                <select name="cust_gender" id="cust_gender" class="form-control m-b">
+                                    <option value="Male" <?php echo $cust_gender=='Male'?'SELECTED':''; ?>>Male</option>
+                                    <option value="Female" <?php echo $cust_gender=='Female'?'SELECTED':''; ?>>Female</option>                                    
+                                </select>
                             </div>
                         </div>
-
                         <div class="col-sm-6">
                             <label class="col-sm-3 control-label" for="cust_marital_status">Marital Status</label>
                             <div class="col-md-6">
                                 <select name="cust_marital_status" id="cust_marital_status" class="form-control m-b">
-                                    <option value="Married" <?php echo $cust_marital_status=='Married'?'SELECTED':''; ?>>Married</option>
                                     <option value="Single" <?php echo $cust_marital_status=='Single'?'SELECTED':''; ?>>Single</option>                                    
+                                    <option value="Married" <?php echo $cust_marital_status=='Married'?'SELECTED':''; ?>>Married</option>                                    
                                 </select>
                             </div>
                         </div>
@@ -211,7 +185,30 @@
                     </div>
                     <div class="line line-dashed line-lg pull-in"></div>
                     <div class="form-group">
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <label class="col-sm-3 control-label" for="cust_type">Customer Type</label>
+                            <div class="col-md-6">
+                                <div class="col-md-6">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="cust_type" id="cust_type" value="Individual" 
+                                                   <?php echo $cust_type=='Individual'?'checked="checked"':''; ?>>
+                                            Individual
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="cust_type" id="cust_type" value="Company" 
+                                                   <?php echo $cust_type=='Company'?'checked="checked"':''; ?>>
+                                            Company
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
                             <label class="col-sm-3 control-label" for="cust_instruction_div">Instructions</label>                            
                             <div class="col-sm-7">
                                 <div id="cust_instruction_div" class="form-control"
@@ -308,7 +305,7 @@
                             <div class="col-sm-9">
                             <input type="text" class="form-control" id="cust_address_1" name="cust_address_1"
                                    value="<?php echo $cust_address_1;?>"
-                                   parsley-required="true" required="true" max="250" parsley-maxlength="250" parsley-trigger="keypress"
+                                   parsley-required="true" required="true" maxlength="250" parsley-maxlength="250" parsley-trigger="keypress"
                                    placeholder="Address Line 1">
                             </div>
                         </div>
@@ -317,7 +314,7 @@
                             <div class="col-sm-9">
                             <input type="text" class="form-control" id="cust_address_2" name="cust_address_2" 
                                    value="<?php echo $cust_address_2;?>"
-                                   parsley-required="true" required="true" max="250" parsley-maxlength="250" parsley-trigger="keypress"
+                                   parsley-required="true" required="true" maxlength="250" parsley-maxlength="250" parsley-trigger="keypress"
                                    placeholder="Address Line 2">
                             </div>
                         </div>
@@ -329,7 +326,8 @@
                             <div class="col-sm-9">
                             <input type="text" class="form-control" id="cust_address_postcode" name="cust_address_postcode" 
                                    value="<?php echo $cust_post_code;?>"
-                                   parsley-required="true" required="true" max="10" parsley-maxlength="10" parsley-trigger="keypress"
+                                   parsley-required="true" required="true" maxlength="20" parsley-maxlength="20" 
+                                   parsley-trigger="keypress"
                                    placeholder="Postcode">
                             </div>
                         </div>

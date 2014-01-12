@@ -83,8 +83,8 @@ class Customer_model extends CI_Model
         $this->db->set('cust_contact_house',$data['cust_contact_house'], TRUE);
         $this->db->set('cust_contact_fax',$data['cust_contact_fax'], TRUE);
         $this->db->set('cust_address_1',$data['cust_address_1'], TRUE);
-        $this->db->set('cust_address_2',$data['cust_address_2'], true);
-        $this->db->set('cust_post_code',$data['cust_post_code'], FALSE);
+        $this->db->set('cust_address_2',$data['cust_address_2'], TRUE);
+        $this->db->set('cust_post_code',$data['cust_post_code'], TRUE);
         $this->db->set('update_by',$this->session->userdata('user_sn'), FALSE);                
         $this->db->set('update_date', 'NOW()', FALSE);
         

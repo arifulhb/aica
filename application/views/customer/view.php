@@ -2,21 +2,7 @@
 /*
  * Customer view
  */
-?>
-<section class="scrollable" id="pjax-container">
-    <header>
-        <div class="row b-b m-l-none m-r-none">
-            <div class="col-sm-11">
-                <h3 class="m-t m-b-none"><?php echo $_page_caption; ?></h3>
-                <p class="block text-muted"><?php echo $_page_description; ?></p>
-            </div>
-        </div>
-    </header>
-
-    <div class="wrapper">
-        <?php
-
-        if(isset($customer)){
+  if(isset($customer)){
             //print_r($customer);
             $cust_sn                =$customer[0]['cust_sn'];
             $cust_name              = $customer[0]['cust_name'];
@@ -69,6 +55,38 @@
             $cust_update_by_name    = '';
             $cust_update_date       = '';
         }
+?>
+<section class="scrollable" id="pjax-container">
+    <header>
+        <div class="row b-b m-l-none m-r-none">
+            <div class="col-sm-10">
+                <h3 class="m-t m-b-none"><?php echo $_page_caption; ?></h3>
+                <p class="block text-muted"><?php echo $_page_description; ?></p>
+            </div>
+            <div class="col-sm-2 m-b-xs text-right" style="padding-left:0px; padding-top:17px">
+                <?php
+                if(in_array('cust_edit', $this->session->userdata('user_access'))){ ?>
+                    
+               <a href="<?php echo base_url().'customer/edit/'.$cust_sn;?>" class="btn btn-primary">
+                            <i class="icon-pencil"></i> Edit
+                        </a> 
+                <?php                    
+                }//end if
+                if(in_array('cust_edit', $this->session->userdata('user_access'))){ 
+                ?>                
+                
+                    <button id="del_customer" value="<?php echo $cust_sn;?>" 
+                            type="button" class="btn btn-danger"><i class="icon-trash"></i> Delete</button>
+                
+                <?php                    
+                }//end if
+                ?>
+            </div>
+        </div>
+    </header>
+
+    <div class="wrapper">
+        <?php
         //echo '<br>dob: '.$cust_dob.'<br>';
         if($this->session->flashdata('success')==true){
         ?>
@@ -98,7 +116,7 @@
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" for="cust_nric">NRIC</label>
+                            <label class="col-sm-3 control-label" for="cust_nric">NRIC/FIN/ACRA</label>
                             <div class="col-sm-9">
                                 <label class="control-label"><?php echo $cust_nric; ?></label>
                             </div>
@@ -115,9 +133,9 @@
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" for="cust_gender">Gender</label>
+                            <label class="col-sm-3 control-label">Age</label>
                             <div class="col-md-6">
-                                <label class="control-label"><?php echo $cust_gender; ?></label>
+                                <label class="control-label"><?php echo round(((time()- strtotime ($cust_dob))  /(3600 * 24 * 365))); ?> years</label>
                             </div>
                         </div>
                     </div>
@@ -126,9 +144,9 @@
 
                     <div class="form-group">
                         <div class="col-sm-6">
-                            <label class="col-sm-3 control-label" for="cust_type">Customer Type</label>
+                             <label class="col-sm-3 control-label" for="cust_gender">Gender</label>
                             <div class="col-md-6">
-                                <label class="control-label"><?php echo $cust_type; ?></label>
+                                <label class="control-label"><?php echo $cust_gender; ?></label>
                             </div>
                         </div>
 
@@ -165,7 +183,13 @@
                     </div>
                     <div class="line line-dashed line-lg pull-in"></div>
                     <div class="form-group">
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <label class="col-sm-3 control-label" for="cust_type">Customer Type</label>
+                            <div class="col-md-6">
+                                <label class="control-label"><?php echo $cust_type; ?></label>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
                             <label class="col-sm-3 control-label" for="cust_instruction_div">Instructions</label>
                             <div class="col-sm-7">
                                 <div id="cust_instruction_div" class="form-control"
@@ -264,35 +288,7 @@
                         </div>
                     </div>
             </section>
-        </section>
-        <section class="panel">
-            <header class="panel-heading font-bold">
-                <?php /*
-                <ul class="nav nav-pills pull-right">
-                    <li>
-                        <a href="#" class="panel-toggle text-muted">
-                            <i class="icon-caret-down text-active"></i>
-                            <i class="icon-caret-up text"></i>
-                        </a>
-                    </li>
-                </ul>*/?>Operation
-            </header>
-            <section class="panel-body">
-
-                <div class="col-md-12">
-
-                    <div class="col-sm-2 m-b-xs" style="padding-left:0px;">
-                        <a href="<?php echo base_url().'customer/edit/'.$cust_sn;?>" class="btn btn-primary">
-                            <i class="icon-pencil"></i> Edit
-                        </a>                        
-                    </div>
-                    <?php /*
-                    <div class="col-sm-2 m-b-xs pull-right text-right" style="padding-left:0px;">
-                        <button type="button" id="customer_cancel" class="btn btn-white">Cancel</button>
-                    </div>   */?>
-                </div>
-            </section>
-        </section>
+        </section>        
 
     </div><!--end wrap-->
 </section><!--end customer form-->

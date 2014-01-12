@@ -734,6 +734,7 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
         var id=$(this).val();        
         $('#qt_claim_history_'+id).remove();
     });
+    
     //Save Claim history
     $('#claim_area').on('click','.btn-save-claim',function(){
         NProgress.start();
@@ -775,8 +776,9 @@ require(['order!jquery','order!apppath','order!moment','order!nprogress','order!
        $.ajax({
            type:"POST",
            data:_data,
-           url:apppath+'/quotation/update_claim_history',
+           url:apppath+'/quotation/updateClaimHistory',
            success:function(res){
+               console.log(res);
                if(res==1){
                     $('#claim_area').find('#save_status_'+1).empty();
                     $('#claim_area').find('#save_status_'+1).text('Saved');

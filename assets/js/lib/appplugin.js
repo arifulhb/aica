@@ -113,8 +113,9 @@
 		$(this).next('.combodate').find('select').addClass('form-control');
 	});
 	// datepicker
-	//$(".datepicker-input").each(function(){ $(this).datepicker();});
-        $('.quotation_new').on('click focus',".datepicker-input",function(){ $(this).datepicker();});
+	$(".datepicker-input").each(function(){ $(this).datepicker();});
+        $('#claim_area').on('click focus',".datepicker-input",function(){ $(this).datepicker();});
+        $('#driver_area').on('click focus',".datepicker-input",function(){ $(this).datepicker();});
 	// dropfile
 	$('.dropfile').each(function(){
 		var $dropbox = $(this);
